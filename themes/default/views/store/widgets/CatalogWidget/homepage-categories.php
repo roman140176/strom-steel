@@ -1,20 +1,22 @@
 <?php if ($category) : ?>
-    <div class="second-level-categories homepage-categories">
+    <div class="hpc-grid">
         <?php foreach ($category as $data) : ?>
-            <a href="<?= $data->getCategoryUrl() ?>" class="csl__item">
-                <?php if (!empty($data->svg_code)) : ?>
-                    <div class="csl__svg" aria-hidden="true"><?= $data->svg_code ?></div>
-                <?php else : ?>
-                    <div class="csl__img">
-                        <?= CHtml::image($data->getImageUrl(164, 125, true, null, 'image'), CHtml::encode($data->name), ['loading' => 'lazy']) ?>
-                        <div class="csl__img_absolute">
-                            <?= CHtml::image($data->getImageUrl(164, 125, true, null, 'thumbnale'), CHtml::encode($data->name), ['loading' => 'lazy']) ?>
-                        </div>
-                    </div>
-                <?php endif ?>
-                <div class="csl__name">
+            <a href="<?= $data->getCategoryUrl() ?>" class="hpc-card">
+                <div class="hpc-card__icon" aria-hidden="true">
+                    <?php if (!empty($data->svg_code)) : ?>
+                        <?= $data->svg_code ?>
+                    <?php else : ?>
+                        <?= CHtml::image($data->getImageUrl(80, 80, true, null, 'image'), CHtml::encode($data->name), ['loading' => 'lazy']) ?>
+                    <?php endif ?>
+                </div>
+                <div class="hpc-card__title">
                     <?= CHtml::encode($data->name) ?>
                 </div>
+                <span class="hpc-card__arrow" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </span>
             </a>
         <?php endforeach ?>
     </div>

@@ -9,8 +9,12 @@ $money = Yii::app()->getComponent('money');
     var yupeCartEmptyMessage = '<h1><?= Yii::t("CartModule.cart", "Cart is empty"); ?></h1><?= Yii::t("CartModule.cart", "There are no products in cart"); ?>';
 </script>
 <div class="but-cart js-cart d-flex" id="cart-widget" data-cart-widget-url="<?= Yii::app()->createUrl('/cart/cart/widget'); ?>">
-        <a class="cart-header" href="<?= Yii::app()->createUrl('/cart/cart/index') ?>">
-            <?= file_get_contents('.'. Yii::app()->getTheme()->getAssetsUrl() . '/images/svg/cart-black.svg'); ?>
+        <a class="cart-header" href="<?= Yii::app()->createUrl('/cart/cart/index') ?>" aria-label="Корзина покупок">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="9" cy="21" r="1"/>
+                <circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
             <div class="cart_bb badge-box<?= (empty(Yii::app()->cart->isEmpty())) ? ' active' : ''?>">
               <?= Yii::app()->cart->getItemsCount(); ?>
             </div>

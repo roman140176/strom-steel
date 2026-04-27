@@ -294,4 +294,36 @@ jQuery(function ($) {
     });
   })();
 
+  /* ========================================================================
+     Header — гостевой дропдаун ЛК (Войти / Регистрация)
+     ======================================================================== */
+  (function initHeaderLkDropdown() {
+    var $guest = $('.header-lk__guest');
+    if (!$guest.length) return;
+    var $btn = $guest.find('.header-lk__btn');
+
+    $btn.on('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var willOpen = !$guest.hasClass('is-open');
+      $guest.toggleClass('is-open', willOpen);
+      $btn.attr('aria-expanded', willOpen ? 'true' : 'false');
+    });
+
+    $(document).on('click', function (e) {
+      if (!$guest.hasClass('is-open')) return;
+      if ($guest.is(e.target) || $guest.has(e.target).length) return;
+      $guest.removeClass('is-open');
+      $btn.attr('aria-expanded', 'false');
+    });
+
+    $(document).on('keydown', function (e) {
+      if (e.key === 'Escape' && $guest.hasClass('is-open')) {
+        $guest.removeClass('is-open');
+        $btn.attr('aria-expanded', 'false');
+        $btn.trigger('focus');
+      }
+    });
+  })();
+
 });

@@ -3300,3 +3300,852 @@ body.video-modal-open {
   .svc-calc-grid { grid-template-columns: 1fr; }
   .svc-products-row { grid-template-columns: 1fr 1fr; }
 }
+
+/* ==========================================================================
+   Header — верхний ряд: логотип + поиск + телефон + заказать звонок
+   ========================================================================== */
+
+:root {
+  --hdr-icon-size: 40px;
+  --hdr-icon-svg: 20px;
+  --hdr-icon-bg: #f3f5f7;
+  --hdr-icon-bg-hover: #0e7e50;
+  --hdr-badge-bg: #0e7e50;
+  --hdr-accent: #0e7e50;
+  --hdr-text: #0b0b0b;
+  --hdr-muted: #6b7280;
+}
+
+.header-wrap > header.container.header-top__inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: auto;
+}
+
+@media (max-width: 1360px) {
+  .header-wrap > header.container.header-top__inner,
+  .header-bottom.container {
+    display: none !important;
+  }
+}
+
+.header-wrap > header.container.header-top__inner .logo-header {
+  flex: 0 0 auto;
+}
+
+.header-wrap > header.container.header-top__inner .searcher {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.header-wrap > header.container.header-top__inner .header-contact {
+  flex: 0 0 auto;
+}
+
+/* Контактные блоки (телефон / поддержка) */
+.header-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--hdr-text);
+  transition: color .2s ease;
+}
+
+a.header-contact:hover {
+  color: var(--hdr-accent);
+}
+
+.header-contact--phone .header-contact__value {
+  color: var(--hdr-text);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.header-contact--phone .header-contact__value:hover {
+  color: var(--hdr-accent);
+}
+
+.header-contact__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(14, 126, 80, 0.08);
+  border: 1.5px dashed rgba(14, 126, 80, 0.45);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--hdr-accent);
+  flex-shrink: 0;
+  transition: background .2s ease;
+}
+
+a.header-contact:hover .header-contact__icon {
+  background: rgba(14, 126, 80, 0.15);
+}
+
+.header-contact__icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.header-contact__body {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.header-contact__label {
+  color: var(--hdr-muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.header-contact__value {
+  color: var(--hdr-text);
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.header-contact__value--secondary {
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--hdr-muted);
+  margin-top: 2px;
+}
+
+.header-contact__value--accent {
+  color: var(--hdr-accent);
+  font-weight: 700;
+}
+
+.header-contact:hover .header-contact__value--accent {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Поиск — pill с круглой зелёной кнопкой-лупой */
+.header-wrap .searcher .sp-form {
+  width: 100%;
+  margin: 0;
+}
+
+.header-wrap .searcher .input-group {
+  position: relative;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 6px 60px 6px 24px;
+  display: flex;
+  align-items: center;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.header-wrap .searcher .input-group:focus-within {
+  border-color: var(--hdr-accent);
+  box-shadow: 0 0 0 3px rgba(14, 126, 80, .12);
+}
+
+.header-wrap .searcher .form-control {
+  border: 0;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  height: 36px;
+  font-size: 15px;
+  padding: 0;
+  box-shadow: none;
+  color: var(--hdr-text);
+}
+
+.header-wrap .searcher .form-control::placeholder {
+  color: #9ca3af;
+}
+
+.header-wrap .searcher .btn-search {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--hdr-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+  padding: 0;
+}
+
+.header-wrap .searcher .btn-search:hover {
+  background: #086c43;
+}
+
+.header-wrap .searcher .btn-search:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.header-wrap .searcher .btn-search img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+
+/* ==========================================================================
+   Header — нижний ряд: каталог + меню + избранное + ЛК + корзина
+   ========================================================================== */
+
+.header-bottom.container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: flex-start;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.header-bottom .catalog-link-main,
+.header-bottom .header-favorite,
+.header-bottom .header-lk,
+.header-bottom #shopping-cart-widget {
+  flex: 0 0 auto;
+}
+
+.header-bottom .catalog-link-main {
+  width: fit-content;
+  height: 40px;
+  padding: 0 16px;
+  font-size: 15px;
+  gap: 10px;
+}
+
+.header-bottom .catalog-link-main > span {
+  margin: 0;
+}
+
+.header-bottom .header-nav {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.header-bottom .header-nav .menu_header {
+  height: auto;
+  margin: 0;
+  padding: 0;
+  gap: 28px;
+}
+
+.header-bottom .header-nav .menu_header li {
+  height: auto;
+  margin-right: 0;
+  font-size: 15px;
+}
+
+.header-bottom .header-nav .menu_header li a {
+  height: auto;
+  width: auto;
+  padding: 6px 0;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Header — компактные иконки: избранное / корзина / личный кабинет
+   ========================================================================== */
+
+.header-favorite .favorite-name,
+#shopping-cart-widget .cart-name,
+.header-lk .fullName {
+  display: none !important;
+}
+
+.header-bottom .header-favorite .but-favorite,
+.header-bottom #shopping-cart-widget .cart-header {
+  width: var(--hdr-icon-size);
+  height: var(--hdr-icon-size);
+  border-radius: 50%;
+  background: var(--hdr-icon-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background .2s ease;
+  text-decoration: none;
+  color: inherit;
+  padding: 0;
+}
+
+.header-bottom .header-favorite .but-favorite svg,
+.header-bottom #shopping-cart-widget .cart-header svg {
+  width: var(--hdr-icon-svg);
+  height: var(--hdr-icon-svg);
+  display: block;
+  color: var(--hdr-text);
+  transition: color .2s ease, stroke .2s ease, fill .2s ease;
+}
+
+.header-bottom .header-favorite .but-favorite:hover svg,
+.header-bottom #shopping-cart-widget .cart-header:hover svg {
+  color: #fff;
+}
+
+.header-bottom .header-favorite .but-favorite:hover,
+.header-bottom #shopping-cart-widget .cart-header:hover {
+  background: var(--hdr-icon-bg-hover);
+}
+
+.header-bottom .header-favorite .but-favorite:hover svg path[stroke] {
+  stroke: #fff;
+}
+
+.header-bottom .header-favorite .but-favorite:hover svg path[fill]:not([fill="none"]) {
+  fill: #fff;
+}
+
+.header-bottom #shopping-cart-widget .cart-header:hover svg path[fill]:not([fill="none"]) {
+  fill: #fff;
+}
+
+/* Бейдж-счётчик в правом верхнем углу иконки */
+.header-bottom .header-favorite .but-favorite .but-favorite__count,
+.header-bottom #shopping-cart-widget .cart-header .cart_bb {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--hdr-badge-bg);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+  border: 2px solid #fff;
+  pointer-events: none;
+  left: auto;
+}
+
+.header-bottom .header-favorite .but-favorite .but-favorite__count:not(.active),
+.header-bottom #shopping-cart-widget .cart-header .cart_bb:not(.active) {
+  display: none;
+}
+
+/* Сбрасываем легаси-фон у обёрток корзины (был серый прямоугольник) */
+.header-bottom #shopping-cart-widget.shoppingCart-widget,
+.header-bottom #shopping-cart-widget .but-cart {
+  width: auto;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+/* Цвет SVG-иконки корзины — по умолчанию тёмный (на мобиле родитель отдавал синий) */
+.cart-header svg {
+  color: #212121;
+}
+
+#shopping-cart-widget.but-cart,
+.header-bottom #shopping-cart-widget {
+  position: relative;
+}
+
+/* ==========================================================================
+   Header — личный кабинет (гость / авторизован)
+   ========================================================================== */
+
+.header-lk {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  background-image: none;
+}
+
+.header-lk .header-lk__item {
+  width: auto;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Гость — круглая SVG-кнопка + дропдаун */
+.header-lk__guest {
+  position: relative;
+}
+
+.header-lk__btn {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  width: var(--hdr-icon-size);
+  height: var(--hdr-icon-size);
+  border-radius: 50%;
+  background: var(--hdr-icon-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s ease;
+}
+
+.header-lk__btn svg {
+  width: var(--hdr-icon-svg);
+  height: var(--hdr-icon-svg);
+  display: block;
+  color: var(--hdr-text);
+  transition: color .2s ease;
+}
+
+.header-lk__btn:hover,
+.header-lk__guest.is-open .header-lk__btn {
+  background: var(--hdr-icon-bg-hover);
+}
+
+.header-lk__btn:hover svg,
+.header-lk__guest.is-open .header-lk__btn svg {
+  color: #fff;
+}
+
+.header-lk__dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #e7eaee;
+  border-radius: 12px;
+  padding: 8px 0;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, .12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity .15s ease, transform .15s ease, visibility .15s ease;
+  z-index: 50;
+}
+
+.header-lk__guest.is-open .header-lk__dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.header-lk__dropdown-item {
+  display: block;
+  padding: 10px 16px;
+  color: var(--hdr-text);
+  font-size: 14px;
+  text-decoration: none;
+  transition: background .15s ease, color .15s ease;
+}
+
+.header-lk__dropdown-item:hover {
+  background: #f3f8f5;
+  color: var(--hdr-accent);
+}
+
+/* Авторизован — круг с первой буквой имени или аватаром */
+.header-lk .lk-visible-menu {
+  width: var(--hdr-icon-size);
+  height: var(--hdr-icon-size);
+  border-radius: 50%;
+  background: var(--hdr-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  overflow: hidden;
+  transition: filter .2s ease;
+}
+
+.header-lk .lk-visible-menu:hover {
+  filter: brightness(0.92);
+}
+
+.header-lk .lk-visible-menu__img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.header-lk .lk-visible-menu__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   Homepage — карточки каталога продукции (.hpc-grid / .hpc-card)
+   ========================================================================== */
+
+.hpc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.hpc-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: #fff;
+  border: 1px solid #e7eaee;
+  border-radius: 14px;
+  text-decoration: none;
+  color: #0b0b0b;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.hpc-card:hover {
+  border-color: #0e7e50;
+  box-shadow: 0 6px 20px rgba(14, 126, 80, .10);
+  transform: translateY(-2px);
+}
+
+.hpc-card__icon {
+  width: 66px;
+  height: 66px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #f3f5f7;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #1f2937;
+  transition: background .2s ease, color .2s ease;
+}
+
+.hpc-card__icon > svg,
+.hpc-card__icon > img {
+  width: 45px;
+  height: 45px;
+  display: block;
+}
+
+.hpc-card__icon img {
+  object-fit: contain;
+}
+
+.hpc-card:hover .hpc-card__icon {
+  background: rgba(14, 126, 80, .12);
+  color: #0e7e50;
+}
+
+/* Перекрашиваем inline-svg-иконки на hover */
+.hpc-card:hover .hpc-card__icon svg path[fill]:not([fill="none"]) {
+  fill: #0e7e50;
+  transition: fill .2s ease;
+}
+
+.hpc-card:hover .hpc-card__icon svg path[stroke]:not([stroke="none"]) {
+  stroke: #0e7e50;
+  transition: stroke .2s ease;
+}
+
+.hpc-card__title {
+  flex: 1 1 auto;
+  font-family: PLB, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0b0b0b;
+  line-height: 1.3;
+}
+
+.hpc-card__arrow {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.hpc-card__arrow svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.hpc-card:hover .hpc-card__arrow {
+  color: #0e7e50;
+  transform: translateX(3px);
+}
+
+@media (max-width: 991px) {
+  .hpc-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hpc-grid {
+    grid-template-columns: 1fr;
+  }
+  .hpc-card {
+    padding: 14px 16px;
+  }
+}
+
+/* ==========================================================================
+   Homepage — баннер «Услуги и сервисы» (.hsv-banner)
+   ========================================================================== */
+
+.page_title--main{
+  margin-top: 42px;
+}
+
+.hsv-banner {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.hsv-banner__inner {
+  background: #1a2438;
+  border-radius: 16px;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #fff;
+}
+
+.hsv-banner__intro {
+  flex: 0 0 auto;
+  max-width: 240px;
+}
+
+.hsv-banner__title {
+  font-family: PLB, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 6px;
+  color: #fff;
+}
+
+.hsv-banner__sub {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.hsv-banner__list {
+  flex: 1 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;  
+  min-width: 0;
+}
+
+.hsv-banner__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 10px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 12.5px;
+  line-height: 1.3;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+  flex-grow: 1;
+  min-height: 55px;
+}
+
+.hsv-banner__item:hover {
+  background: rgba(14, 126, 80, .18);
+  border-color: rgba(14, 126, 80, .55);
+  transform: translateY(-2px);
+}
+
+.hsv-banner__icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: #0e7e50;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hsv-banner__icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.hsv-banner__label {
+  white-space: normal;
+  max-width: 170px;
+  font-weight: 500;
+  color: #fff;
+}
+
+@media (max-width: 1199px) {
+  .hsv-banner__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+  }
+  .hsv-banner__intro {
+    max-width: none;
+  }
+  .hsv-banner__list {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .hsv-banner__list {
+    flex-direction: column;
+  }
+  .hsv-banner__item {
+    width: 100%;
+  }
+  .hsv-banner__label {
+    white-space: normal;
+  }
+}
+
+/* ==========================================================================
+   Homepage — производство (.hv-grid): большой квадрат + 4 в сетке 2×2
+   На мобиле — горизонтальный скролл с 1.5 видимыми карточками, gap 8
+   ========================================================================== */
+
+.hv-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.hv-grid .hv-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #1c1c1c;
+  cursor: pointer;
+  aspect-ratio: auto;
+  transition: transform .25s ease, box-shadow .25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+}
+
+.hv-grid .hv-card--big {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  aspect-ratio: 1 / 1;
+}
+
+.hv-grid .hv-card:hover,
+.hv-grid .hv-card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(14, 126, 80, .25);
+  outline: none;
+}
+
+.hv-grid .hv-card__poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .35s ease;
+}
+
+.hv-grid .hv-card:hover .hv-card__poster {
+  transform: scale(1.04);
+}
+
+.hv-grid .hv-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0e7e50;
+  background: #fff;
+  border-radius: 50%;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .35));
+  transition: transform .25s ease, color .25s ease;
+  pointer-events: none;
+}
+
+.hv-grid .hv-card__play svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hv-grid .hv-card:hover .hv-card__play,
+.hv-grid .hv-card:focus-visible .hv-card__play {
+  transform: scale(1.08);
+  color: #14a76b;
+}
+
+/* Mobile — горизонтальный скролл, 1.5 карточки видны, gap 8 */
+@media (max-width: 991px) {
+  .hv-grid {
+    display: flex;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    gap: 8px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+  }
+  .hv-grid::-webkit-scrollbar { display: none; }
+
+  .hv-grid .hv-card,
+  .hv-grid .hv-card--big {
+    flex: 0 0 calc((100% - 8px) / 1.5);
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 16 / 9;
+    scroll-snap-align: start;
+  }
+}
+

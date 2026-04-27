@@ -58,34 +58,28 @@ $mainAssets = Yii::app()->getTheme()->getAssetsUrl();
         </div>
     </div>
     <div class="container">
-        <h2 class="page_title">Каталог продукции</h2>
+        <h2 class="page_title page_title--main">Каталог продукции</h2>
         <?php $this->widget('application.modules.store.widgets.CatalogWidget', [
             'view' => 'homepage-categories'
         ]); ?>
     </div>
      <?php $this->widget('application.modules.page.widgets.PagesNewWidget', [
-        'parent_id' => 2
+        'parent_id' => 2,
+        'view' => 'homepage-services-banner',
     ]); ?>
     <section class="container home-videos">
         <h2 class="page_title">Производство</h2>
-        <div class="home-videos-swiper-wrap">
-            <div class="swiper home-videos-swiper">
-                <div class="swiper-wrapper">
-                    <?php for ($i = 1; $i <= 5; $i++) : ?>
-                        <div class="swiper-slide">
-                            <button type="button" class="home-video-card" data-video="/uploads/video/<?= $i ?>.mp4" aria-label="Смотреть видео <?= $i ?>">
-                                <img class="home-video-card__poster" src="/uploads/video/posters/<?= $i ?>.webp" alt="" loading="lazy" decoding="async" width="270" height="480">
-                                <span class="home-video-card__play" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24" width="56" height="56"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
-                                </span>
-                            </button>
-                        </div>
-                    <?php endfor ?>
-                </div>
-                <div class="swiper-pagination home-videos-swiper__pagination"></div>
-            </div>
-            <button type="button" class="swiper-button-prev home-videos-swiper__prev" aria-label="Предыдущее видео"></button>
-            <button type="button" class="swiper-button-next home-videos-swiper__next" aria-label="Следующее видео"></button>
+        <div class="hv-grid">
+            <?php for ($i = 1; $i <= 5; $i++) : ?>
+                <button type="button" class="hv-card home-video-card<?= $i === 1 ? ' hv-card--big' : '' ?>" data-video="/uploads/video/<?= $i ?>.mp4" aria-label="Смотреть видео <?= $i ?>">
+                    <img class="hv-card__poster" src="/uploads/video/posters/<?= $i ?>.webp" alt="" loading="lazy" decoding="async">
+                    <span class="hv-card__play" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM15.75 13.299C16.75 12.7217 16.75 11.2783 15.75 10.7009L11.25 8.10286C10.25 7.52551 9 8.24719 9 9.4019V14.598C9 15.7527 10.25 16.4744 11.25 15.8971L15.75 13.299Z" fill="currentColor"/>
+                        </svg>
+                    </span>
+                </button>
+            <?php endfor ?>
         </div>
     </section>
     <div class="video-modal" id="video-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Видеоплеер">
@@ -250,38 +244,3 @@ Yii::app()->clientScript->registerScript("items", "
 
     ");
 ?>
-<style>
-    .second-level-categories.homepage-categories{
-        grid-template-columns: repeat(4,1fr);
-    }
-    .second-level-categories.homepage-categories .csl__item{
-        background: rgb(242, 245, 248);
-    }
-     @media (max-width:991px){
-        .second-level-categories.homepage-categories{
-            grid-gap: 8px;
-        }
-     }
-    @media (max-width:767px) {
-        .second-level-categories.homepage-categories{
-            grid-template-columns: repeat(2,1fr);
-        }
-    }
-    @media (max-width:720px) {
-        .second-level-categories.homepage-categories .csl__img{
-            width: 100px;
-        }
-        .second-level-categories.homepage-categories .csl__img img{
-            width: 100%;
-            height: auto;
-        }
-        .second-level-categories.homepage-categories .csl__item{
-            padding: 16px;
-        }
-    }
-    @media (max-width:720px) {
-        .second-level-categories.homepage-categories{
-            grid-template-columns: repeat(2,50%);
-        }
-    }
-</style>
