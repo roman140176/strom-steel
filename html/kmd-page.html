@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Разработка чертежей и КМД — СТРОМ ТРЕЙД</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --dark:     #1e2a38;
+  --green:    #0e7e50;
+  --green2:   #14a066;
+  --green-lt: #e6f4ed;
+  --green-bd: #a8d9be;
+  --bg:       #f2f4f6;
+  --white:    #ffffff;
+  --text:     #1a2332;
+  --muted:    #5a6478;
+  --muted2:   #9aa3b0;
+  --border:   #e0e4ea;
+  --border2:  #ccd1db;
+  --radius:   8px;
+  --shadow:   0 1px 4px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.05);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); font-size: 14.5px; line-height: 1.65; }
+
+/* ── BREADCRUMB ─────────── */
+.breadcrumb { background: var(--white); border-bottom: 1px solid var(--border); padding: .55rem 2rem; font-size: 12px; color: var(--muted2); display: flex; align-items: center; gap: 6px; }
+.breadcrumb a { color: var(--muted); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green); }
+.breadcrumb .sep { color: var(--border2); }
+.breadcrumb .cur { color: var(--text); font-weight: 500; }
+
+/* ── SERVICE NAV ─────────── */
+.services-nav { background: var(--dark); }
+.services-nav-inner { max-width: 1180px; margin: 0 auto; display: flex; }
+.svc-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 1.25rem .8rem 1.15rem; text-decoration: none; color: rgba(255,255,255,.5); font-size: 12px; font-weight: 500; line-height: 1.3; text-align: center; border-right: 1px solid rgba(255,255,255,.07); border-bottom: 3px solid transparent; transition: color .2s, background .2s, border-color .2s; }
+.svc-tab:last-child { border-right: none; }
+.svc-tab:hover { color: rgba(255,255,255,.85); background: rgba(255,255,255,.05); }
+.svc-tab.active { color: #fff; background: rgba(14,126,80,.18); border-bottom-color: var(--green2); }
+.svc-tab .ico { width: 44px; height: 44px; border-radius: 10px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; transition: background .2s; flex-shrink: 0; }
+.svc-tab:hover .ico { background: rgba(255,255,255,.12); }
+.svc-tab.active .ico { background: rgba(14,126,80,.3); border-color: rgba(20,160,102,.5); }
+
+/* ── PAGE HEADER ─────────── */
+.page-header { background: var(--white); border-bottom: 1px solid var(--border); }
+.page-header-inner { max-width: 1180px; margin: 0 auto; padding: 2.2rem 2rem 2.5rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; }
+.ph-title { font-size: 36px; font-weight: 800; color: var(--text); letter-spacing: -.6px; line-height: 1.1; margin-bottom: .4rem; }
+.ph-sub { font-size: 14px; color: var(--muted); max-width: 580px; line-height: 1.65; }
+.ph-badges { display: flex; gap: 8px; flex-shrink: 0; }
+.ph-badge { display: flex; align-items: center; gap: 7px; background: var(--green-lt); border: 1px solid var(--green-bd); border-radius: 7px; padding: .6rem 1rem; font-size: 12px; font-weight: 600; color: var(--green); white-space: nowrap; }
+
+/* ── LAYOUT ─────────────── */
+.main { max-width: 1180px; margin: 0 auto; padding: 2rem 2rem 0; display: flex; flex-direction: column; gap: 1.5rem; }
+
+/* ── CARD ────────────────── */
+.card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; animation: up .35s ease both; }
+.card:nth-child(1) { animation-delay: .04s; }
+.card:nth-child(2) { animation-delay: .10s; }
+.card:nth-child(3) { animation-delay: .16s; }
+.card:nth-child(4) { animation-delay: .22s; }
+.card-head { padding: 1.5rem 1.8rem 0; margin-bottom: 1.4rem; display: flex; align-items: center; gap: 10px; }
+.card-head-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--green-lt); border: 1px solid var(--green-bd); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-head-icon svg { color: var(--green); }
+.card-head h2 { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -.2px; }
+.card-body { padding: 0 1.8rem 1.8rem; }
+.intro { font-size: 14.5px; color: var(--muted); margin-bottom: 1.4rem; line-height: 1.7; }
+.intro strong { color: var(--text); }
+
+/* ── STEPS ───────────────── */
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step { display: flex; gap: 1rem; align-items: flex-start; padding: .85rem 0; border-bottom: 1px solid var(--border); position: relative; }
+.step:last-child { border-bottom: none; padding-bottom: 0; }
+.step-num { width: 28px; height: 28px; flex-shrink: 0; background: var(--green); color: #fff; font-size: 12px; font-weight: 700; border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+.step-text { font-size: 14px; color: var(--muted); line-height: 1.6; padding-top: 3px; }
+.step-text strong { color: var(--text); font-weight: 600; }
+
+/* ── TECH STRIP ──────────── */
+.tech-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 1.5rem; }
+.tech-card { background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 1.2rem 1.3rem; display: flex; gap: 12px; align-items: flex-start; }
+.tech-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--green-lt); border: 1px solid var(--green-bd); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.tech-icon svg { color: var(--green); }
+.tech-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.tech-desc { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+/* ── KMD GRID ────────────── */
+.kmd-intro { font-size: 14.5px; color: var(--muted); line-height: 1.7; margin-bottom: 1.4rem; }
+.kmd-intro strong { color: var(--text); }
+
+.kmd-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
+.kmd-section { background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 1.4rem 1.5rem; border-top: 3px solid var(--dark); position: relative; overflow: hidden; }
+.kmd-section:first-child { border-top-color: var(--green); }
+.kmd-section-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted2); margin-bottom: .5rem; }
+.kmd-section:first-child .kmd-section-tag { color: var(--green); }
+.kmd-section-title { font-size: 14.5px; font-weight: 700; color: var(--text); margin-bottom: .6rem; line-height: 1.3; }
+.kmd-section-desc { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+/* ── KMD BENEFITS ────────── */
+.kmd-benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+.benefit { background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 1.2rem 1.3rem; }
+.benefit-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: .35rem; display: flex; align-items: center; gap: 7px; }
+.benefit-title svg { color: var(--green); flex-shrink: 0; }
+.benefit-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+/* ── SOFTWARE ────────────── */
+.software-row { display: flex; gap: 10px; }
+.software-tag { display: flex; align-items: center; gap: 7px; background: var(--dark); color: rgba(255,255,255,.8); font-size: 12.5px; font-weight: 600; padding: .55rem 1rem; border-radius: 6px; }
+.software-tag svg { color: var(--green2); }
+
+/* ── WHAT DESIGNED ───────── */
+.what-designed { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 1.2rem; }
+.wd-item { background: var(--green-lt); border: 1px solid var(--green-bd); border-radius: 6px; padding: .8rem 1rem; font-size: 13px; font-weight: 600; color: var(--green); line-height: 1.35; }
+
+/* ── CONTACT GRID ────────── */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; animation: up .35s .28s ease both; }
+.contact-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.form-inner { padding: 1.8rem; }
+.form-inner h3 { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 1.2rem; letter-spacing: -.2px; }
+.form-group { margin-bottom: .9rem; }
+.form-label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: .3rem; }
+.form-label .req { color: var(--green); }
+.form-input, .form-textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: .65rem .9rem; font-family: inherit; font-size: 14px; color: var(--text); outline: none; transition: border-color .2s, background .2s; resize: none; }
+.form-input:focus, .form-textarea:focus { border-color: var(--green); background: var(--white); }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--muted2); }
+.form-textarea { height: 90px; }
+.form-file-label { display: inline-flex; align-items: center; gap: 7px; background: var(--bg); border: 1px dashed var(--border2); border-radius: 7px; padding: .6rem 1rem; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; transition: border-color .2s, color .2s; }
+.form-file-label:hover { border-color: var(--green); color: var(--green); }
+input[type="file"] { display: none; }
+.form-agree { font-size: 12px; color: var(--muted2); margin-top: .8rem; line-height: 1.5; }
+.form-agree a { color: var(--green); text-decoration: none; }
+.form-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: #fff; font-family: inherit; font-size: 13.5px; font-weight: 700; padding: .85rem 1.8rem; border: none; border-radius: 7px; cursor: pointer; transition: background .18s, transform .15s; margin-top: 1rem; }
+.form-btn:hover { background: var(--green2); transform: translateY(-1px); }
+.photo-card { background: var(--dark); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; position: relative; }
+.photo-card img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .8; min-height: 300px; }
+.photo-card-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(10,30,20,.75)); padding: 1.5rem; }
+.photo-card-text { font-size: 14px; font-weight: 600; color: rgba(255,255,255,.9); line-height: 1.4; }
+
+/* ── NOTICE ──────────────── */
+.notice { background: var(--green-lt); border: 1px solid var(--green-bd); border-radius: 7px; padding: 1rem 1.3rem; font-size: 14px; color: var(--muted); display: flex; gap: 10px; align-items: flex-start; line-height: 1.6; }
+.notice strong { color: var(--text); }
+.notice-ico { width: 26px; height: 26px; border-radius: 6px; background: #c2e8d5; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.notice-ico svg { color: var(--green); }
+
+/* ── GALLERY ─────────────── */
+.gallery-section { max-width: 1180px; margin: 1.5rem auto 0; padding: 0 2rem; }
+.gallery-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted2); margin-bottom: 1rem; }
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 3rem; }
+.gallery-item { border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/3; background: var(--dark); border: 1px solid var(--border); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
+.gallery-item:hover img { transform: scale(1.04); }
+
+@keyframes up { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+
+@media (max-width: 900px) {
+  .tech-strip, .kmd-benefits, .what-designed { grid-template-columns: 1fr 1fr; }
+  .kmd-sections { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr 1fr; }
+  .services-nav-inner { overflow-x: auto; }
+  .svc-tab { min-width: 110px; font-size: 11px; }
+  .ph-badges { display: none; }
+}
+@media (max-width: 600px) {
+  .tech-strip, .kmd-benefits, .what-designed { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">Главная</a><span class="sep">/</span>
+  <a href="#">Услуги</a><span class="sep">/</span>
+  <span class="cur">Разработка чертежей и КМД</span>
+</div>
+
+<!-- SERVICE NAV -->
+<div class="services-nav">
+  <div class="services-nav-inner">
+    <a href="#" class="svc-tab">
+      <div class="ico"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21"/></svg></div>
+      Изготовление<br>металлоконструкций
+    </a>
+    <a href="#" class="svc-tab active">
+      <div class="ico"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg></div>
+      Разработка<br>чертежей и КМД
+    </a>
+    <a href="#" class="svc-tab">
+      <div class="ico"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437"/></svg></div>
+      Монтаж<br>и шеф-монтаж
+    </a>
+    <a href="#" class="svc-tab">
+      <div class="ico"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg></div>
+      Лазерная<br>резка
+    </a>
+    <a href="#" class="svc-tab">
+      <div class="ico"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg></div>
+      Доставка
+    </a>
+  </div>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <h1 class="ph-title">Разработка чертежей и КМД</h1>
+      <p class="ph-sub">Проектирование металлоконструкций по индивидуальным заданиям с использованием 3D-графики, в соответствии с нормативной документацией (ГОСТ, ТУ, ОСТ).</p>
+    </div>
+    <div class="ph-badges">
+      <div class="ph-badge">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0H3"/></svg>
+        Компас 3D и AutoCAD
+      </div>
+      <div class="ph-badge">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.746 3.746 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.745 3.745 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
+        ГОСТ / ТУ / ОСТ
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+
+  <!-- CARD 1: ЭТАПЫ -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"/></svg>
+      </div>
+      <h2>Этапы разработки чертежей</h2>
+    </div>
+    <div class="card-body">
+      <p class="intro">Основные этапы от начала разработки чертежей металлоконструкций до финального результата:</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Определение типа изделия,</strong> его назначение и степень сложности — предварительное задание с общими данными</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Выбор подходящих материалов,</strong> подготовка первичного эскиза и модели для визуализации</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Составление плана</strong> необходимых сборочных работ конструкции в целом</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Согласование</strong> с заказчиком всех технических моментов</div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-text"><strong>Составление сметы,</strong> где указывается стоимость проектирования металлоконструкций</div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-text"><strong>Согласование проекта</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-num">7</div>
+          <div class="step-text"><strong>Подготовка полного комплекта</strong> всех чертежей, включая монтажные</div>
+        </div>
+      </div>
+
+      <div class="tech-strip">
+        <div class="tech-card">
+          <div class="tech-icon">
+            <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
+          </div>
+          <div>
+            <div class="tech-title">3D-моделирование</div>
+            <div class="tech-desc">Все проекты разрабатываются с использованием 3D-графики. В моделях отображены все элементы вплоть до болтовых соединений</div>
+          </div>
+        </div>
+        <div class="tech-card">
+          <div class="tech-icon">
+            <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+          </div>
+          <div>
+            <div class="tech-title">Нормативная документация</div>
+            <div class="tech-desc">Все работы ведутся в строгом соответствии с ГОСТ, ТУ, ОСТ и другими нормативными документами</div>
+          </div>
+        </div>
+        <div class="tech-card">
+          <div class="tech-icon">
+            <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <div class="tech-title">Гибкое ценообразование</div>
+            <div class="tech-desc">Цена зависит от сложности и объёма. Окончательные расчёты объявляются после уточнения всей информации и проведения замеров</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2: КМД -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+      </div>
+      <h2>Разработка чертежей КМД</h2>
+    </div>
+    <div class="card-body">
+
+      <p class="kmd-intro"><strong>Проект КМД — Конструкции Металлические Деталировочные</strong> — это полное и детальное раскрытие разделов КМ, необходимое для перехода к изготовлению, сборке и монтажу металлоконструкций. Без этого раздела невозможно перейти к реализации проекта. По разделу формируется спецификация, по которой оцениваются затраты на изготовление деталей с учётом материалов, рабочего времени и привлечения специалистов.</p>
+
+      <div class="kmd-sections">
+        <div class="kmd-section">
+          <div class="kmd-section-tag">Раздел 1</div>
+          <div class="kmd-section-title">Сборочные и детальные чертежи</div>
+          <div class="kmd-section-desc">Передаются на производство для изготовления деталей и сборки отдельных узлов металлоконструкций. Содержат полную информацию для производственного цикла.</div>
+        </div>
+        <div class="kmd-section">
+          <div class="kmd-section-tag">Раздел 2</div>
+          <div class="kmd-section-title">Монтажные чертежи</div>
+          <div class="kmd-section-desc">Передаются специалистам для монтажа конструкций на объекте. Специалисты составляют карту сборочных операций и технологические карты монтажа непосредственно на объекте.</div>
+        </div>
+      </div>
+
+      <div class="kmd-benefits">
+        <div class="benefit">
+          <div class="benefit-title">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"/></svg>
+            Полная спецификация
+          </div>
+          <div class="benefit-desc">По КМД составляется сборочная спецификация, по которой специалисты составляют карту сборочных операций</div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-title">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path d="M2.25 6L9 12.75l4.286-4.286a11.948 11.948 0 014.306 6.43l.776 2.898m0 0l3.182-5.511m-3.182 5.51l-5.511-3.181"/></svg>
+            Детализация элементов
+          </div>
+          <div class="benefit-desc">В проектировании детализированы стальные балки, прогоны, несущие и вспомогательные колонны, узлы соединений деталей и элементов</div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-title">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0H3"/></svg>
+            Компас 3D и AutoCAD
+          </div>
+          <div class="benefit-desc">Проектирование КМД осуществляется в профессиональном ПО Компас 3D и AutoCAD — высокое качество в короткие сроки</div>
+        </div>
+      </div>
+
+      <div class="notice">
+        <div class="notice-ico">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+        </div>
+        <p>КМД выстраивается как часть <strong>рабочей документации проекта,</strong> по которой организуются строительные и монтажные работы с металлоконструкциями на объекте. Осуществляется проверка спецификации с выявлением недочётов проекта и их корректировка, после чего происходит закупка необходимого металла для производства.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTACT + PHOTO -->
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="form-inner">
+        <h3>Напишите нам</h3>
+        <div class="form-group">
+          <label class="form-label">Ваше имя <span class="req">*</span></label>
+          <input class="form-input" type="text" placeholder="Иван Иванов">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ваш E-mail</label>
+          <input class="form-input" type="email" placeholder="mail@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ваш телефон <span class="req">*</span></label>
+          <input class="form-input" type="tel" placeholder="+7 (___) ___-__-__">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ваше сообщение</label>
+          <textarea class="form-textarea" placeholder="Опишите задачу или вопрос..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Прикрепить файл</label>
+          <label class="form-file-label">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13"/></svg>
+            Выбрать файл
+            <input type="file">
+          </label>
+        </div>
+        <div class="form-agree">
+          Нажимая кнопку «Отправить», я даю согласие на обработку моих персональных данных в соответствии с <a href="#">Соглашением об обработке персональных данных</a>
+        </div>
+        <button class="form-btn">
+          Отправить
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80" alt="Разработка чертежей КМД">
+      <div class="photo-card-overlay">
+        <div class="photo-card-text">Проектирование в профессиональном ПО Компас 3D и AutoCAD — полный цикл от эскиза до рабочей документации</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- GALLERY -->
+<div class="gallery-section">
+  <div class="gallery-label">Примеры чертежей</div>
+  <div class="gallery">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&q=75" alt="Чертёж 1"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=500&q=75" alt="Чертёж 2"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1518709779341-56cf4535e94a?w=500&q=75" alt="Чертёж 3"></div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /*.js
+Allow: /*.css
+Allow: /assets/
+Disallow: /yupe/backend*
+Disallow: /registration
+Disallow: /login
+Disallow: /*/default*
+Disallow: /order/
+Disallow: /store/search?
+Disallow: /cart
+Disallow: /favorite
+Disallow: /recovery
+
+Clean-Param: yhid&from&q&etext&matchtype&price%5Bfrom%5D&price%5Bto%5D&my_range_price
+
+Sitemap: https://stromsteel.ru/sitemap.xml

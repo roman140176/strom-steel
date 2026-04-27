@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="_Слой_1"
+   version="1.1"
+   viewBox="0 0 869.45003 1062.3401"
+   sodipodi:docname="logo.svg"
+   width="869.45001"
+   height="1062.3401"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview85"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.19781645"
+     inkscape:cx="1425.564"
+     inkscape:cy="485.29838"
+     inkscape:window-width="1918"
+     inkscape:window-height="1054"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g56" />
+  <defs
+     id="defs4">
+    <style
+       id="style2"> .st0 { fill: #214068; } .st1 { fill: #11764b; } .st2 { fill: #399c5d; } .st3 { fill: #203e66; } .st4 { fill: #9bc43d; } </style>
+  </defs>
+  <g
+     id="g82">
+    <g
+       id="g18">
+      <polygon
+         class="st1"
+         points="701.94,469 475.94,344.45 475.94,222.14 701.94,344.45 "
+         id="polygon6" />
+      <polygon
+         class="st2"
+         points="701.94,469 701.94,344.45 869.45,246.07 869.44,559.39 "
+         id="polygon8" />
+      <polygon
+         class="st4"
+         points="869.45,246.07 701.94,344.45 475.94,222.14 647.23,121.14 "
+         id="polygon10" />
+      <polygon
+         class="st1"
+         points="260.56,674.18 0,823.05 0.03,530.57 "
+         id="polygon12" />
+      <polygon
+         class="st2"
+         points="433.4,1062.34 433.4,873.56 169,726.5 0,823.05 "
+         id="polygon14" />
+      <path
+         class="st3"
+         d="M 865.19,724.94 C 687.33,626.28 173.13,353.33 176.48,348.05 L 608.87,94.55 434.5,0 0.42,247.82 1.3,461.47 c 128.09,67.71 599.5,322.91 599.5,322.91 l -167.4,89.18 v 188.78 c 0.4,0.1 433.43,-229.96 433.43,-229.96 l -1.64,-107.45 v 0 z"
+         id="path16" />
+    </g>
+    <g
+       id="g56" />
+  </g>
+</svg>
