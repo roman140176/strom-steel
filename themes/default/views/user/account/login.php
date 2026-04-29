@@ -82,7 +82,7 @@ Yii::app()->getClientScript()->registerScriptFile('https://www.google.com/recapt
             </div>
             <div class="lk-form__right">
                 <div class="new-reg">
-                    <h2><?= Yii::t('UserModule.user', 'Зарегистрируйтесь на'); ?><?= CHtml::image(Yii::app()->getTheme()->getAssetsUrl() . '/images/logo.webp', ''); ?></h2>
+                    <h2><?= Yii::t('UserModule.user', 'Зарегистрируйтесь на'); ?><?= CHtml::image(Yii::app()->getTheme()->getAssetsUrl() . '/images/logo.svg', ''); ?></h2>
                     <div class="new-reg__text">
                         <p>Зачем нужен личный кабинет?</p>
                         <p>В чём его преимущества?</p>

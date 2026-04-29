@@ -6,6 +6,7 @@ class ServicesFormsWidget extends yupe\widgets\YWidget
 {
   public $view = 'services-form';
   public $img = '1.jpg';
+  public $alt = '';
 
 
   public function run()
@@ -34,6 +35,7 @@ class ServicesFormsWidget extends yupe\widgets\YWidget
     $this->render($this->view, [
       'model' => $model,
       'img' => $this->img,
+      'alt' => $this->alt,
     ]);
   }
 }

@@ -106,6 +106,8 @@ Yii::app()->getClientScript()->registerScriptFile('https://www.google.com/recapt
     <?php $this->endWidget() ?>
   </div>
   <div class="form-img">
-    <?= CHtml::image(Yii::app()->controller->mainAssets . '/images/page/services/forms/' . $img) ?>
+    <?= CHtml::image(Yii::app()->controller->mainAssets .                         
+  '/images/page/services/forms/' . $img, $alt, ['loading' => 'lazy', 'decoding' =>
+   'async']) ?> 
   </div>
 </div>

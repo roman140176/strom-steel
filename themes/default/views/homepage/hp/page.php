@@ -189,36 +189,88 @@ foreach ($faqHomeItems as $item) {
         ]); ?>
     </div>
 </section>
-<section class="container about-container">
-    <h2 class="page_title">Несколько слов о нас</h2>
-    <?php $about = Page::model()->findByPk(4) ?>
-    <div class="about-content">
-        <?= $about['short_content'] ?>
+<section class="about-container">
+    <div class="container">
+        <h2 class="page_title">Несколько слов о нас</h2>
+        <?php $about = Page::model()->findByPk(4) ?>
+        <div class="about-content">
+            <?= $about['short_content'] ?>
+        </div>
+        <div id="read-more">
+            <span>Читать весь текст</span>
+            <?= file_get_contents('.' . Yii::app()->getTheme()->getAssetsUrl() . '/images/svg/cats.svg'); ?>
+        </div>
     </div>
-    <div id="read-more">
-        <span>Читать весь текст</span>
-        <?= file_get_contents('.' . Yii::app()->getTheme()->getAssetsUrl() . '/images/svg/cats.svg'); ?>
-    </div>
+
 </section>
-<section class="container container-form">
-    <div class="form-info">
-        <h2 class="page_title">Остались вопросы? Мы на связи:</h2>
-        <small><?= Yii::app()->getModule('yupe')->wmode ?></small>
-        <a href="tel:<?= Yii::app()->getModule('yupe')->p_reception ?>" class="form-info__tel">
-            <?= Yii::app()->getModule('yupe')->reception ?>
-        </a>
-        <small>Почта для связи:</small>
-        <a href="mailTo:<?= Yii::app()->getModule('yupe')->email ?>" class="form-info__email">
-            <?= Yii::app()->getModule('yupe')->email ?>
-        </a>
-    </div>
-    <div class="form-sender">
-        <h2 class="page_title">Или обратитесь через форму связи</h2>
-        <small>Наши специалисты свяжутся с вами в ближайшее время</small>
-        <a href="#" class="leave-request js-button" data-target="#CallbackFormEmail" data-toggle="modal">
-            Оставить заявку
-            <?= file_get_contents('.' . Yii::app()->getTheme()->getAssetsUrl() . '/images/svg/form-arr.svg'); ?>
-        </a>
+<section class="container cf-section" aria-labelledby="cf-title">
+    <div class="cf-row">
+        <div class="cf-card cf-card--info">
+            <img class="cf-card__bg cf-card__bg--left" src="<?= $mainAssets ?>/images/left.avif" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <div class="cf-card__content">
+                <span class="cf-eyebrow">— Мы на связи</span>
+                <h2 id="cf-title" class="cf-title">Остались вопросы?<br>Мы на связи:</h2>
+                <p class="cf-lead">Ответим на вопросы по продукции, срокам, расчёту и доставке.</p>
+                <ul class="cf-list">
+                    <li class="cf-item">
+                        <span class="cf-item__ico" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/>
+                                <path d="M12 7V12L15.5 14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <div class="cf-item__body">
+                            <span class="cf-item__label">Время работы</span>
+                            <span class="cf-item__value">Пн–Пт с 9:00 до 18:00</span>
+                        </div>
+                    </li>
+                    <li class="cf-item">
+                        <span class="cf-item__ico" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                <path d="M5.5 4.5C5.5 4.5 7 4 8.5 4C9 4 9.5 4.2 9.7 4.7L10.7 7C10.9 7.5 10.7 8.1 10.3 8.4L9 9.3C9.7 11 11 12.3 12.7 13L13.6 11.7C13.9 11.3 14.5 11.1 15 11.3L17.3 12.3C17.8 12.5 18 13 18 13.5C18 15 17.5 16.5 17.5 16.5C17.5 17.3 16.8 18 16 18C9.9 18 4 12.1 4 6C4 5.2 4.7 4.5 5.5 4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <div class="cf-item__body">
+                            <span class="cf-item__label">Телефон</span>
+                            <a class="cf-item__value cf-item__value--link" href="tel:+74955320720">+7 (495) 532-07-20</a>
+                        </div>
+                    </li>
+                    <li class="cf-item">
+                        <span class="cf-item__ico" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                                <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <div class="cf-item__body">
+                            <span class="cf-item__label">E-mail</span>
+                            <a class="cf-item__value cf-item__value--link" href="mailto:info@strom-trade.ru">info@strom-trade.ru</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="cf-card cf-card--cta">
+            <img class="cf-card__bg cf-card__bg--right" src="<?= $mainAssets ?>/images/right.avif" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <div class="cf-card__content">
+                <span class="cf-cta-ico" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                        <rect x="6" y="4" width="12" height="16" rx="2" stroke="currentColor" stroke-width="1.7"/>
+                        <rect x="9" y="2.5" width="6" height="3" rx="1" stroke="currentColor" stroke-width="1.7"/>
+                        <path d="M9.2 13L11 14.8L15 10.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <h3 class="cf-cta-title">Или обратитесь<br>через форму связи</h3>
+                <p class="cf-cta-text">Заполните форму — мы свяжемся с вами в ближайшее время и подготовим решение.</p>
+                <a href="#" class="cf-cta-btn leave-request js-button" data-target="#CallbackFormEmail" data-toggle="modal">
+                    <span>Оставить заявку</span>
+                    <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true">
+                        <path d="M11 1L17 7L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
     </div>
 </section>
 <?php

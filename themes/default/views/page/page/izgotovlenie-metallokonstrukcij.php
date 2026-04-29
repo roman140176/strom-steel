@@ -161,18 +161,20 @@ $this->keywords = $model->meta_keywords ?: Yii::app()->getModule('yupe')->siteKe
        Подпись для фото-карточки прокидываем через CSS-переменную --photo-caption. -->
   <div class="svc-page__form page-services" style="--photo-caption: 'Производство металлоконструкций любой сложности по индивидуальным проектам'">
     <?php $this->widget('application.modules.mail.widgets.ServicesFormsWidget', [
-      'img' => '1.jpg',
+      'img' => '1.avif',
+      'alt' => 'Производство металлоконструкций любой сложности по индивидуальным проектам',
     ]); ?>
   </div>
 
   <!-- Галерея -->
+   <?php $mainAssets =Yii::app()->getTheme()->getAssetsUrl(); ?>
   <section class="svc-page__inner svc-page__gallery-section">
     <div class="svc-section-label">Примеры работ</div>
     <div class="svc-gallery">
-      <a href="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&q=85" class="svc-gallery__item" data-fancybox="works"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=400&q=75" alt="" loading="lazy"></a>
-      <a href="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=85" class="svc-gallery__item" data-fancybox="works"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&q=75" alt="" loading="lazy"></a>
-      <a href="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1600&q=85" class="svc-gallery__item" data-fancybox="works"><img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=400&q=75" alt="" loading="lazy"></a>
-      <a href="https://images.unsplash.com/photo-1518709779341-56cf4535e94a?w=1600&q=85" class="svc-gallery__item" data-fancybox="works"><img src="https://images.unsplash.com/photo-1518709779341-56cf4535e94a?w=400&q=75" alt="" loading="lazy"></a>
+      <a href="<?= $mainAssets ?>/images/page/services/forms/1bm.jpg" class="svc-gallery__item" data-fancybox="works"><img src="<?= $mainAssets ?>/images/page/services/forms/1m.avif" alt="Производство металлоконструкций" loading="lazy"></a>
+      <a href="<?= $mainAssets ?>/images/page/services/forms/2bm.jpg" class="svc-gallery__item" data-fancybox="works"><img src="<?= $mainAssets ?>/images/page/services/forms/2m.avif" alt="Производство металлоконструкций" loading="lazy"></a>
+      <a href="<?= $mainAssets ?>/images/page/services/forms/3bm.jpg" class="svc-gallery__item" data-fancybox="works"><img src="<?= $mainAssets ?>/images/page/services/forms/3m.avif" alt="Производство металлоконструкций" loading="lazy"></a>
+      <a href="<?= $mainAssets ?>/images/page/services/forms/4bm.jpg" class="svc-gallery__item" data-fancybox="works"><img src="<?= $mainAssets ?>/images/page/services/forms/4m.avif" alt="Производство металлоконструкций" loading="lazy"></a>
     </div>
   </section>
 

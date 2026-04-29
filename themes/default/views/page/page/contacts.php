@@ -22,37 +22,6 @@ $this->keywords = $model->meta_keywords ?: Yii::app()->getModule('yupe')->siteKe
   </div>
   <div class="container" id="map-container">
     <h1 class="page_title"><?= $model->title; ?></h1>
-    <!-- <address>
-      <blockquote>
-        <div class="adr_name"><strong>Адрес офиса:</strong></div>
-        <div class="adr_detail">
-          <?= Yii::app()->getModule('yupe')->buhgalter ?>
-        </div>
-      </blockquote>
-    </address>
-    <div class="map-contacts" id="map-contacts">
-      <a class="dg-widget-link" href="http://2gis.ru/moscow/firm/70000001026119653/center/37.555274,55.741318/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть на карте Москвы</a>
-      <div class="dg-widget-link"><a href="http://2gis.ru/moscow/center/37.555274,55.741318/zoom/16/routeTab/rsType/bus/to/37.555274,55.741318╎Стром Трейд, торговая компания?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти проезд до Стром Трейд, торговая компания</a></div>
-      <script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script>
-      <script charset="utf-8">
-        new DGWidgetLoader({
-          "width": 640,
-          "height": 600,
-          "borderColor": "#a3a3a3",
-          "pos": {
-            "lat": 55.741318,
-            "lon": 37.555274,
-            "zoom": 16
-          },
-          "opt": {
-            "city": "moscow"
-          },
-          "org": [{
-            "id": "70000001026119653"
-          }]
-        });
-      </script><noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите его в настройках вашего браузера.</noscript>
-    </div> -->
     <address style="margin-top:2rem">
       <blockquote>
         <div class="adr_name"><strong>Адрес офиса и склада:</strong></div>
@@ -61,8 +30,8 @@ $this->keywords = $model->meta_keywords ?: Yii::app()->getModule('yupe')->siteKe
         </div>
       </blockquote>
     </address>
-    <div class="map-contacts" id="map-contacts">
-        <a class="dg-widget-link" href="http://2gis.ru/moscow/firm/70000001026119653/center/37.555274,55.741318/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть на карте Москвы</a><div class="dg-widget-link"><a href="http://2gis.ru/moscow/center/37.555274,55.741318/zoom/16/routeTab/rsType/bus/to/37.555274,55.741318╎Стром Трейд, торговая компания?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти проезд до Стром Трейд, торговая компания</a></div><script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script><script charset="utf-8">new DGWidgetLoader({"width":640,"height":600,"borderColor":"#a3a3a3","pos":{"lat":55.741318,"lon":37.555274,"zoom":16},"opt":{"city":"moscow"},"org":[{"id":"70000001026119653"}]});</script><noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите его в настройках вашего браузера.</noscript>
+    <div class="map-contacts" id="strom-map-page" data-strom-map="auto">
+        <noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. <a href="https://yandex.ru/maps/?ll=37.555274%2C55.741318&z=17">Открыть в Яндекс.Картах</a>.</noscript>
     </div>
     <div class="adr-flex">
       <div class="adr-flex__item">

@@ -160,17 +160,19 @@ $this->keywords = $model->meta_keywords ?: Yii::app()->getModule('yupe')->siteKe
        Класс .page-services нужен, потому что стили .services-form scoped под него. -->
   <div class="svc-page__form page-services" style="--photo-caption: 'Проектирование в профессиональном ПО Компас 3D и AutoCAD — полный цикл от эскиза до рабочей документации'">
     <?php $this->widget('application.modules.mail.widgets.ServicesFormsWidget', [
-      'img' => '2.jpg',
+      'img' => '2.avif',
+      'alt' => 'Разработка чертежей и КМД'
     ]); ?>
   </div>
 
   <!-- Галерея -->
+    <?php $mainAssets =Yii::app()->getTheme()->getAssetsUrl(); ?>
   <section class="svc-page__inner svc-page__gallery-section">
     <div class="svc-section-label">Примеры чертежей</div>
     <div class="svc-gallery svc-gallery--3">
-      <a href="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=85" class="svc-gallery__item" data-fancybox="works"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=75" alt="" loading="lazy"></a>
-      <a href="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1600&q=85" class="svc-gallery__item" data-fancybox="works"><img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=600&q=75" alt="" loading="lazy"></a>
-      <a href="https://images.unsplash.com/photo-1518709779341-56cf4535e94a?w=1600&q=85" class="svc-gallery__item" data-fancybox="works"><img src="https://images.unsplash.com/photo-1518709779341-56cf4535e94a?w=600&q=75" alt="" loading="lazy"></a>
+      <a href="<?= $mainAssets ?>/images/page/services/forms/1kb.jpg" class="svc-gallery__item svc-gallery__item--kmd" data-fancybox="works"><img src="<?= $mainAssets ?>/images/page/services/forms/1k.avif" alt="" loading="lazy"></a>
+      <a href="<?= $mainAssets ?>/images/page/services/forms/2kb.jpg" class="svc-gallery__item svc-gallery__item--kmd" data-fancybox="works"><img src="<?= $mainAssets ?>/images/page/services/forms/2k.avif" alt="" loading="lazy"></a>
+      <a href="<?= $mainAssets ?>/images/page/services/forms/3kb.jpg" class="svc-gallery__item svc-gallery__item--kmd" data-fancybox="works"><img src="<?= $mainAssets ?>/images/page/services/forms/3k.avif" alt="" loading="lazy"></a>
     </div>
   </section>
 

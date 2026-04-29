@@ -14,16 +14,16 @@ $this->breadcrumbs = [Yii::t('NewsModule.news', 'News')];
                     ]
                 );?>
     </div>
-    <div class="pageMainContent">
+    <div class="pageMainContent nws-page">
     <div class="container">
-    <h1><?= Yii::t('NewsModule.news', 'News') ?></h1>
+    <h1 class="nws-page__title"><?= Yii::t('NewsModule.news', 'News') ?></h1>
         <?php $this->widget(
     'bootstrap.widgets.TbListView',
     [
         'dataProvider' => $dataProvider,
         'itemView' => '_item',
         'summaryText' => "Новости {start}-{end} из {count} ",
-        'itemsCssClass'=>'last-news',
+        'itemsCssClass'=>'nws-grid nws-grid--page',
         'ajaxUpdate'=>true,
         'enableHistory' => false,
         'pagerCssClass' => 'pagination-box',

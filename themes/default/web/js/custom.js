@@ -326,4 +326,39 @@ jQuery(function ($) {
     });
   })();
 
+  /* Yandex map widget — injects iframe once per container.
+     Containers opt-in via [data-strom-map="auto"] (auto-init on ready)
+     or window.stromInitMap('container-id') (called by triggers). */
+  (function initStromMap() {
+    var MAP_SRC = 'https://yandex.ru/map-widget/v1/org/strom_treyd/1829653746/?indoorLevel=1&ll=37.555319%2C55.741399&z=17';
+    var inited = {};
+
+    window.stromInitMap = function (containerId) {
+      if (!containerId || inited[containerId]) return;
+      var el = document.getElementById(containerId);
+      if (!el) return;
+      inited[containerId] = true;
+      var iframe = document.createElement('iframe');
+      iframe.src = MAP_SRC;
+      iframe.title = 'Стром Трейд на карте';
+      iframe.loading = 'lazy';
+      iframe.allow = 'fullscreen';
+      iframe.setAttribute('frameborder', '0');
+      iframe.style.cssText = 'width:100%;height:100%;min-height:420px;border:0;display:block;';
+      el.appendChild(iframe);
+    };
+
+    var autoNodes = document.querySelectorAll('[data-strom-map="auto"]');
+    for (var i = 0; i < autoNodes.length; i++) {
+      if (autoNodes[i].id) window.stromInitMap(autoNodes[i].id);
+    }
+
+    var modalTrigger = document.querySelector('[data-target="#pmYandex"]');
+    if (modalTrigger) {
+      modalTrigger.addEventListener('click', function () {
+        window.stromInitMap('strom-map-modal');
+      });
+    }
+  })();
+
 });

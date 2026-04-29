@@ -93,7 +93,7 @@
   </div>
 </footer>
 
-<div id="pmYandex" class="modal fade" class="modal fade" role="dialog">
+<div id="pmYandex" class="modal fade" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -103,40 +103,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="map-contacts" id="map-contacts">
-          <a class="dg-widget-link" href="http://2gis.ru/moscow/firm/70000001026119653/center/37.555274,55.741318/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть на карте Москвы</a>
-          <div class="dg-widget-link"><a href="http://2gis.ru/moscow/center/37.555274,55.741318/zoom/16/routeTab/rsType/bus/to/37.555274,55.741318╎Стром Трейд, торговая компания?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти проезд до Стром Трейд, торговая компания</a></div>
-          <noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите его в настройках вашего браузера.</noscript>
+        <div class="map-contacts" id="strom-map-modal">
+          <noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. <a href="https://yandex.ru/maps/?ll=37.555274%2C55.741318&z=17">Открыть в Яндекс.Картах</a>.</noscript>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<script>
-  const btnShowMap = document.querySelector('[data-target="#pmYandex"]');
-  btnShowMap.addEventListener('click', createAdditionalContent)
-
-  function createAdditionalContent() {
-    new DGWidgetLoader({
-      "width": 640,
-      "height": 600,
-      'container': 'map-contacts',
-      "borderColor": "#a3a3a3",
-      "pos": {
-        "lat": 55.741318,
-        "lon": 37.555274,
-        "zoom": 16
-      },
-      "opt": {
-        "city": "moscow"
-      },
-      "org": [{
-        "id": "70000001026119653"
-      }]
-    });
-  }
-</script>
 
 
 

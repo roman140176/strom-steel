@@ -131,7 +131,7 @@ $this->keywords = $model->meta_keywords ?: Yii::app()->getModule('yupe')->siteKe
             <div class="svc-dlv__items">
               <div class="svc-dlv__item">
                 <div class="svc-dlv__label">Адрес склада</div>
-                <p><strong>г. Москва, ул. Киевская д. 19</strong></p>
+                <p><strong>МО, г. Подольск, мкл. Львовский, проезд Металлургов 3Г</strong></p>
               </div>
               <div class="svc-dlv__item">
                 <div class="svc-dlv__label">Прочие товарные группы</div>

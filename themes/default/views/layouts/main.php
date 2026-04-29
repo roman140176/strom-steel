@@ -107,7 +107,6 @@
   Yii::app()->getClientScript()->registerCssFile($this->mainAssets . '/css/new-styles.css');
   Yii::app()->getClientScript()->registerScriptFile($this->mainAssets . '/js/scripts.min.js', CClientScript::POS_END);
   Yii::app()->getClientScript()->registerScriptFile($this->mainAssets . '/js/new-scripts.js', CClientScript::POS_END);
-  Yii::app()->getClientScript()->registerScriptFile($this->mainAssets . '/js/DGWidgetLoader.js', CClientScript::POS_END);
 
   Yii::app()->getClientScript()->registerCssFile($this->mainAssets . '/css/swiper-bundle.min.css');
   Yii::app()->getClientScript()->registerScriptFile($this->mainAssets . '/js/swiper-bundle.min.js', CClientScript::POS_END);
