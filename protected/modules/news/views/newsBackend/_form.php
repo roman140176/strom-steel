@@ -7,6 +7,7 @@
  */ ?>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#common" data-toggle="tab"><?= Yii::t("NewsModule.news", "General"); ?></a></li>
+  <li><a href="#options" data-toggle="tab"><?= Yii::t("NewsModule.news", "Options"); ?></a></li>
   <li><a href="#seo" data-toggle="tab"><?= Yii::t("NewsModule.news", "SEO"); ?></a></li>
 </ul>
 
@@ -240,6 +241,43 @@ $form = $this->beginWidget(
     <div class="row">
       <div class="col-sm-7">
         <?= $form->checkBoxGroup($model, 'is_protected', $model->getProtectedStatusList()); ?>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane" id="options">
+    <div class="row">
+      <div class="col-sm-3">
+        <?= $form->dropDownListGroup(
+          $model,
+          'layout',
+          [
+            'widgetOptions' => [
+              'data' => Yii::app()->getModule('yupe')->getLayoutsList(),
+              'htmlOptions' => [
+                'class' => 'popover-help',
+                'empty' => Yii::t('NewsModule.news', '--choose--'),
+                'data-original-title' => $model->getAttributeLabel('layout'),
+                'data-content' => $model->getAttributeDescription('layout'),
+              ],
+            ],
+          ]
+        ); ?>
+      </div>
+      <div class="col-sm-3">
+        <?= $form->textFieldGroup(
+          $model,
+          'view',
+          [
+            'widgetOptions' => [
+              'htmlOptions' => [
+                'class' => 'popover-help',
+                'data-original-title' => $model->getAttributeLabel('view'),
+                'data-content' => $model->getAttributeDescription('view'),
+              ],
+            ],
+          ]
+        ); ?>
       </div>
     </div>
   </div>

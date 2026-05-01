@@ -42,7 +42,7 @@ class NewsController extends \yupe\components\controllers\FrontController
 
     $this->meta_robots = $model->meta_robots;
 
-    $this->render('view', ['model' => $model]);
+    $this->render($model->view ?: 'view', ['model' => $model]);
   }
 
   /**

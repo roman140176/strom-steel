@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Ребрендинг компании СТРОМ ТРЕЙД — Новости</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   .nrb-* — namespace страницы новости «Ребрендинг»
+   Изолировано от глобальных стилей сайта.
+   ========================================================= */
+.nrb-root{
+  --nrb-green:#0e7e50;
+  --nrb-green-deep:#0a5e3b;
+  --nrb-green-soft:#e8f3ed;
+  --nrb-ink:#0f1614;
+  --nrb-ink-2:#2a3431;
+  --nrb-muted:#6b7771;
+  --nrb-line:#e3e7e5;
+  --nrb-bg:#ffffff;
+  --nrb-bg-tint:#f5f7f6;
+  --nrb-radius:16px;
+  --nrb-radius-sm:10px;
+  --nrb-container:1320px;
+
+  font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  color:var(--nrb-ink);
+  background:var(--nrb-bg);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  line-height:1.55;
+}
+.nrb-root *,
+.nrb-root *::before,
+.nrb-root *::after{box-sizing:border-box;}
+
+.nrb-container{
+  max-width:var(--nrb-container);
+  margin:0 auto;
+  padding:0 32px;
+}
+
+.nrb-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--nrb-green);
+}
+.nrb-eyebrow::before{
+  content:"";
+  width:24px;
+  height:1px;
+  background:var(--nrb-green);
+}
+
+/* =================== HERO =================== */
+.nrb-hero{
+  position:relative;
+  background:#0b1311;
+  color:#fff;
+  overflow:hidden;
+  isolation:isolate;
+}
+.nrb-hero__media{
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(90deg, rgba(8,17,15,.96) 0%, rgba(8,17,15,.85) 38%, rgba(8,17,15,.45) 70%, rgba(8,17,15,.25) 100%),
+    url('https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=2000&q=80');
+  background-size:cover;
+  background-position:center;
+  z-index:0;
+}
+.nrb-hero__grid{
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size:80px 80px;
+  z-index:1;
+  pointer-events:none;
+  mask-image:linear-gradient(90deg, #000 30%, transparent 90%);
+  -webkit-mask-image:linear-gradient(90deg, #000 30%, transparent 90%);
+}
+.nrb-hero__inner{
+  position:relative;
+  z-index:2;
+  padding:96px 0 72px;
+  min-height:560px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.nrb-hero__top{max-width:780px;}
+
+.nrb-hero__eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:var(--nrb-green);
+  color:#fff;
+  padding:9px 16px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.nrb-hero__eyebrow svg{width:14px;height:14px;}
+
+.nrb-hero h1{
+  font-size:72px;
+  line-height:1.02;
+  font-weight:800;
+  letter-spacing:-.03em;
+  margin:28px 0 20px;
+  text-wrap:balance;
+}
+.nrb-hero h1 .nrb-accent{color:#3ed694;}
+.nrb-hero__sub{
+  font-size:22px;
+  font-weight:400;
+  line-height:1.4;
+  max-width:640px;
+  color:rgba(255,255,255,.78);
+  margin:0 0 36px;
+}
+
+.nrb-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.nrb-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 16px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(6px);
+  font-size:14px;
+  font-weight:500;
+  color:#fff;
+}
+.nrb-chip svg{width:16px;height:16px;color:#3ed694;}
+
+.nrb-hero__meta{
+  display:flex;
+  align-items:center;
+  gap:32px;
+  flex-wrap:wrap;
+  margin-top:64px;
+  padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.14);
+  font-size:13px;
+  color:rgba(255,255,255,.72);
+  letter-spacing:.04em;
+}
+.nrb-hero__meta-item{display:inline-flex;align-items:center;gap:8px;}
+.nrb-hero__meta-item svg{width:14px;height:14px;color:#3ed694;}
+.nrb-hero__meta-cat{
+  margin-left:auto;
+  padding:6px 12px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:4px;
+  text-transform:uppercase;
+  font-weight:600;
+  font-size:11px;
+  letter-spacing:.14em;
+}
+
+/* =================== LEAD =================== */
+.nrb-lead{
+  padding:96px 0 72px;
+  background:var(--nrb-bg);
+}
+.nrb-lead__inner{
+  max-width:920px;
+  margin:0 auto;
+  text-align:left;
+}
+.nrb-lead__text{
+  font-size:24px;
+  line-height:1.5;
+  font-weight:400;
+  letter-spacing:-.01em;
+  color:var(--nrb-ink);
+  margin-top:20px;
+  text-wrap:pretty;
+}
+.nrb-lead__text strong{
+  color:var(--nrb-green);
+  font-weight:600;
+}
+
+/* =================== FEATURES (4 направления) =================== */
+.nrb-features{
+  padding:72px 0 96px;
+  background:var(--nrb-bg-tint);
+  border-top:1px solid var(--nrb-line);
+  border-bottom:1px solid var(--nrb-line);
+}
+.nrb-features__head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:32px;
+  margin-bottom:48px;
+  flex-wrap:wrap;
+}
+.nrb-features__head h2{
+  font-size:48px;
+  line-height:1.1;
+  font-weight:700;
+  letter-spacing:-.02em;
+  margin:14px 0 0;
+  max-width:640px;
+}
+.nrb-features__count{
+  font-size:13px;
+  color:var(--nrb-muted);
+  letter-spacing:.04em;
+  font-variant-numeric:tabular-nums;
+}
+.nrb-features__count b{color:var(--nrb-ink);font-weight:600;}
+
+.nrb-features__grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:24px;
+}
+.nrb-feature{
+  background:#fff;
+  border:1px solid var(--nrb-line);
+  border-radius:var(--nrb-radius);
+  padding:32px 28px;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  position:relative;
+}
+.nrb-feature:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 40px -20px rgba(14,126,80,.25);
+  border-color:var(--nrb-green);
+}
+.nrb-feature__icon{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  border:1.5px solid var(--nrb-green);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:24px;
+  color:var(--nrb-green);
+  background:var(--nrb-green-soft);
+}
+.nrb-feature__icon svg{width:28px;height:28px;}
+.nrb-feature__num{
+  position:absolute;
+  top:24px;
+  right:28px;
+  font-size:13px;
+  font-weight:600;
+  color:var(--nrb-muted);
+  letter-spacing:.06em;
+  font-variant-numeric:tabular-nums;
+}
+.nrb-feature h3{
+  font-size:19px;
+  line-height:1.3;
+  font-weight:600;
+  letter-spacing:-.01em;
+  margin:0 0 12px;
+}
+.nrb-feature p{
+  font-size:15px;
+  line-height:1.55;
+  color:var(--nrb-muted);
+  margin:0;
+}
+
+/* =================== PRODUCT (бордюры) =================== */
+.nrb-product{
+  padding:120px 0;
+  background:var(--nrb-bg);
+}
+.nrb-product__grid{
+  display:grid;
+  grid-template-columns:7fr 5fr;
+  gap:80px;
+  align-items:center;
+}
+.nrb-product__text h2{
+  font-size:54px;
+  line-height:1.05;
+  font-weight:700;
+  letter-spacing:-.025em;
+  margin:16px 0 24px;
+  text-wrap:balance;
+}
+.nrb-product__lead{
+  font-size:18px;
+  line-height:1.6;
+  color:var(--nrb-ink-2);
+  margin:0 0 36px;
+  text-wrap:pretty;
+}
+.nrb-bullets{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:20px;}
+.nrb-bullets li{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  padding:18px 20px;
+  background:var(--nrb-bg-tint);
+  border-left:3px solid var(--nrb-green);
+  border-radius:0 var(--nrb-radius-sm) var(--nrb-radius-sm) 0;
+}
+.nrb-bullets__icon{
+  flex-shrink:0;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:var(--nrb-green);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:2px;
+}
+.nrb-bullets__icon svg{width:16px;height:16px;}
+.nrb-bullets__title{
+  font-weight:600;
+  font-size:16px;
+  display:block;
+  margin-bottom:4px;
+  color:var(--nrb-ink);
+}
+.nrb-bullets__desc{
+  font-size:14.5px;
+  line-height:1.55;
+  color:var(--nrb-muted);
+}
+
+.nrb-product__media{
+  position:relative;
+  border-radius:var(--nrb-radius);
+  overflow:hidden;
+  aspect-ratio:4/5;
+  background:#1a201e;
+}
+.nrb-product__media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.nrb-product__media figcaption{
+  position:absolute;
+  left:20px;
+  right:20px;
+  bottom:20px;
+  background:rgba(8,17,15,.78);
+  backdrop-filter:blur(8px);
+  color:#fff;
+  padding:14px 18px;
+  border-radius:var(--nrb-radius-sm);
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.nrb-product__media figcaption::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#3ed694;
+  box-shadow:0 0 0 4px rgba(62,214,148,.18);
+}
+.nrb-product__badge{
+  position:absolute;
+  top:20px;
+  left:20px;
+  background:var(--nrb-green);
+  color:#fff;
+  padding:8px 14px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+/* =================== APPLICATIONS (chip cloud) =================== */
+.nrb-apps{
+  padding:80px 0 96px;
+  background:var(--nrb-bg-tint);
+  border-top:1px solid var(--nrb-line);
+}
+.nrb-apps h3{
+  font-size:36px;
+  line-height:1.15;
+  font-weight:700;
+  letter-spacing:-.02em;
+  margin:14px 0 36px;
+  max-width:760px;
+}
+.nrb-apps__cloud{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+.nrb-apps__chip{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 22px;
+  background:#fff;
+  border:1px solid var(--nrb-line);
+  border-radius:999px;
+  font-size:15px;
+  font-weight:500;
+  color:var(--nrb-ink);
+  transition:all .2s ease;
+  cursor:default;
+}
+.nrb-apps__chip:hover{
+  border-color:var(--nrb-green);
+  color:var(--nrb-green);
+  transform:translateY(-2px);
+}
+.nrb-apps__chip::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--nrb-green);
+  flex-shrink:0;
+}
+
+/* =================== QUOTE =================== */
+.nrb-quote-wrap{
+  padding:96px 0;
+  background:var(--nrb-bg);
+}
+.nrb-quote{
+  background:linear-gradient(135deg, var(--nrb-green-deep) 0%, #073e27 100%);
+  border-radius:var(--nrb-radius);
+  padding:72px 80px 64px;
+  position:relative;
+  overflow:hidden;
+  color:#fff;
+}
+.nrb-quote::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:6px;
+  background:#3ed694;
+}
+.nrb-quote__mark{
+  position:absolute;
+  top:-30px;
+  right:60px;
+  font-family:'Inter', serif;
+  font-size:280px;
+  line-height:1;
+  font-weight:700;
+  color:rgba(62,214,148,.12);
+  pointer-events:none;
+  user-select:none;
+}
+.nrb-quote__eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#3ed694;
+  margin-bottom:24px;
+}
+.nrb-quote__eyebrow::before{
+  content:"";
+  width:24px;
+  height:1px;
+  background:#3ed694;
+}
+.nrb-quote__text{
+  font-size:24px;
+  line-height:1.5;
+  font-weight:400;
+  letter-spacing:-.005em;
+  max-width:880px;
+  position:relative;
+  text-wrap:pretty;
+  margin:0 0 36px;
+}
+.nrb-quote__author{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  position:relative;
+}
+.nrb-quote__avatar{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:linear-gradient(135deg, #3ed694, #0e7e50);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:18px;
+  color:#0a3d27;
+  letter-spacing:.02em;
+}
+.nrb-quote__name{
+  font-weight:600;
+  font-size:16px;
+  color:#fff;
+}
+.nrb-quote__role{
+  font-size:13px;
+  color:rgba(255,255,255,.6);
+  margin-top:2px;
+}
+
+/* =================== STATS =================== */
+.nrb-stats{
+  padding:0 0 96px;
+  background:var(--nrb-bg);
+}
+.nrb-stats__head{
+  margin-bottom:48px;
+  max-width:720px;
+}
+.nrb-stats__head h2{
+  font-size:42px;
+  line-height:1.1;
+  font-weight:700;
+  letter-spacing:-.02em;
+  margin:14px 0 0;
+}
+.nrb-stats__row{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  border:1px solid var(--nrb-line);
+  border-radius:var(--nrb-radius);
+  overflow:hidden;
+  background:#fff;
+}
+.nrb-stat{
+  padding:40px 32px;
+  border-right:1px solid var(--nrb-line);
+  position:relative;
+}
+.nrb-stat:last-child{border-right:none;}
+.nrb-stat__num{
+  font-size:64px;
+  line-height:1;
+  font-weight:700;
+  color:var(--nrb-green);
+  letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;
+  margin:0 0 10px;
+  display:flex;
+  align-items:baseline;
+  gap:6px;
+}
+.nrb-stat__num small{
+  font-size:24px;
+  font-weight:600;
+  color:var(--nrb-green);
+  letter-spacing:0;
+}
+.nrb-stat__label{
+  font-size:14px;
+  line-height:1.45;
+  color:var(--nrb-muted);
+}
+.nrb-stat__index{
+  position:absolute;
+  top:20px;
+  right:24px;
+  font-size:11px;
+  letter-spacing:.16em;
+  color:var(--nrb-muted);
+  font-weight:600;
+}
+
+/* =================== CTA =================== */
+.nrb-cta-wrap{
+  padding:0 0 80px;
+}
+.nrb-cta{
+  background:
+    radial-gradient(circle at 80% 20%, rgba(62,214,148,.18) 0%, transparent 55%),
+    linear-gradient(135deg, var(--nrb-green-deep) 0%, #062b1c 100%);
+  border-radius:var(--nrb-radius);
+  padding:80px 80px;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+.nrb-cta::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;
+  mask-image:linear-gradient(135deg, #000 0%, transparent 70%);
+  -webkit-mask-image:linear-gradient(135deg, #000 0%, transparent 70%);
+}
+.nrb-cta__inner{
+  position:relative;
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:64px;
+  align-items:center;
+}
+.nrb-cta__eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:#3ed694;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.nrb-cta__eyebrow::before{
+  content:"";width:24px;height:1px;background:#3ed694;
+}
+.nrb-cta h2{
+  font-size:46px;
+  line-height:1.1;
+  font-weight:700;
+  letter-spacing:-.02em;
+  margin:18px 0 18px;
+  text-wrap:balance;
+}
+.nrb-cta__desc{
+  font-size:17px;
+  line-height:1.6;
+  color:rgba(255,255,255,.78);
+  margin:0;
+  max-width:560px;
+}
+.nrb-cta__actions{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.nrb-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:18px 26px;
+  border-radius:10px;
+  font-size:16px;
+  font-weight:600;
+  text-decoration:none;
+  transition:transform .2s ease, background .2s ease, border-color .2s ease;
+  letter-spacing:-.005em;
+}
+.nrb-btn--primary{
+  background:#fff;
+  color:var(--nrb-green-deep);
+}
+.nrb-btn--primary:hover{
+  transform:translateY(-2px);
+  background:#f1fbf6;
+}
+.nrb-btn--outline{
+  border:1.5px solid rgba(255,255,255,.4);
+  color:#fff;
+  background:transparent;
+}
+.nrb-btn--outline:hover{
+  border-color:#3ed694;
+  color:#3ed694;
+  transform:translateY(-2px);
+}
+.nrb-btn svg{width:18px;height:18px;flex-shrink:0;}
+.nrb-cta__email{
+  margin-top:8px;
+  font-size:13px;
+  color:rgba(255,255,255,.6);
+  letter-spacing:.02em;
+}
+.nrb-cta__email a{
+  color:#3ed694;
+  text-decoration:none;
+  font-weight:500;
+}
+.nrb-cta__email a:hover{text-decoration:underline;}
+
+/* =================== BACK LINK =================== */
+.nrb-back{
+  padding:0 0 80px;
+}
+.nrb-back__link{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:var(--nrb-muted);
+  text-decoration:none;
+  font-size:15px;
+  font-weight:500;
+  padding:12px 0;
+  transition:color .2s ease, gap .2s ease;
+}
+.nrb-back__link:hover{
+  color:var(--nrb-green);
+  gap:14px;
+}
+
+/* =================== ADAPTIVE =================== */
+@media (max-width: 1100px){
+  .nrb-features__grid{grid-template-columns:repeat(2,1fr);}
+  .nrb-product__grid{grid-template-columns:1fr;gap:48px;}
+  .nrb-product__media{aspect-ratio:16/10;max-width:560px;}
+  .nrb-cta__inner{grid-template-columns:1fr;gap:40px;}
+  .nrb-stats__row{grid-template-columns:repeat(2,1fr);}
+  .nrb-stat:nth-child(2){border-right:none;}
+  .nrb-stat:nth-child(1),.nrb-stat:nth-child(2){border-bottom:1px solid var(--nrb-line);}
+}
+
+@media (max-width: 900px){
+  .nrb-container{padding:0 24px;}
+  .nrb-hero__inner{padding:64px 0 48px;min-height:auto;}
+  .nrb-hero h1{font-size:48px;}
+  .nrb-hero__sub{font-size:18px;}
+  .nrb-hero__meta{margin-top:40px;gap:20px;}
+  .nrb-hero__meta-cat{margin-left:0;}
+
+  .nrb-lead{padding:64px 0 48px;}
+  .nrb-lead__text{font-size:20px;}
+
+  .nrb-features{padding:56px 0 72px;}
+  .nrb-features__head h2{font-size:36px;}
+  .nrb-feature{padding:28px 24px;}
+
+  .nrb-product{padding:72px 0;}
+  .nrb-product__text h2{font-size:38px;}
+  .nrb-product__lead{font-size:16px;}
+
+  .nrb-apps{padding:64px 0 72px;}
+  .nrb-apps h3{font-size:28px;}
+
+  .nrb-quote-wrap{padding:64px 0;}
+  .nrb-quote{padding:48px 36px;}
+  .nrb-quote__text{font-size:20px;}
+  .nrb-quote__mark{font-size:200px;right:24px;}
+
+  .nrb-stats{padding:0 0 72px;}
+  .nrb-stats__head h2{font-size:32px;}
+  .nrb-stat{padding:32px 24px;}
+  .nrb-stat__num{font-size:48px;}
+
+  .nrb-cta{padding:56px 36px;}
+  .nrb-cta h2{font-size:32px;}
+}
+
+@media (max-width: 600px){
+  .nrb-container{padding:0 18px;}
+  .nrb-hero h1{font-size:36px;}
+  .nrb-hero__sub{font-size:16px;}
+  .nrb-hero__eyebrow{font-size:11px;padding:8px 12px;}
+
+  .nrb-lead__text{font-size:18px;}
+
+  .nrb-features__grid{grid-template-columns:1fr;gap:16px;}
+  .nrb-features__head h2{font-size:28px;}
+
+  .nrb-product__text h2{font-size:30px;}
+  .nrb-bullets li{padding:14px 16px;}
+
+  .nrb-apps h3{font-size:22px;}
+  .nrb-apps__chip{font-size:14px;padding:10px 16px;}
+
+  .nrb-quote{padding:40px 24px;}
+  .nrb-quote__text{font-size:17px;}
+  .nrb-quote__mark{font-size:140px;top:-10px;right:12px;}
+
+  .nrb-stats__row{grid-template-columns:1fr;}
+  .nrb-stat{border-right:none !important;border-bottom:1px solid var(--nrb-line);}
+  .nrb-stat:last-child{border-bottom:none;}
+  .nrb-stat__num{font-size:42px;}
+  .nrb-stats__head h2{font-size:26px;}
+
+  .nrb-cta{padding:44px 24px;}
+  .nrb-cta h2{font-size:26px;}
+  .nrb-cta__desc{font-size:15px;}
+  .nrb-btn{padding:16px 20px;font-size:15px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ВНИМАНИЕ: только контент-блок, без хедера/футера/хлебных крошек ===== -->
+<article class="nrb-root">
+
+  <!-- ============ 1. HERO ============ -->
+  <section class="nrb-hero">
+    <div class="nrb-hero__media" aria-hidden="true"></div>
+    <div class="nrb-hero__grid" aria-hidden="true"></div>
+    <div class="nrb-container">
+      <div class="nrb-hero__inner">
+        <div class="nrb-hero__top">
+          <span class="nrb-hero__eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 11-5.8-1.6"/></svg>
+            Новости компании · апрель 2026
+          </span>
+          <h1>Ребрендинг компании <span class="nrb-accent">СТРОМ&nbsp;ТРЕЙД</span></h1>
+          <p class="nrb-hero__sub">Новый фирменный стиль и новое направление в производстве — от обновлённой визуальной идентичности до запуска линии металлических бордюров.</p>
+          <div class="nrb-chips">
+            <span class="nrb-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              Новый логотип
+            </span>
+            <span class="nrb-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v10H4z"/><path d="M4 11h16M9 7v10M15 7v10"/></svg>
+              Новое оборудование
+            </span>
+            <span class="nrb-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M5 20V8h4v12M15 20V4h4v16"/></svg>
+              Металлические бордюры
+            </span>
+          </div>
+        </div>
+
+        <div class="nrb-hero__meta">
+          <span class="nrb-hero__meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+            14 апреля 2026
+          </span>
+          <span class="nrb-hero__meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+            ~3 минуты чтения
+          </span>
+          <span class="nrb-hero__meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
+            ID&nbsp;26-04-001
+          </span>
+          <span class="nrb-hero__meta-cat">Корпоративные новости</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. LEAD ============ -->
+  <section class="nrb-lead">
+    <div class="nrb-container">
+      <div class="nrb-lead__inner">
+        <span class="nrb-eyebrow">Главное</span>
+        <p class="nrb-lead__text">
+          В&nbsp;2026&nbsp;году компания «СТРОМ ТРЕЙД» прошла важную веху&nbsp;— провела ребрендинг и&nbsp;одновременно запустила новое направление производства. Обновлённый имидж, включая новый логотип и&nbsp;фирменную цветовую гамму, отражает не&nbsp;косметические перемены, а&nbsp;внутреннюю трансформацию: расширение производственных мощностей, переход к&nbsp;более высоким стандартам качества и&nbsp;запуск выпуска <strong>металлических бордюров</strong>&nbsp;— востребованного решения для городской и&nbsp;промышленной инфраструктуры.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. ЧТО ОБНОВИЛИ ============ -->
+  <section class="nrb-features">
+    <div class="nrb-container">
+      <header class="nrb-features__head">
+        <div>
+          <span class="nrb-eyebrow">Четыре направления обновления</span>
+          <h2>Что мы обновили</h2>
+        </div>
+        <span class="nrb-features__count"><b>04</b> &nbsp;/&nbsp; направления</span>
+      </header>
+
+      <div class="nrb-features__grid">
+        <article class="nrb-feature">
+          <span class="nrb-feature__num">01</span>
+          <div class="nrb-feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a14 14 0 010 18M12 3a14 14 0 000 18M3 12h18"/></svg>
+          </div>
+          <h3>Новый образ — новые возможности</h3>
+          <p>Обновлённая визуальная идентичность, новый логотип, фирменный сайт и&nbsp;расширенный портфель решений для клиентов.</p>
+        </article>
+
+        <article class="nrb-feature">
+          <span class="nrb-feature__num">02</span>
+          <div class="nrb-feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 005.5 15a1.65 1.65 0 00-1.51-1H4a2 2 0 010-4h.09A1.65 1.65 0 005.5 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.5 1.65 1.65 0 0010 2.99V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9c.36.16.66.45.85.78"/></svg>
+          </div>
+          <h3>Современное оборудование</h3>
+          <p>Инвестиции в&nbsp;станочный парк: новые гибочные и&nbsp;режущие станки, автоматизация ключевых производственных процессов.</p>
+        </article>
+
+        <article class="nrb-feature">
+          <span class="nrb-feature__num">03</span>
+          <div class="nrb-feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9.3-8 10-4.5-.7-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3>Высокие стандарты качества</h3>
+          <p>Многоступенчатый контроль на&nbsp;каждом этапе: соответствие ГОСТ, ТУ и&nbsp;собственным внутренним нормативам.</p>
+        </article>
+
+        <article class="nrb-feature">
+          <span class="nrb-feature__num">04</span>
+          <div class="nrb-feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3>Надёжный партнёр для бизнеса</h3>
+          <p>Гибкие условия сотрудничества, оперативные сроки, индивидуальный подход к&nbsp;проектам любой сложности.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. БОРДЮРЫ ============ -->
+  <section class="nrb-product">
+    <div class="nrb-container">
+      <div class="nrb-product__grid">
+        <div class="nrb-product__text">
+          <span class="nrb-eyebrow">Новое направление</span>
+          <h2>Производство металлических бордюров</h2>
+          <p class="nrb-product__lead">
+            СТРОМ&nbsp;ТРЕЙД расширил производственные мощности и&nbsp;начал выпуск металлических бордюров&nbsp;— современной альтернативы традиционным бетонным конструкциям. Решение, востребованное в&nbsp;городском благоустройстве, на&nbsp;промышленных площадках и&nbsp;в&nbsp;коммерческой недвижимости.
+          </p>
+          <ul class="nrb-bullets">
+            <li>
+              <span class="nrb-bullets__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+              </span>
+              <span>
+                <span class="nrb-bullets__title">Прочнее бетонных</span>
+                <span class="nrb-bullets__desc">Выдерживают экстремальные нагрузки и&nbsp;температурные перепады от&nbsp;–50&nbsp;°C до&nbsp;+60&nbsp;°C.</span>
+              </span>
+            </li>
+            <li>
+              <span class="nrb-bullets__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+              </span>
+              <span>
+                <span class="nrb-bullets__title">Долговечные</span>
+                <span class="nrb-bullets__desc">Расчётный срок службы&nbsp;25+&nbsp;лет без потери геометрии и&nbsp;эстетики.</span>
+              </span>
+            </li>
+            <li>
+              <span class="nrb-bullets__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+              </span>
+              <span>
+                <span class="nrb-bullets__title">Устойчивые к&nbsp;коррозии</span>
+                <span class="nrb-bullets__desc">Защитное покрытие сохраняет металл от&nbsp;агрессивных воздействий городской среды и&nbsp;реагентов.</span>
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <figure class="nrb-product__media">
+          <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80" alt="Металлические бордюры на производстве">
+          <span class="nrb-product__badge">Новинка · 2026</span>
+          <figcaption>Производственная линия металлических бордюров, г.&nbsp;Москва</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. СФЕРЫ ПРИМЕНЕНИЯ ============ -->
+  <section class="nrb-apps">
+    <div class="nrb-container">
+      <span class="nrb-eyebrow">Где применяются</span>
+      <h3>Сферы применения металлических бордюров</h3>
+      <div class="nrb-apps__cloud">
+        <span class="nrb-apps__chip">Городское благоустройство</span>
+        <span class="nrb-apps__chip">Парковки и&nbsp;стоянки</span>
+        <span class="nrb-apps__chip">Дороги и&nbsp;тротуары</span>
+        <span class="nrb-apps__chip">Парковые зоны</span>
+        <span class="nrb-apps__chip">Набережные</span>
+        <span class="nrb-apps__chip">Промышленные площадки</span>
+        <span class="nrb-apps__chip">Логистические комплексы</span>
+        <span class="nrb-apps__chip">Частные территории</span>
+        <span class="nrb-apps__chip">Коммерческая недвижимость</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. ЦИТАТА ============ -->
+  <section class="nrb-quote-wrap">
+    <div class="nrb-container">
+      <blockquote class="nrb-quote">
+        <span class="nrb-quote__mark" aria-hidden="true">«</span>
+        <span class="nrb-quote__eyebrow">Слово руководителя</span>
+        <p class="nrb-quote__text">
+          Ребрендинг для нас&nbsp;— это не&nbsp;просто изменение визуала, а&nbsp;отражение внутренней трансформации. Приобретение нового оборудования и&nbsp;запуск нового производства свидетельствуют о&nbsp;переходе к&nbsp;более высоким стандартам качества и&nbsp;расширении наших услуг. Мы&nbsp;стремимся предложить клиентам надёжные решения, отвечающие современным требованиям рынка.
+        </p>
+        <footer class="nrb-quote__author">
+          <span class="nrb-quote__avatar">АР</span>
+          <span>
+            <span class="nrb-quote__name">Александр Родионов</span>
+            <span class="nrb-quote__role">Генеральный директор СТРОМ&nbsp;ТРЕЙД</span>
+          </span>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ============ 7. STATS ============ -->
+  <section class="nrb-stats">
+    <div class="nrb-container">
+      <header class="nrb-stats__head">
+        <span class="nrb-eyebrow">Что стоит за&nbsp;ребрендингом</span>
+        <h2>Цифры, которые говорят за&nbsp;нас</h2>
+      </header>
+      <div class="nrb-stats__row">
+        <div class="nrb-stat">
+          <span class="nrb-stat__index">01</span>
+          <div class="nrb-stat__num">15<small>+&nbsp;лет</small></div>
+          <div class="nrb-stat__label">на&nbsp;рынке металлоконструкций</div>
+        </div>
+        <div class="nrb-stat">
+          <span class="nrb-stat__index">02</span>
+          <div class="nrb-stat__num">85<small>+</small></div>
+          <div class="nrb-stat__label">регионов доставки по&nbsp;РФ</div>
+        </div>
+        <div class="nrb-stat">
+          <span class="nrb-stat__index">03</span>
+          <div class="nrb-stat__num">7<small>+</small></div>
+          <div class="nrb-stat__label">направлений изделий из&nbsp;металла</div>
+        </div>
+        <div class="nrb-stat">
+          <span class="nrb-stat__index">04</span>
+          <div class="nrb-stat__num">25<small>+&nbsp;лет</small></div>
+          <div class="nrb-stat__label">расчётный срок службы металлических бордюров</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. CTA ============ -->
+  <section class="nrb-cta-wrap">
+    <div class="nrb-container">
+      <div class="nrb-cta">
+        <div class="nrb-cta__inner">
+          <div>
+            <span class="nrb-cta__eyebrow">Обсудим сотрудничество</span>
+            <h2>Узнайте больше о&nbsp;новых возможностях</h2>
+            <p class="nrb-cta__desc">
+              Свяжитесь с&nbsp;менеджерами отдела продаж&nbsp;— расскажем подробнее о&nbsp;металлических бордюрах, обсудим условия партнёрства и&nbsp;предложим решение под&nbsp;ваш проект.
+            </p>
+          </div>
+          <div class="nrb-cta__actions">
+            <a href="#CallbackFormEmail" class="nrb-btn nrb-btn--primary" data-toggle="modal">
+              <span>Оставить заявку</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <a href="tel:+74956643517" class="nrb-btn nrb-btn--outline">
+              <span>+7 (495) 664-35-17</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </a>
+            <p class="nrb-cta__email">
+              или e-mail: <a href="/cdn-cgi/l/email-protection#bed7d0d8d1fecdcaccd1d3cdcadbdbd290cccb"><span class="__cf_email__" data-cfemail="ddb4b3bbb29daea9afb2b0aea9b8b8b1f3afa8">[email&#160;protected]</span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BACK LINK ============ -->
+  <nav class="nrb-back">
+    <div class="nrb-container">
+      <a href="/news" class="nrb-back__link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Все новости
+      </a>
+    </div>
+  </nav>
+
+</article>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

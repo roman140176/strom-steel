@@ -32,6 +32,8 @@
  * @property string $meta_keywords
  * @property string $title_short
  * @property string $meta_robots
+ * @property string $layout
+ * @property string $view
  */
 
 use yupe\components\Event;
@@ -98,7 +100,7 @@ class News extends yupe\models\YModel
             ['lang', 'in', 'range' => array_keys(Yii::app()->getModule('yupe')->getLanguagesList())],
             ['status', 'in', 'range' => array_keys($this->getStatusList())],
             ['slug', 'yupe\components\validators\YUniqueSlugValidator'],
-            ['meta_title, meta_keywords, meta_description, meta_robots', 'length', 'max' => 250],
+            ['meta_title, meta_keywords, meta_description, meta_robots, layout, view', 'length', 'max' => 250],
             ['link', 'length', 'max' => 250],
             ['link', 'yupe\components\validators\YUrlValidator'],
             [
@@ -108,7 +110,7 @@ class News extends yupe\models\YModel
             ],
             ['category_id', 'default', 'setOnEmpty' => true, 'value' => null],
             [
-                'id, meta_title, meta_keywords, meta_description, create_time, update_time, date, title, slug, short_text, full_text, user_id, status, is_protected, lang, title_short',
+                'id, meta_title, meta_keywords, meta_description, create_time, update_time, date, title, slug, short_text, full_text, user_id, status, is_protected, lang, title_short, layout, view',
                 'safe',
                 'on' => 'search'
             ],
@@ -244,6 +246,19 @@ class News extends yupe\models\YModel
             'meta_description' => Yii::t('NewsModule.news', 'Description (SEO)'),
             'title_short' => Yii::t('NewsModule.news', 'Title Short'),
             'meta_robots' => 'Мета-тег Robots',
+            'layout' => Yii::t('NewsModule.news', 'Layout'),
+            'view' => Yii::t('NewsModule.news', 'View'),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function attributeDescriptions()
+    {
+        return [
+            'layout' => Yii::t('NewsModule.news', 'News article layout'),
+            'view' => Yii::t('NewsModule.news', 'News article view'),
         ];
     }
 

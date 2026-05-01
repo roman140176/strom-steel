@@ -11,8 +11,12 @@
  * @var $this NewsController
  * @var $model News
  **/
-?> 
+?>
 <?php
+if ($model->layout) {
+    $this->layout = "//layouts/{$model->layout}";
+}
+
 $this->title = $model->meta_title ?: $model->title . ' | Новости Стром Трейд';;
 $this->description = $model->meta_description ?: $model->title . '. Актуальные новости Стром Трейд о работе компании, примерах работ и производстве металлоконструкций.';
 $this->keywords = $model->meta_keywords;
