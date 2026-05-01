@@ -989,7 +989,7 @@
    ========================================================================== */
 
 .home-videos {
-  margin-top: 40px;
+  margin-top: 72px;
   margin-bottom: 40px;
 }
 
@@ -1218,7 +1218,9 @@ body.video-modal-open {
   --svc-shadow:  0 1px 4px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.05);
   background: var(--svc-bg);
   color: var(--svc-text);
+  border-top: 1px solid var(--svc-border);
 }
+.svc-page main { border-top: 0; }
 
 .svc-page,
 .svc-page p,
@@ -3293,7 +3295,7 @@ body.video-modal-open {
   }
 }
 @media (max-width: 767px) {
-  .svc-page .svc-page__title { font-size: 28px; }
+  .svc-page .svc-page__title { font-size: 28px; }  
 }
 
 @media (max-width: 600px) {
@@ -3441,6 +3443,7 @@ a.header-contact:hover .header-contact__icon {
 .header-wrap .searcher .sp-form {
   width: 100%;
   margin: 0;
+  display: flex;
 }
 
 .header-wrap .searcher .input-group {
@@ -3452,6 +3455,7 @@ a.header-contact:hover .header-contact__icon {
   display: flex;
   align-items: center;
   transition: border-color .2s ease, box-shadow .2s ease;
+  flex-grow: 1;
 }
 
 .header-wrap .searcher .input-group:focus-within {
@@ -3799,6 +3803,7 @@ a.header-contact:hover .header-contact__icon {
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1;
+  margin-right:0!important;
 }
 
 .header-lk .lk-visible-menu__img img {
@@ -3926,9 +3931,6 @@ a.header-contact:hover .header-contact__icon {
    Homepage — баннер «Услуги и сервисы» (.hsv-banner)
    ========================================================================== */
 
-.page_title--main{
-  margin-top: 42px;
-}
 
 .hsv-banner {
   margin-top: 32px;
@@ -4043,7 +4045,7 @@ a.header-contact:hover .header-contact__icon {
     width: 100%;
   }
   .hsv-banner__label {
-    white-space: normal;
+    white-space: normal;.page_title--main
   }
 }
 
@@ -4861,4 +4863,29 @@ img.cf-card__bg--right{ object-position: right center; }
 }
 #pmYandex .modal-body iframe {
   height: 93%!important;
+}
+
+.dc__img img{
+  width: 200px;
+}
+.page_title--main {
+  margin-top: 72px;
+}
+
+
+@media (max-width: 767px) { 
+
+  .page_title--main,.home-videos {
+    margin-top: 42px;
+  }
+    main{
+      padding: 20px 0 48px;
+    }
+    .widget-pages{
+      padding-top: 36px;
+    }
+  .cf-section{
+    margin-top: 0;
+    
+  }
 }

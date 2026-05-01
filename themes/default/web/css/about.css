@@ -19,7 +19,9 @@
     font-size: 16px;
     line-height: 1.55;
     background: var(--ab-bg);
+    border-top: 1px solid var(--ab-line);
 }
+.ab-page main { border-top: 0; }
 .ab-page * { box-sizing: border-box; }
 
 /* Breadcrumbs */

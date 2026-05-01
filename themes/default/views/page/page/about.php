@@ -16,11 +16,13 @@ $themeAssets = Yii::app()->getTheme()->getAssetsUrl();
 Yii::app()->clientScript->registerCssFile($themeAssets . '/css/about.css');
 ?>
 <div class="ab-page">
-    <div class="container ab-crumbs-wrap">
-        <?php $this->widget(
-            'bootstrap.widgets.TbBreadcrumbs',
-            ['links' => $this->breadcrumbs]
-        ); ?>
+    <div class="ab-crumbs-wrap">
+        <div class="container">
+            <?php $this->widget(
+                'bootstrap.widgets.TbBreadcrumbs',
+                ['links' => $this->breadcrumbs]
+            ); ?>
+        </div>
     </div>
 
     <section class="ab-hero">
@@ -94,13 +96,11 @@ Yii::app()->clientScript->registerCssFile($themeAssets . '/css/about.css');
                 </article>
                 <article class="ab-cat-card">
                     <div class="ab-cat-num">04</div>
-                    <h3>Металлоконструкции под заказ</h3>
+                    <h3>Металлические бордюры</h3>
                     <ul>
-                        <li>лестницы</li>
-                        <li>опоры</li>
-                        <li>площадки обслуживания</li>
-                        <li>ограждения</li>
-                        <li>лестничные ограждения</li>
+                        <li>стальные бордюры</li>
+                        <li>бордюры из нержавеющей стали</li>
+                        <li>крепежи для металлических бордюров</li>
                     </ul>
                 </article>
             </div>
@@ -124,7 +124,7 @@ Yii::app()->clientScript->registerCssFile($themeAssets . '/css/about.css');
                     <?= CHtml::image($mainAssets . '/images/page/about/3.avif', '', ['class' => 'ab-srv-tile__img', 'loading' => 'lazy', 'decoding' => 'async']) ?>
                     <div class="ab-srv-tile__body">
                         <div class="ab-srv-tile__num">— 01</div>
-                        <h4>Изготовление металлоконструкций любой сложности по индивидуальным чертежам</h4>
+                        <h4>Металлические бордюры. Стальные бордюры. Бордюры из нержавеющей стали.</h4>
                     </div>
                 </article>
                 <article class="ab-srv-tile ab-srv-tile--t2">

@@ -173,7 +173,7 @@ $this->keywords = $model->meta_keywords ?: Yii::app()->getModule('yupe')->siteKe
             Местоположение объекта
           </div>
         </div>
-        <a href="/kontakty" class="svc-cost-banner__btn">
+        <a href="#" class="svc-cost-banner__btn" data-target="#callbackModal" data-toggle="modal">
           Рассчитать стоимость
           <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
         </a>
