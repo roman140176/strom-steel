@@ -251,7 +251,7 @@ $crumbs = [
       <div class="nrb-stats__row">
         <div class="nrb-stat">
           <span class="nrb-stat__index">01</span>
-          <div class="nrb-stat__num">15<small>+&nbsp;лет</small></div>
+          <div class="nrb-stat__num">10<small>+&nbsp;лет</small></div>
           <div class="nrb-stat__label">на&nbsp;рынке металлоконструкций</div>
         </div>
         <div class="nrb-stat">

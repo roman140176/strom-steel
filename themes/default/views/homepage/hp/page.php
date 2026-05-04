@@ -189,20 +189,115 @@ foreach ($faqHomeItems as $item) {
         ]); ?>
     </div>
 </section>
-<section class="about-container">
+<section class="aboutus-section" aria-labelledby="aboutus-title">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="aboutus-ico-pipe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3c1.4 1.8 2.4 3.2 2.4 4.4a2.4 2.4 0 1 1-4.8 0C9.6 6.2 10.6 4.8 12 3z" fill="currentColor" fill-opacity=".12"/>
+                <path d="M3 12h18"/>
+                <path d="M5 12l2 7h10l2-7"/>
+                <path d="M9 14.5v3"/>
+                <path d="M12 14.5v3"/>
+                <path d="M15 14.5v3"/>
+            </symbol>
+            <symbol id="aboutus-ico-grate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 14h13l5-4H8z"/>
+                <path d="M3 14v5h13v-5"/>
+                <path d="M16 14l5-4v5l-5 4"/>
+                <path d="M7 12l1.5-1.2"/>
+                <path d="M11 12l1.5-1.2"/>
+                <path d="M15 12l1.5-1.2"/>
+                <path d="M6 17h7"/>
+            </symbol>
+            <symbol id="aboutus-ico-mat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 4c0 1.6.4 2.6 1.4 3.2l3 1.6c.8.4 1.4 1 1.6 1.8l.3 1.4H6.4c-.5 0-.9-.4-.9-.9V4.9c0-.5.4-.9.9-.9H7z" fill="currentColor" fill-opacity=".10"/>
+                <path d="M6 4h1c0 1.6.4 2.6 1.4 3.2l3 1.6c.8.4 1.4 1 1.6 1.8l.3 1.4H6.4c-.5 0-.9-.4-.9-.9V4.9c0-.5.4-.9.9-.9z"/>
+                <rect x="3" y="14.5" width="18" height="6" rx="0.8"/>
+                <path d="M3 17.5h18"/>
+                <path d="M7 14.5v6"/>
+                <path d="M11 14.5v6"/>
+                <path d="M15 14.5v6"/>
+                <path d="M19 14.5v6"/>
+            </symbol>
+            <symbol id="aboutus-ico-edge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 11c3-4 7-4 9 0s6 4 9 0"/>
+                <path d="M3 14c3-4 7-4 9 0s6 4 9 0"/>
+                <path d="M5 14v3"/>
+                <path d="M19 14v3"/>
+                <path d="M8 8c.5-1.5 1.5-2 2.5-2"/>
+                <path d="M9.2 8c0-1 .4-2 1-2.6"/>
+                <path d="M14 8c.5-1.5 1.5-2 2.5-2"/>
+            </symbol>
+        </defs>
+    </svg>
     <div class="container">
-        <h2 class="page_title">Несколько слов о нас</h2>
-        <?php $about = Page::model()->findByPk(4) ?>
-        <div class="about-content">
-            <?= $about['short_content'] ?>
+        <!-- <p class="aboutus-eyebrow">О компании</p> -->
+        <h2 class="page_title" id="aboutus-title">Несколько слов о&nbsp;нас</h2>
+
+        <div class="aboutus-hero">
+            <div class="aboutus-text-col">
+                <p class="aboutus-lead">
+                    Компания «СТРОМ ТРЕЙД» — <b>торгово-производственное объединение</b> по&nbsp;производству изделий из&nbsp;металла любой&nbsp;сложности.
+                </p>
+                <p class="aboutus-text">
+                    Нашим заказчикам мы предлагаем как типовые изделия из&nbsp;металла, так и&nbsp;изделия по&nbsp;индивидуальным проектам в&nbsp;соответствии с&nbsp;вашими требованиями.
+                </p>
+                <p class="aboutus-text">
+                    Технический отдел разрабатывает чертежи и&nbsp;КМД по&nbsp;запросу, специалисты проводят шеф-монтаж и&nbsp;работы по&nbsp;монтажу изделий на&nbsp;объекте.
+                </p>
+            </div>
+
+            <aside class="aboutus-side" aria-label="Производственная база">
+                <p class="aboutus-side__title">Производственная база</p>
+                <p class="aboutus-side__lead">
+                    Собственное оборудование, материально-техническая база и&nbsp;производственные / складские помещения в&nbsp;Подмосковье.
+                </p>
+                <div class="aboutus-stats">
+                    <div class="aboutus-stat">
+                        <p class="aboutus-stat__num">10+</p>
+                        <p class="aboutus-stat__label">лет на&nbsp;рынке</p>
+                    </div>
+                    <div class="aboutus-stat">
+                        <p class="aboutus-stat__num">200+</p>
+                        <p class="aboutus-stat__label">объектов сдано</p>
+                    </div>
+                    <div class="aboutus-stat">
+                        <p class="aboutus-stat__num">10&nbsp;дн.</p>
+                        <p class="aboutus-stat__label">объект под&nbsp;ключ от</p>
+                    </div>
+                </div>
+            </aside>
         </div>
-        <div id="read-more">
-            <span>Читать весь текст</span>
-            <?= file_get_contents('.' . Yii::app()->getTheme()->getAssetsUrl() . '/images/svg/cats.svg'); ?>
+
+        <h3 class="aboutus-subtitle">В&nbsp;нашем ассортименте</h3>
+        <div class="aboutus-features">
+            <article class="aboutus-feature">
+                <span class="aboutus-feature__icon" aria-hidden="true"><svg><use href="#aboutus-ico-pipe"/></svg></span>
+                <h4 class="aboutus-feature__title">Нержавеющая сталь для&nbsp;пищевой промышленности</h4>
+                <p class="aboutus-feature__text">Стандартные и&nbsp;щелевые лотки, трапы с&nbsp;горизонтальным и&nbsp;вертикальным выпусками.</p>
+            </article>
+            <article class="aboutus-feature">
+                <span class="aboutus-feature__icon" aria-hidden="true"><svg><use href="#aboutus-ico-grate"/></svg></span>
+                <h4 class="aboutus-feature__title">Решётчатые настилы и&nbsp;лестничные ступени</h4>
+                <p class="aboutus-feature__text">Прессованные и&nbsp;сварные металлические настилы.</p>
+            </article>
+            <article class="aboutus-feature">
+                <span class="aboutus-feature__icon" aria-hidden="true"><svg><use href="#aboutus-ico-mat"/></svg></span>
+                <h4 class="aboutus-feature__title">Системы очистки обуви</h4>
+                <p class="aboutus-feature__text">Стальные оцинкованные решётки и&nbsp;придверные ковры на&nbsp;алюминиевой основе.</p>
+            </article>
+            <article class="aboutus-feature">
+                <span class="aboutus-feature__icon" aria-hidden="true"><svg><use href="#aboutus-ico-edge"/></svg></span>
+                <h4 class="aboutus-feature__title">Металлические гибкие бордюры</h4>
+                <p class="aboutus-feature__text">Из&nbsp;оцинкованной и&nbsp;нержавеющей стали для&nbsp;дорожек, клумб и&nbsp;газонов.</p>
+            </article>
         </div>
     </div>
-
 </section>
+<?php $this->widget('application.modules.review.widgets.ReviewCarouselWidget', [
+    'limit' => 9,
+    'order' => 'ASC'
+]); ?>
 <section class="container cf-section" aria-labelledby="cf-title">
     <div class="cf-row">
         <div class="cf-card cf-card--info">
@@ -273,26 +368,3 @@ foreach ($faqHomeItems as $item) {
         </div>
     </div>
 </section>
-<?php
-Yii::app()->clientScript->registerScript("items", "
-        var items = $('.about-content').find('ol li').length;
-        $('.about-content').find('ol li').slice(-9).hide();
-        $('.about-content').find('p').hide();
-        $('.about-content').append('<div class =\"half-opacity\"></div>');
-        $(document).delegate('#read-more','click',function(){
-            $(this).toggleClass('active');
-            if($(this).hasClass('active')){
-                $('.about-content').find('ol li:hidden').show();
-                $('.about-content').find('p').show();
-                $('.half-opacity').hide();
-                $(this).find('span').text('Скрыть');
-                }else{
-                   $('.about-content').find('ol li').slice(-9).hide();
-                    $('.about-content').find('p').hide();
-                    $('.about-content').append('<div class =\"half-opacity\"></div>');
-                    $(this).find('span').text('Читать весь текст');
-                }
-            })
-
-    ");
-?>

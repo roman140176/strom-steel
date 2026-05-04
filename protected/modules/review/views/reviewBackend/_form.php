@@ -88,6 +88,21 @@ $form = $this->beginWidget(
     </div>
     <div class="row">
         <div class="col-sm-7">
+            <?=  $form->textAreaGroup($model, 'preview_text', [
+            'widgetOptions' => [
+                'htmlOptions' => [
+                    'class' => 'popover-help',
+                    'rows' => 4,
+                    'cols' => 50,
+                    'data-original-title' => $model->getAttributeLabel('preview_text'),
+                    'data-content' => $model->getAttributeDescription('preview_text')
+                ]
+            ]]); ?>
+            <p class="hint" style="margin: -10px 0 20px;">Если заполнено — в карусели на сайте показывается этот короткий текст, а полный «Ваш отзыв» открывается по клику «Читать полностью». Если пусто — выводится полный текст без триггера.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-7">
             <!-- <label for="">Оценка работы (от 1 - 5)</label> -->
             <?=  $form->textFieldGroup($model, 'rating', [
             'widgetOptions' => [
@@ -114,29 +129,30 @@ $form = $this->beginWidget(
             ]); ?>
         </div>
     </div> -->
-    <!-- <div class='row'>
+    <div class='row'>
         <div class="col-sm-7">
-            <?php
-            echo CHtml::image(
-                !$model->isNewRecord && $model->image ? $model->getImageUrl(200,200) : '#',
-                $model->username,
-                [
-                    'class' => 'preview-image',
-                    'style' => !$model->isNewRecord && $model->image ? '' : 'display:none',
-                ]
-            ); ?>
-    
+            <label class="control-label">Аватар (фото клиента)</label>
             <?php if (!$model->isNewRecord && $model->image): ?>
-                <div class="checkbox">
+                <div style="margin-bottom: 10px;">
+                    <?= CHtml::image(
+                        $model->getImageUrl(120, 120),
+                        $model->username,
+                        [
+                            'class' => 'preview-image',
+                            'style' => 'border-radius: 50%; width: 80px; height: 80px; object-fit: cover; display: block;',
+                        ]
+                    ); ?>
+                </div>
+                <div class="checkbox" style="margin-bottom: 10px;">
                     <label>
-                        <input type="checkbox" name="delete-file"> <?= Yii::t('YupeModule.yupe', 'Delete the file') ?>
+                        <input type="checkbox" name="delete-file" value="1"> <?= Yii::t('YupeModule.yupe', 'Delete the file') ?>
                     </label>
                 </div>
             <?php endif; ?>
-    
             <?= $form->fileFieldGroup($model, 'image'); ?>
+            <p class="hint" style="margin: -10px 0 20px;">JPG / PNG. Будет показан в карусели на сайте круглым превью.</p>
         </div>
-    </div> -->
+    </div>
     <div class="row">
         <div class="col-sm-7">
             <?=  $form->dropDownListGroup($model, 'moderation', [

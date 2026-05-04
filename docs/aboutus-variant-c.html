@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>Несколько слов о нас — Вариант C</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     ТОКЕНЫ ПРОЕКТА (имитация прод-окружения; на сайте уже есть)
+     ========================================================= */
+  :root{
+    --brand: #0e7e50;
+    --brand-d: #0a5e3b;
+    --text: #1f2530;
+    --title: #0f1c2f;
+    --border: #d9dde8;
+    --muted: #5a6478;
+    --bg: #f5f6f9;
+    --card: #ffffff;
+    --shadow-hover: 0 14px 34px -14px rgba(15,28,47,.22);
+    --radius: 16px;
+  }
+
+  /* === ДЕМО-ОБЁРТКА (на проде НЕ копировать — это только для просмотра файла) === */
+  *,*::before,*::after{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family: 'Inter','PLR',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+  .container{ width:100%; max-width:1320px; margin-inline:auto; padding-inline:24px; }
+  .page_title{
+    font-family: inherit;
+    font-weight: 600;
+    font-size: clamp(28px, 3.4vw, 44px);
+    line-height: 1.1;
+    color: var(--title);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  /* === /конец демо-обёртки === */
+
+
+  /* =========================================================
+     БЛОК .aboutus-* — копировать на прод только этот раздел
+     ========================================================= */
+  .aboutus-section{
+    padding: clamp(48px, 6vw, 88px) 0;
+    background: var(--bg);
+  }
+
+  .aboutus-eyebrow{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--brand);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+  }
+  .aboutus-eyebrow::before{
+    content:"";
+    width: 28px; height: 2px;
+    background: var(--brand);
+    border-radius: 2px;
+  }
+
+  .aboutus-lead{
+    font-size: clamp(18px, 1.4vw, 22px);
+    line-height: 1.45;
+    color: var(--title);
+    font-weight: 500;
+    margin: 0 0 20px;
+    text-wrap: pretty;
+  }
+  .aboutus-lead b{ color: var(--brand); font-weight: 600; }
+
+  .aboutus-text{
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.65;
+    margin: 0 0 14px;
+    text-wrap: pretty;
+  }
+
+  .aboutus-subtitle{
+    font-size: clamp(20px, 1.6vw, 26px);
+    font-weight: 600;
+    color: var(--title);
+    margin: 0 0 24px;
+    letter-spacing: -0.005em;
+  }
+
+  /* --- ГЕРО: текст слева, тёмная плашка справа --- */
+  .aboutus-hero{
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 48px;
+    margin-top: 40px;
+    align-items: stretch;
+  }
+
+  .aboutus-side{
+    background: var(--title);
+    color: #e7ebf3;
+    border-radius: 20px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .aboutus-side::before{
+    content:"";
+    position: absolute;
+    inset: auto -40px -40px auto;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle at center, rgba(14,126,80,.35) 0%, transparent 70%);
+    filter: blur(10px);
+    pointer-events: none;
+  }
+  .aboutus-side__title{
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #4dd29a;
+    margin: 0;
+    position: relative;
+  }
+  .aboutus-side__lead{
+    font-size: clamp(18px, 1.5vw, 22px);
+    line-height: 1.4;
+    color: #fff;
+    font-weight: 500;
+    margin: 0;
+    position: relative;
+    text-wrap: pretty;
+  }
+  .aboutus-stats{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,.12);
+    position: relative;
+  }
+  .aboutus-stat__num{
+    font-size: clamp(26px, 2.4vw, 32px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .aboutus-stat__label{
+    font-size: 12px;
+    color: #a8b1c4;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* --- 4 КАРТОЧКИ НАПРАВЛЕНИЙ --- */
+  .aboutus-features{
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .aboutus-feature{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    box-shadow: 0 1px 0 rgba(15,28,47,.02);
+    height: 100%;
+  }
+  .aboutus-feature:hover,
+  .aboutus-feature:focus-within{
+    transform: translateY(-3px);
+    border-color: var(--brand);
+    box-shadow: var(--shadow-hover);
+  }
+  .aboutus-feature:hover .aboutus-feature__icon,
+  .aboutus-feature:focus-within .aboutus-feature__icon{
+    color: var(--brand);
+    background: #e7f3ec;
+    border-color: #cfe6d8;
+  }
+  .aboutus-feature__icon{
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: #f3f5f9;
+    border: 1px solid var(--border);
+    color: #4a5568;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color .2s ease, background .2s ease, border-color .2s ease;
+    flex-shrink: 0;
+  }
+  .aboutus-feature__icon svg{ width: 24px; height: 24px; }
+  .aboutus-feature__title{
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--title);
+    margin: 0;
+    line-height: 1.3;
+  }
+  .aboutus-feature__text{
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* focus styles */
+  .aboutus-section :focus-visible{
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* --- АДАПТИВ --- */
+  @media (max-width: 980px){
+    .aboutus-hero{ grid-template-columns: 1fr; gap: 32px; }
+    .aboutus-features{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 576px){
+    .aboutus-features{ grid-template-columns: 1fr; }
+    .aboutus-stats{ grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     SVG-СПРАЙТЫ — положить один раз где-то в начале <body>
+     ========================================================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- 1. Нержавейка для пищевой пром. — щелевой лоток-трап + капля -->
+    <symbol id="aboutus-ico-pipe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3c1.4 1.8 2.4 3.2 2.4 4.4a2.4 2.4 0 1 1-4.8 0C9.6 6.2 10.6 4.8 12 3z" fill="currentColor" fill-opacity=".12"/>
+      <path d="M3 12h18"/>
+      <path d="M5 12l2 7h10l2-7"/>
+      <path d="M9 14.5v3"/>
+      <path d="M12 14.5v3"/>
+      <path d="M15 14.5v3"/>
+    </symbol>
+    <!-- 2. Решётчатый настил + лестничная ступень -->
+    <symbol id="aboutus-ico-grate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 14h13l5-4H8z"/>
+      <path d="M3 14v5h13v-5"/>
+      <path d="M16 14l5-4v5l-5 4"/>
+      <path d="M7 12l1.5-1.2"/>
+      <path d="M11 12l1.5-1.2"/>
+      <path d="M15 12l1.5-1.2"/>
+      <path d="M6 17h7"/>
+    </symbol>
+    <!-- 3. Придверный коврик-решётка (вид сверху) + ботинок -->
+    <symbol id="aboutus-ico-mat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 4c0 1.6.4 2.6 1.4 3.2l3 1.6c.8.4 1.4 1 1.6 1.8l.3 1.4H6.4c-.5 0-.9-.4-.9-.9V4.9c0-.5.4-.9.9-.9H7z" fill="currentColor" fill-opacity=".10"/>
+      <path d="M6 4h1c0 1.6.4 2.6 1.4 3.2l3 1.6c.8.4 1.4 1 1.6 1.8l.3 1.4H6.4c-.5 0-.9-.4-.9-.9V4.9c0-.5.4-.9.9-.9z"/>
+      <rect x="3" y="14.5" width="18" height="6" rx="0.8"/>
+      <path d="M3 17.5h18"/>
+      <path d="M7 14.5v6"/>
+      <path d="M11 14.5v6"/>
+      <path d="M15 14.5v6"/>
+      <path d="M19 14.5v6"/>
+    </symbol>
+    <!-- 4. Гибкий бордюр-лента вдоль клумбы -->
+    <symbol id="aboutus-ico-edge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 11c3-4 7-4 9 0s6 4 9 0"/>
+      <path d="M3 14c3-4 7-4 9 0s6 4 9 0"/>
+      <path d="M5 14v3"/>
+      <path d="M19 14v3"/>
+      <path d="M8 8c.5-1.5 1.5-2 2.5-2"/>
+      <path d="M9.2 8c0-1 .4-2 1-2.6"/>
+      <path d="M14 8c.5-1.5 1.5-2 2.5-2"/>
+    </symbol>
+  </defs>
+</svg>
+
+
+<!-- =========================================================
+     БЛОК «НЕСКОЛЬКО СЛОВ О НАС» — Вариант C
+     ========================================================= -->
+<section class="aboutus-section" aria-labelledby="aboutus-title">
+  <div class="container">
+    <p class="aboutus-eyebrow">О компании</p>
+    <h2 class="page_title" id="aboutus-title">Несколько слов о&nbsp;нас</h2>
+
+    <div class="aboutus-hero">
+      <div class="aboutus-text-col">
+        <p class="aboutus-lead">
+          Компания «СТРОМ ТРЕЙД» — <b>торгово-производственное объединение</b> по&nbsp;производству изделий из&nbsp;металла любой&nbsp;сложности.
+        </p>
+        <p class="aboutus-text">
+          Нашим заказчикам мы предлагаем как типовые изделия из&nbsp;металла, так и&nbsp;изделия по&nbsp;индивидуальным проектам в&nbsp;соответствии с&nbsp;вашими требованиями.
+        </p>
+        <p class="aboutus-text">
+          Технический отдел разрабатывает чертежи и&nbsp;КМД по&nbsp;запросу, специалисты проводят шеф-монтаж и&nbsp;работы по&nbsp;монтажу изделий на&nbsp;объекте.
+        </p>
+      </div>
+
+      <aside class="aboutus-side" aria-label="Производственная база">
+        <p class="aboutus-side__title">Производственная база</p>
+        <p class="aboutus-side__lead">
+          Собственное оборудование, материально-техническая база и&nbsp;производственные / складские помещения в&nbsp;Подмосковье.
+        </p>
+        <div class="aboutus-stats">
+          <div class="aboutus-stat">
+            <p class="aboutus-stat__num">10+</p>
+            <p class="aboutus-stat__label">лет на&nbsp;рынке</p>
+          </div>
+          <div class="aboutus-stat">
+            <p class="aboutus-stat__num">200+</p>
+            <p class="aboutus-stat__label">объектов сдано</p>
+          </div>
+          <div class="aboutus-stat">
+            <p class="aboutus-stat__num">10&nbsp;дн.</p>
+            <p class="aboutus-stat__label">объект под&nbsp;ключ от</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <h3 class="aboutus-subtitle" style="margin-top:48px;">В&nbsp;нашем ассортименте</h3>
+    <div class="aboutus-features">
+      <article class="aboutus-feature" tabindex="0">
+        <span class="aboutus-feature__icon" aria-hidden="true"><svg><use href="#aboutus-ico-pipe"/></svg></span>
+        <h4 class="aboutus-feature__title">Нержавеющая сталь для&nbsp;пищевой промышленности</h4>
+        <p class="aboutus-feature__text">Стандартные и&nbsp;щелевые лотки, трапы с&nbsp;горизонтальным и&nbsp;вертикальным выпусками.</p>
+      </article>
+      <article class="aboutus-feature" tabindex="0">
+        <span class="aboutus-feature__icon" aria-hidden="true"><svg><use href="#aboutus-ico-grate"/></svg></span>
+        <h4 class="aboutus-feature__title">Решётчатые настилы и&nbsp;лестничные ступени</h4>
+        <p class="aboutus-feature__text">Прессованные и&nbsp;сварные металлические настилы.</p>
+      </article>
+      <article class="aboutus-feature" tabindex="0">
+        <span class="aboutus-feature__icon" aria-hidden="true"><svg><use href="#aboutus-ico-mat"/></svg></span>
+        <h4 class="aboutus-feature__title">Системы очистки обуви</h4>
+        <p class="aboutus-feature__text">Стальные оцинкованные решётки и&nbsp;придверные ковры на&nbsp;алюминиевой основе.</p>
+      </article>
+      <article class="aboutus-feature" tabindex="0">
+        <span class="aboutus-feature__icon" aria-hidden="true"><svg><use href="#aboutus-ico-edge"/></svg></span>
+        <h4 class="aboutus-feature__title">Металлические гибкие бордюры</h4>
+        <p class="aboutus-feature__text">Из&nbsp;оцинкованной и&nbsp;нержавеющей стали для&nbsp;дорожек, клумб и&nbsp;газонов.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

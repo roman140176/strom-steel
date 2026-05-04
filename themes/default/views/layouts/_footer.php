@@ -79,17 +79,8 @@
     </div>
 
   </div>
-  <div class="container footer-bottom-container d-flex">
-    <div style="width:62px;height:62px;" class="fl-mobile__logotype">
-      <?= CHtml::image($this->mainAssets . '/images/logo-mob.svg', '', ['loading' => 'lazy']) ?>
-    </div>
-    <a href="https://hacking-marketing.ru/" class="dc d-flex" target="_blank">
-      <span class="dc__name">
-      </span>
-      <span class="dc__img">
-        <?= CHtml::image($this->mainAssets . '/images/icon/hm.png', '', ['loading' => 'lazy']) ?>
-      </span>
-    </a>
+  <div class="container footer-bottom-container d-flex" style="border:0;">
+    
   </div>
 </footer>
 
@@ -112,7 +103,7 @@
 </div>
 
 
-
+<!-- 
 <style>
   .ctc__desc-text {
     font-size: 14px;
@@ -233,4 +224,4 @@
       width: 100%;
     }
   }
-</style>
+</style> -->

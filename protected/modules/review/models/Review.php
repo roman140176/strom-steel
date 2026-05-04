@@ -14,6 +14,7 @@
  * @property integer $category_id
  * @property integer $product_id
  * @property integer $rating
+ * @property string $preview_text
  */
 Yii::import('application.modules.store.models.*');
 
@@ -44,12 +45,12 @@ class Review extends yupe\models\YModel
             ['username, text', 'required'],
             ['moderation, position, rating, product_id', 'numerical', 'integerOnly'=>true],
             ["useremail", "email"],
-            ['id, date_created, username, text, moderation, useremail, image, position, product_id, rating', 'safe', 'on'=>'search'],
+            ['id, date_created, username, text, preview_text, moderation, useremail, image, position, product_id, rating', 'safe', 'on'=>'search'],
             /* array('image', 'file',
                 'types'=>'jpg, jpeg, png',
                 'allowEmpty'=>true,
             ),*/
-            ['image, moderation, validate, category_id, position, date_created, product_id', 'safe'],
+            ['image, moderation, validate, category_id, position, date_created, product_id, preview_text', 'safe'],
         ];
     }
     public function behaviors()
@@ -122,6 +123,7 @@ class Review extends yupe\models\YModel
             'user_id'      => 'User',
             'date_created' => 'Date Created',
             'text'         => 'Ваш отзыв',
+            'preview_text' => 'Краткий текст (для карусели)',
             'moderation'   => 'Статус',
             'username'     => 'Ваше имя',
             'useremail'    => 'Ваш E-mail',

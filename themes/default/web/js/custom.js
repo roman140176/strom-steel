@@ -206,6 +206,87 @@ jQuery(function ($) {
   })();
 
   /* ========================================================================
+     Reviews — Swiper-карусель отзывов + модалка «Читать полностью»
+     ======================================================================== */
+  (function initReviewsCarousel() {
+    var swiperEl = document.querySelector('.reviews-swiper');
+    if (swiperEl && typeof Swiper !== 'undefined') {
+      new Swiper(swiperEl, {
+        slidesPerView: 1.1,
+        spaceBetween: 16,
+        grabCursor: true,
+        watchOverflow: true,
+        pagination: {
+          el: '.reviews-swiper__pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.reviews-swiper__next',
+          prevEl: '.reviews-swiper__prev',
+        },
+        a11y: {
+          prevSlideMessage: 'Предыдущий отзыв',
+          nextSlideMessage: 'Следующий отзыв',
+        },
+        breakpoints: {
+          576: { slidesPerView: 1.6, spaceBetween: 18 },
+          768: { slidesPerView: 2.2, spaceBetween: 20 },
+          992: { slidesPerView: 3.2, spaceBetween: 24 },
+          1200: { slidesPerView: 3.5, spaceBetween: 28 },
+          1440: { slidesPerView: 4.5, spaceBetween: 30 },
+        },
+      });
+    }
+
+    var modal = document.getElementById('reviews-modal');
+    if (!modal) return;
+    var body = modal.querySelector('.reviews-modal__body');
+    var lastFocused = null;
+
+    function openModal(id) {
+      var tpl = document.querySelector('[data-reviews-content="' + id + '"]');
+      if (!tpl || !tpl.content) return;
+      lastFocused = document.activeElement;
+      body.innerHTML = '';
+      body.appendChild(tpl.content.cloneNode(true));
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('reviews-modal-open');
+      var closeBtn = modal.querySelector('.reviews-modal__close');
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('reviews-modal-open');
+      body.innerHTML = '';
+      if (lastFocused && typeof lastFocused.focus === 'function') {
+        lastFocused.focus();
+      }
+    }
+
+    document.addEventListener('click', function (event) {
+      var trigger = event.target.closest('[data-reviews-open]');
+      if (trigger) {
+        event.preventDefault();
+        openModal(trigger.getAttribute('data-reviews-open'));
+        return;
+      }
+      if (event.target.closest('[data-reviews-close]')) {
+        event.preventDefault();
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+        closeModal();
+      }
+    });
+  })();
+
+  /* ========================================================================
      Home videos — vertical reels carousel + lightbox
      ======================================================================== */
   (function initHomeVideos() {

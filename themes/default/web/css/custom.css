@@ -371,7 +371,9 @@
 .home-banner-swiper__prev,
 .home-banner-swiper__next,
 .home-videos-swiper__prev,
-.home-videos-swiper__next {
+.home-videos-swiper__next,
+.reviews-swiper__prev,
+.reviews-swiper__next {
   width: 50px;
   height: 50px;
   margin-top: -25px;
@@ -387,7 +389,9 @@
 .home-banner-swiper__prev::before,
 .home-banner-swiper__next::before,
 .home-videos-swiper__prev::before,
-.home-videos-swiper__next::before {
+.home-videos-swiper__next::before,
+.reviews-swiper__prev::before,
+.reviews-swiper__next::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -402,13 +406,15 @@
 }
 
 .home-banner-swiper__prev::before,
-.home-videos-swiper__prev::before {
+.home-videos-swiper__prev::before,
+.reviews-swiper__prev::before {
   -webkit-mask-image: url("../images/svg/carousel-arrow-prev.svg");
   mask-image: url("../images/svg/carousel-arrow-prev.svg");
 }
 
 .home-banner-swiper__next::before,
-.home-videos-swiper__next::before {
+.home-videos-swiper__next::before,
+.reviews-swiper__next::before {
   -webkit-mask-image: url("../images/svg/carousel-arrow-next.svg");
   mask-image: url("../images/svg/carousel-arrow-next.svg");
 }
@@ -416,7 +422,9 @@
 .home-banner-swiper__prev:hover,
 .home-banner-swiper__next:hover,
 .home-videos-swiper__prev:hover,
-.home-videos-swiper__next:hover {
+.home-videos-swiper__next:hover,
+.reviews-swiper__prev:hover,
+.reviews-swiper__next:hover {
   border-color: transparent;
   box-shadow: 0 4px 12px rgba(14, 126, 80, .15);
 }
@@ -424,7 +432,9 @@
 .home-banner-swiper__prev:hover::before,
 .home-banner-swiper__next:hover::before,
 .home-videos-swiper__prev:hover::before,
-.home-videos-swiper__next:hover::before {
+.home-videos-swiper__next:hover::before,
+.reviews-swiper__prev:hover::before,
+.reviews-swiper__next:hover::before {
   background-color: #0e7e50;
 }
 
@@ -432,14 +442,20 @@
 .home-banner-swiper__next::after,
 .home-videos-swiper__prev::after,
 .home-videos-swiper__next::after,
+.reviews-swiper__prev::after,
+.reviews-swiper__next::after,
 .home-banner-swiper__prev .swiper-navigation-icon,
 .home-banner-swiper__next .swiper-navigation-icon,
 .home-videos-swiper__prev .swiper-navigation-icon,
 .home-videos-swiper__next .swiper-navigation-icon,
+.reviews-swiper__prev .swiper-navigation-icon,
+.reviews-swiper__next .swiper-navigation-icon,
 .home-banner-swiper__prev svg:not(:root),
 .home-banner-swiper__next svg:not(:root),
 .home-videos-swiper__prev svg:not(:root),
-.home-videos-swiper__next svg:not(:root) {
+.home-videos-swiper__next svg:not(:root),
+.reviews-swiper__prev svg:not(:root),
+.reviews-swiper__next svg:not(:root) {
   display: none !important;
 }
 
@@ -659,6 +675,11 @@
   .lm__img img {
     width: 100%;
     height: 100%;
+  }
+}
+@media (max-width: 1366px) {
+  .reviews-carousel__head{
+    padding: 0 15px;
   }
 }
 
@@ -5738,4 +5759,481 @@ img.cf-card__bg--right{ object-position: right center; }
     padding: 8px 14px;
     font-size: 14px;
   }
+}
+
+/* ============================================================================
+   Reviews carousel — placeholder styles (TODO: replace after Claude Design)
+   ============================================================================ */
+.reviews-carousel-section {
+  padding: 60px 0;
+  position: relative;
+}
+.reviews-carousel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.reviews-swiper {
+  position: relative;
+  padding-bottom: 48px;
+  overflow: hidden;
+}
+.reviews-swiper .swiper-wrapper {
+  align-items: stretch;
+}
+.reviews-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: auto;
+  background: #fff;
+  border: 1px solid #e6e9ef;
+  border-radius: 16px;
+  padding: 22px 22px 24px;
+  box-sizing: border-box;
+  box-shadow: 0 6px 18px -12px rgba(15, 28, 47, .14);
+}
+.reviews-card__rating {
+  display: inline-flex;
+  gap: 2px;
+  color: #d9dde8;
+}
+.reviews-card__star.is-on { color: #f5b301; }
+.reviews-card__text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #1f2530;
+  flex: 1 1 auto;
+}
+.reviews-card__more {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: #0e7e50;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color .2s ease, transform .2s ease;
+}
+.reviews-card__more:hover { color: #0a5e3b; transform: translateX(2px); }
+.reviews-card__person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+.reviews-card__avatar {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  color: #0e7e50;
+  background: rgba(14, 126, 80, .14);
+  text-transform: uppercase;
+}
+.reviews-card__avatar--initial {
+  background: rgba(14, 126, 80, .14);
+}
+.reviews-card__author {
+  font-weight: 600;
+  font-size: 15px;
+  color: #0f1c2f;
+}
+
+/* Reviews modal — «Читать полностью» */
+.reviews-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.reviews-modal.is-open { display: flex; }
+.reviews-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 28, 47, .55);
+  cursor: pointer;
+}
+.reviews-modal__dialog {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 640px;
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  background: #fff;
+  border-radius: 18px;
+  padding: 32px 32px 28px;
+  box-shadow: 0 24px 60px -20px rgba(15, 28, 47, .35);
+}
+.reviews-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #f2f4f8;
+  font-size: 22px;
+  line-height: 1;
+  color: #0f1c2f;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.reviews-modal__close:hover { background: #0e7e50; color: #fff; }
+.reviews-modal__rating {
+  display: inline-flex;
+  gap: 3px;
+  color: #d9dde8;
+  margin-bottom: 14px;
+}
+.reviews-modal__text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1f2530;
+}
+.reviews-modal__person {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 20px;
+}
+.reviews-modal__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: 0 0 56px;
+  background: rgba(14, 126, 80, .1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 22px;
+  color: #0e7e50;
+}
+.reviews-modal__author {
+  font-weight: 600;
+  font-size: 16px;
+  color: #0f1c2f;
+}
+body.reviews-modal-open { overflow: hidden; }
+@media (max-width: 575px) {
+  .reviews-modal__dialog { padding: 24px 20px 20px; border-radius: 14px; }
+}
+.reviews-swiper__pagination.swiper-pagination-bullets {
+  bottom: 0;
+}
+.reviews-swiper__pagination .swiper-pagination-bullet-active {
+  background: #0e7e50;
+}
+.all-objects.reviews-carousel__more {
+  width: 166px;
+  flex: 0 0 auto;
+}
+.reviews-carousel__more-accent {
+  color: #FC3F1D;
+}
+@media (max-width: 1100px) {
+  .reviews-swiper__prev,
+  .reviews-swiper__next { display: none; }
+}
+@media (max-width: 767px) {
+  .reviews-carousel-section { padding: 40px 0; }
+  .reviews-card { padding: 18px 18px 20px; border-radius: 14px; }
+  .reviews-carousel__head { flex-wrap: wrap; }
+}
+
+/* ============================================================================
+   «Несколько слов о нас» — главная (вариант C от Claude Design)
+   Структура: эйбрау + заголовок, гриd «текст + тёмная плашка-факт»,
+   ниже — 4 карточки направлений с inline-SVG.
+   Был jQuery «Читать весь текст / Скрыть» — убран, теперь готовая структура.
+   ============================================================================ */
+.aboutus-section {
+  padding: clamp(48px, 6vw, 60px) 0;
+  background: #f5f6f9;
+}
+
+.aboutus-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #0e7e50;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+.aboutus-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: #0e7e50;
+  border-radius: 2px;
+}
+
+.aboutus-lead {
+  font-size: clamp(18px, 1.4vw, 22px);
+  line-height: 1.45;
+  color: #0f1c2f;
+  font-weight: 500;
+  margin: 0 0 20px;
+  text-wrap: pretty;
+}
+.aboutus-lead b {
+  color: #0e7e50;
+  font-weight: 600;
+}
+
+.aboutus-text {
+  color: #1f2530;
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0 0 14px;
+  text-wrap: pretty;
+}
+
+.aboutus-subtitle {
+  font-size: clamp(20px, 1.6vw, 26px);
+  font-weight: 600;
+  color: #0f1c2f;
+  margin: 48px 0 24px;
+  letter-spacing: -0.005em;
+}
+
+/* Геро-сетка: текст + тёмная плашка-факт */
+.aboutus-hero {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 48px;
+  margin-top: 40px;
+  align-items: stretch;
+}
+
+.aboutus-side {
+  background: #0f1c2f;
+  color: #e7ebf3;
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.aboutus-side::before {
+  content: "";
+  position: absolute;
+  inset: auto -40px -40px auto;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle at center, rgba(14, 126, 80, .35) 0%, transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+.aboutus-side__title {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #4dd29a;
+  margin: 0;
+  position: relative;
+}
+.aboutus-side__lead {
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.4;
+  color: #fff;
+  font-weight: 500;
+  margin: 0;
+  position: relative;
+  text-wrap: pretty;
+}
+
+.aboutus-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  position: relative;
+}
+.aboutus-stat__num {
+  font-size: clamp(26px, 2.4vw, 32px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+.aboutus-stat__label {
+  font-size: 12px;
+  color: #a8b1c4;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 4 карточки направлений */
+.aboutus-features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.aboutus-feature {
+  background: #fff;
+  border: 1px solid #d9dde8;
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  box-shadow: 0 1px 0 rgba(15, 28, 47, .02);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.aboutus-feature:hover,
+.aboutus-feature:focus-within {
+  transform: translateY(-3px);
+  border-color: #0e7e50;
+  box-shadow: 0 14px 34px -14px rgba(15, 28, 47, .22);
+}
+.aboutus-feature:hover .aboutus-feature__icon,
+.aboutus-feature:focus-within .aboutus-feature__icon {
+  color: #0e7e50;
+  background: #e7f3ec;
+  border-color: #cfe6d8;
+}
+.aboutus-feature__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #f3f5f9;
+  border: 1px solid #d9dde8;
+  color: #4a5568;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: color .2s ease, background .2s ease, border-color .2s ease;
+}
+.aboutus-feature__icon svg {
+  width: 24px;
+  height: 24px;
+}
+.aboutus-feature__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f1c2f;
+  margin: 0;
+  line-height: 1.3;
+}
+.aboutus-feature__text {
+  font-size: 14px;
+  color: #5a6478;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.aboutus-section :focus-visible {
+  outline: 2px solid #0e7e50;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (max-width: 980px) {
+  .aboutus-hero { grid-template-columns: 1fr; gap: 32px; }
+  .aboutus-features { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 576px) {
+  .aboutus-features { grid-template-columns: 1fr; }
+  .aboutus-stats { grid-template-columns: 1fr 1fr; }
+}
+
+#CallbackEmail .modal-content,
+#CallbackFormEmail .modal-content,
+#CallbackProduct .modal-content,
+#callbackModal .modal-content,
+#reviewZayavkaModal .modal-content {
+  border-radius: 18px!important;
+}
+/* ============================================================================
+   Унификация крестиков закрытия модалок под стиль .reviews-modal__close
+   Скоуп: #CallbackEmail / #CallbackFormEmail / #CallbackProduct /
+          #callbackModal / #reviewZayavkaModal
+   Перебиваем дефолты Bootstrap .close (opacity, text-shadow, position).
+   ============================================================================ */
+#CallbackEmail .close,
+#CallbackFormEmail .close,
+#CallbackProduct .close,
+#callbackModal .close,
+#reviewZayavkaModal .close {
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 50% !important;
+  background: #f2f4f8 !important;
+  color: #0f1c2f !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background .2s ease, color .2s ease !important;
+  z-index: 5;
+}
+#CallbackEmail .close:hover,
+#CallbackFormEmail .close:hover,
+#CallbackProduct .close:hover,
+#callbackModal .close:hover,
+#reviewZayavkaModal .close:hover,
+#CallbackEmail .close:focus,
+#CallbackFormEmail .close:focus,
+#CallbackProduct .close:focus,
+#callbackModal .close:focus,
+#reviewZayavkaModal .close:focus {
+  background: #0e7e50 !important;
+  color: #fff !important;
+  outline: none !important;
+}
+#CallbackEmail .close > span,
+#CallbackFormEmail .close > span,
+#CallbackProduct .close > span,
+#callbackModal .close > span,
+#reviewZayavkaModal .close > span {
+  display: inline-block;
+  font-size: inherit;
+  line-height: 1;
+  margin-top: -2px;
 }
