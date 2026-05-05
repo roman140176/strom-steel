@@ -273,7 +273,7 @@ foreach ($faqHomeItems as $item) {
         <div class="aboutus-features">
             <article class="aboutus-feature">
                 <span class="aboutus-feature__icon" aria-hidden="true"><svg><use href="#aboutus-ico-pipe"/></svg></span>
-                <h4 class="aboutus-feature__title">Нержавеющая сталь для&nbsp;пищевой промышленности</h4>
+                <h4 class="aboutus-feature__title">Изделия из нержавеющей стали для пищевой промышленности</h4>
                 <p class="aboutus-feature__text">Стандартные и&nbsp;щелевые лотки, трапы с&nbsp;горизонтальным и&nbsp;вертикальным выпусками.</p>
             </article>
             <article class="aboutus-feature">

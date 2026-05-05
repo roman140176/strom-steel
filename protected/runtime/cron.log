@@ -1,0 +1,19 @@
+2026/05/01 12:28:36 [error] [exception.PDOException] PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-1' at line 1 in /home/roman/sites/www/stromsteel.loc/protected/modules/yupe/extensions/NestedPDO.php:72
+Stack trace:
+#0 /home/roman/sites/www/stromsteel.loc/protected/modules/yupe/extensions/NestedPDO.php(72): PDO->exec()
+#1 /home/roman/sites/www/stromsteel.loc/vendor/yiisoft/yii/framework/db/CDbTransaction.php(80): yupe\extensions\NestedPDO->rollBack()
+#2 /home/roman/sites/www/stromsteel.loc/vendor/yiisoft/yii/framework/db/CDbMigration.php(64): CDbTransaction->rollback()
+#3 /home/roman/sites/www/stromsteel.loc/vendor/yiisoft/yii/framework/cli/commands/MigrateCommand.php(415): CDbMigration->up()
+#4 /home/roman/sites/www/stromsteel.loc/vendor/yiiext/migrate-command/EMigrateCommand.php(467): MigrateCommand->migrateUp()
+#5 /home/roman/sites/www/stromsteel.loc/vendor/yiisoft/yii/framework/cli/commands/MigrateCommand.php(109): EMigrateCommand->migrateUp()
+#6 /home/roman/sites/www/stromsteel.loc/vendor/yiiext/migrate-command/EMigrateCommand.php(266): MigrateCommand->actionUp()
+#7 [internal function]: EMigrateCommand->actionUp()
+#8 /home/roman/sites/www/stromsteel.loc/vendor/yiisoft/yii/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs()
+#9 /home/roman/sites/www/stromsteel.loc/vendor/yiisoft/yii/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run()
+#10 /home/roman/sites/www/stromsteel.loc/vendor/yiisoft/yii/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run()
+#11 /home/roman/sites/www/stromsteel.loc/vendor/yiisoft/yii/framework/base/CApplication.php(185): CConsoleApplication->processRequest()
+#12 /home/roman/sites/www/stromsteel.loc/protected/yiic.php(11): CApplication->run()
+#13 /home/roman/sites/www/stromsteel.loc/protected/yiic(3): require_once('...')
+#14 {main}
+---
+2026/05/01 12:28:42 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'layout'. The SQL statement executed was: ALTER TABLE `yupe_news_news` ADD `layout` varchar(250).
