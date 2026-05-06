@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>С Днём Победы — СТРОМ ТРЕЙД</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     VICTORY DAY LONGREAD — СТРОМ ТРЕЙД
+     Body partial. No site header / footer here.
+     Class prefix: .news-longread__*
+     Tone: restrained, dignified. Symbols as accents — not banners.
+     ============================================================ */
+
+  .news-longread,
+  .news-longread *,
+  .news-longread *::before,
+  .news-longread *::after { box-sizing: border-box; }
+
+  .news-longread {
+    font-family: "Inter", "PLR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #212121;
+    font-size: 17px;
+    line-height: 1.65;
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .news-longread__container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .news-longread__column {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Breadcrumbs ---------- */
+  .news-longread__breadcrumbs {
+    padding: 18px 0 14px;
+    font-size: 13px;
+    color: #6b7280;
+    letter-spacing: 0.01em;
+  }
+  .news-longread__breadcrumbs a {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color .15s ease;
+  }
+  .news-longread__breadcrumbs a:hover { color: #0e7e50; }
+  .news-longread__breadcrumbs-sep {
+    display: inline-block;
+    margin: 0 8px;
+    color: #d9dde8;
+  }
+  .news-longread__breadcrumbs-current { color: #0f1c2f; }
+
+  /* ---------- Hero ---------- */
+  .news-longread__hero {
+    padding: 36px 0 0;
+    border-top: 1px solid #d9dde8;
+  }
+  .news-longread__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #0e7e50;
+    margin-bottom: 28px;
+  }
+  .news-longread__eyebrow-star {
+    width: 18px;
+    height: 18px;
+    color: #b88a3a;
+    flex-shrink: 0;
+  }
+
+  .news-longread__h1 {
+    font-size: 72px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: #0f1c2f;
+    margin: 0 0 28px;
+    text-wrap: balance;
+  }
+
+  .news-longread__lead {
+    font-size: 21px;
+    line-height: 1.55;
+    color: #4b5563;
+    max-width: 720px;
+    margin: 0 0 56px;
+    font-weight: 400;
+  }
+
+  /* Ribbon divider — 50/50 muted orange + graphite */
+  .news-longread__ribbon {
+    display: flex;
+    height: 3px;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+  .news-longread__ribbon span:first-child { flex: 1; background: #cc4124; }
+  .news-longread__ribbon span:last-child  { flex: 1; background: #1a1a1a; }
+
+  /* ---------- Intro ---------- */
+  .news-longread__intro {
+    padding: 56px 0 0;
+  }
+  .news-longread__intro p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #212121;
+    margin: 0;
+  }
+
+  /* ---------- Section 1 — plain block ---------- */
+  .news-longread__section {
+    padding: 64px 0 0;
+  }
+  .news-longread__h2 {
+    font-size: 34px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+    color: #0f1c2f;
+    margin: 0 0 24px;
+    text-wrap: balance;
+  }
+  .news-longread__body p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #212121;
+    margin: 0 0 18px;
+  }
+  .news-longread__body p:last-child { margin-bottom: 0; }
+
+  /* ---------- Section 2 — dark plate, tyl ---------- */
+  .news-longread__plate-wrap {
+    padding: 80px 0 0;
+  }
+  .news-longread__plate {
+    position: relative;
+    background-color: #0f1c2f;
+    background-image:
+      linear-gradient(rgba(15,28,47,0.88), rgba(15,28,47,0.94)),
+      url("https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1600&q=70");
+    background-size: cover;
+    background-position: center;
+    color: #d9dde8;
+    border-radius: 20px;
+    padding: 80px 96px 80px 100px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  /* left accent bar 4px #cc4124 */
+  .news-longread__plate::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: #cc4124;
+  }
+  /* watermark star top-right, ~20% opacity */
+  .news-longread__plate-star {
+    position: absolute;
+    top: 36px;
+    right: 44px;
+    width: 120px;
+    height: 120px;
+    color: #b88a3a;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .news-longread__plate .news-longread__h2 {
+    color: #ffffff;
+    margin-bottom: 22px;
+    max-width: 720px;
+  }
+  .news-longread__plate p {
+    color: #d9dde8;
+    font-size: 17px;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0;
+  }
+  .news-longread__plate-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #cc4124;
+    margin-bottom: 18px;
+  }
+
+  /* ---------- Section 3 — pull-quote ---------- */
+  .news-longread__quote-wrap {
+    padding: 80px 0 0;
+  }
+  .news-longread__quote {
+    border-left: 3px solid #0e7e50;
+    padding: 4px 0 4px 28px;
+    margin: 28px 0 28px;
+    font-size: 30px;
+    line-height: 1.35;
+    font-weight: 500;
+    color: #0f1c2f;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+  .news-longread__quote p { margin: 0 0 12px; }
+  .news-longread__quote p:last-child { margin-bottom: 0; }
+
+  .news-longread__quote-byline {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .news-longread__order {
+    width: 46px;
+    height: 46px;
+    color: #b88a3a;
+    flex-shrink: 0;
+  }
+  .news-longread__quote-byline-text {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.4;
+  }
+  .news-longread__quote-byline-text strong {
+    display: block;
+    color: #0f1c2f;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+
+  /* ---------- Section 4 — service callout (work schedule) ---------- */
+  .news-longread__callout-wrap {
+    padding: 64px 0 0;
+  }
+  .news-longread__callout {
+    background: #f2f4f8;
+    border: 1px solid #d9dde8;
+    border-radius: 16px;
+    padding: 36px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .news-longread__callout-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: #0e7e50;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .news-longread__callout-icon svg { width: 26px; height: 26px; }
+  .news-longread__callout-body { flex: 1; min-width: 0; }
+  .news-longread__h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #0f1c2f;
+    margin: 4px 0 10px;
+    letter-spacing: -0.005em;
+  }
+  .news-longread__callout-body p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: #4b5563;
+    margin: 0;
+  }
+
+  /* ---------- Signature ---------- */
+  .news-longread__signature-wrap {
+    padding: 80px 0 0;
+  }
+  .news-longread__signature {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: #6b7280;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    margin: 0 0 32px;
+  }
+  .news-longread__signature-star {
+    width: 20px;
+    height: 20px;
+    color: #b88a3a;
+    flex-shrink: 0;
+  }
+  .news-longread__signature-name {
+    font-weight: 500;
+    color: #0f1c2f;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------- All news link chip ---------- */
+  .news-longread__allnews {
+    padding: 32px 0 72px;
+    display: flex;
+    justify-content: center;
+  }
+  .news-longread__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: #0f1c2f;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    padding: 14px 22px;
+    border-radius: 999px;
+    border: 1px solid #d9dde8;
+    text-decoration: none;
+    transition: border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .news-longread__chip:hover {
+    border-color: #0e7e50;
+    color: #0e7e50;
+    background: #ffffff;
+  }
+  .news-longread__chip svg { width: 14px; height: 14px; transition: transform .15s ease; }
+  .news-longread__chip:hover svg { transform: translateX(3px); }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 1200px) {
+    .news-longread__h1 { font-size: 56px; }
+    .news-longread__plate { padding: 48px 56px 48px 60px; }
+    .news-longread__plate-star { width: 96px; height: 96px; top: 28px; right: 32px; }
+  }
+
+  @media (max-width: 768px) {
+    .news-longread__container { padding: 0 16px; }
+    .news-longread__h1 { font-size: 40px; }
+    .news-longread__h2 { font-size: 28px; }
+    .news-longread__lead { font-size: 19px; margin-bottom: 40px; }
+
+    .news-longread__intro       { padding-top: 48px; }
+    .news-longread__section     { padding-top: 48px; }
+    .news-longread__plate-wrap  { padding-top: 48px; }
+    .news-longread__quote-wrap  { padding-top: 48px; }
+    .news-longread__callout-wrap{ padding-top: 48px; }
+    .news-longread__signature-wrap { padding-top: 56px; }
+
+    /* Section 2 — dark plate goes full-bleed (no side padding) on mobile */
+    .news-longread__plate-wrap {
+      margin-left: -16px;
+      margin-right: -16px;
+    }
+    .news-longread__plate {
+      border-radius: 0;
+      padding: 56px 24px 56px 28px;
+    }
+    .news-longread__plate-star { width: 72px; height: 72px; top: 20px; right: 20px; }
+
+    .news-longread__quote { font-size: 22px; padding-left: 20px; }
+    .news-longread__callout { flex-direction: column; gap: 18px; padding: 28px; }
+    .news-longread__h1 { letter-spacing: -0.015em; }
+  }
+
+  @media (max-width: 576px) {
+    .news-longread__h1 { font-size: 36px; }
+    .news-longread__lead { font-size: 17px; }
+    .news-longread__body p,
+    .news-longread__intro p,
+    .news-longread__plate p { font-size: 16px; }
+    .news-longread__quote { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =================================================================
+     VICTORY DAY LONGREAD — body partial.
+     ================================================================= -->
+<article class="news-longread">
+
+  <!-- 1. Breadcrumbs (mock) -->
+  <div class="news-longread__container">
+    <nav class="news-longread__breadcrumbs" aria-label="Хлебные крошки">
+      <a href="/">Главная</a>
+      <span class="news-longread__breadcrumbs-sep">/</span>
+      <a href="/news">Новости</a>
+      <span class="news-longread__breadcrumbs-sep">/</span>
+      <span class="news-longread__breadcrumbs-current">С Днём Победы</span>
+    </nav>
+  </div>
+
+  <!-- 2. Hero -->
+  <header class="news-longread__container news-longread__hero">
+    <div class="news-longread__column">
+      <div class="news-longread__eyebrow">
+        <!-- thin outlined five-pointed star -->
+        <svg class="news-longread__eyebrow-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="12,2.6 14.6,9.2 21.6,9.6 16.2,14.1 18,21 12,17.2 6,21 7.8,14.1 2.4,9.6 9.4,9.2"></polygon>
+        </svg>
+        9 мая 2026 / 81 год Победы
+      </div>
+
+      <h1 class="news-longread__h1">С Днём Победы</h1>
+
+      <p class="news-longread__lead">
+        Помним. Гордимся. Благодарим. Команда «СТРОМ ТРЕЙД» поздравляет с 81-й годовщиной Великой Победы и желает мирного неба над головой.
+      </p>
+    </div>
+
+    <!-- Ribbon divider — half muted orange / half graphite -->
+    <div class="news-longread__ribbon" aria-hidden="true">
+      <span></span><span></span>
+    </div>
+  </header>
+
+  <!-- 3. Intro -->
+  <section class="news-longread__container news-longread__intro">
+    <div class="news-longread__column">
+      <p>
+        9 Мая — день, который объединяет всю страну. Это день памяти о подвиге наших дедов и прадедов, день благодарности ветеранам и труженикам тыла — тем, кто ковал Победу на фронте и за станком. В этот день мы останавливаемся и говорим спасибо.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4.1. Section 1 — Помним каждое имя -->
+  <section class="news-longread__container news-longread__section">
+    <div class="news-longread__column">
+      <h2 class="news-longread__h2">Помним каждое имя</h2>
+      <div class="news-longread__body">
+        <p>
+          Великая Отечественная унесла десятки миллионов жизней. Солдаты, врачи, инженеры, рабочие — каждый воевал по-своему: с оружием в руках или у станка. И каждый из них — герой.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4.2. Section 2 — dark plate — Тыл -->
+  <section class="news-longread__container news-longread__plate-wrap">
+    <div class="news-longread__plate">
+      <!-- Watermark star top-right -->
+      <svg class="news-longread__plate-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round" aria-hidden="true">
+        <polygon points="12,2.6 14.6,9.2 21.6,9.6 16.2,14.1 18,21 12,17.2 6,21 7.8,14.1 2.4,9.6 9.4,9.2"></polygon>
+      </svg>
+
+      <span class="news-longread__plate-eyebrow">Память о труде тыла</span>
+      <h2 class="news-longread__h2">Тыл — это тоже фронт</h2>
+      <p>
+        В 1941–1945 годах на эвакуированных заводах люди стояли у станков по 12–14 часов в сутки. Металл с уральских и сибирских предприятий превращался в технику Победы. Уважение к труду тыла — часть нашей профессиональной памяти: мы сами работаем с металлом и понимаем, какой ценой это давалось.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4.3. Section 3 — pull-quote — Спасибо ветеранам -->
+  <section class="news-longread__container news-longread__quote-wrap">
+    <div class="news-longread__column">
+      <h2 class="news-longread__h2">Спасибо ветеранам</h2>
+
+      <blockquote class="news-longread__quote">
+        <p>Каждый год их становится всё меньше. Но пока жива память о том, что они сделали, — жива и страна.</p>
+        <p>Низкий поклон тем, кто прошёл войну. И светлая память тем, кто не вернулся.</p>
+      </blockquote>
+
+      <div class="news-longread__quote-byline">
+        <!-- Stylised order — concentric star/medallion in muted gold. Geometric, not photoreal. -->
+        <svg class="news-longread__order" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" aria-hidden="true">
+          <!-- outer rays -->
+          <g stroke-width="0.9" opacity="0.7">
+            <line x1="24" y1="2"  x2="24" y2="8"></line>
+            <line x1="24" y1="40" x2="24" y2="46"></line>
+            <line x1="2"  y1="24" x2="8"  y2="24"></line>
+            <line x1="40" y1="24" x2="46" y2="24"></line>
+            <line x1="8"  y1="8"  x2="12" y2="12"></line>
+            <line x1="36" y1="36" x2="40" y2="40"></line>
+            <line x1="40" y1="8"  x2="36" y2="12"></line>
+            <line x1="12" y1="36" x2="8"  y2="40"></line>
+          </g>
+          <!-- outer ring -->
+          <circle cx="24" cy="24" r="16"></circle>
+          <!-- inner star -->
+          <polygon points="24,10 27.2,19.2 36.8,19.6 29.2,25.6 31.6,35 24,29.6 16.4,35 18.8,25.6 11.2,19.6 20.8,19.2"></polygon>
+          <!-- inner dot -->
+          <circle cx="24" cy="24" r="2.4" fill="currentColor" stroke="none"></circle>
+        </svg>
+        <div class="news-longread__quote-byline-text">
+          <strong>Память поколений</strong>
+          1941—1945
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4.4. Section 4 — service callout — Режим работы -->
+  <section class="news-longread__container news-longread__callout-wrap">
+    <div class="news-longread__column">
+      <div class="news-longread__callout" role="note">
+        <div class="news-longread__callout-icon" aria-hidden="true">
+          <!-- Geometric calendar icon, white on green -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3.5" y="5" width="17" height="15.5" rx="1.6"></rect>
+            <line x1="3.5" y1="10" x2="20.5" y2="10"></line>
+            <line x1="8" y1="3" x2="8" y2="7"></line>
+            <line x1="16" y1="3" x2="16" y2="7"></line>
+            <rect x="7" y="13" width="3" height="3" rx="0.4" fill="currentColor" stroke="none"></rect>
+          </svg>
+        </div>
+        <div class="news-longread__callout-body">
+          <h3 class="news-longread__h3">Режим работы 9 и 10 мая</h3>
+          <p>
+            9 и 10 мая — выходные дни в компании «СТРОМ ТРЕЙД». Производство и офис не работают. Заявки, оставленные через сайт в эти дни, мы обработаем 12 мая в порядке поступления. С 12 мая работаем в обычном режиме.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Signature -->
+  <section class="news-longread__container news-longread__signature-wrap">
+    <div class="news-longread__column">
+      <p class="news-longread__signature">
+        <svg class="news-longread__signature-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="12,2.6 14.6,9.2 21.6,9.6 16.2,14.1 18,21 12,17.2 6,21 7.8,14.1 2.4,9.6 9.4,9.2"></polygon>
+        </svg>
+        <span class="news-longread__signature-name">Команда СТРОМ ТРЕЙД</span>
+        <svg class="news-longread__signature-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="12,2.6 14.6,9.2 21.6,9.6 16.2,14.1 18,21 12,17.2 6,21 7.8,14.1 2.4,9.6 9.4,9.2"></polygon>
+        </svg>
+      </p>
+
+      <!-- Closing ribbon — same as hero, closes the composition -->
+      <div class="news-longread__ribbon" aria-hidden="true">
+        <span></span><span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. All news -->
+  <section class="news-longread__container news-longread__allnews">
+    <a class="news-longread__chip" href="/news">
+      Все новости
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="4" y1="12" x2="20" y2="12"></line>
+        <polyline points="14 6 20 12 14 18"></polyline>
+      </svg>
+    </a>
+  </section>
+
+</article>
+
+</body>
+</html>

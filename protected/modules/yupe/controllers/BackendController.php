@@ -27,6 +27,8 @@ class BackendController extends yupe\components\controllers\BackController
             ['allow', 'actions' => ['error']],
             ['allow', 'actions' => ['AjaxFileUpload']],
             ['allow', 'actions' => ['AjaxImageUpload']],
+            ['allow', 'actions' => ['AjaxUploadTinyMCE5']],
+            ['allow', 'actions' => ['ElFinderConnection']],
             ['allow', 'actions' => ['transliterate']],
             ['allow', 'actions' => ['settings'], 'roles' => ['Yupe.Backend.Settings'],],
             ['allow', 'actions' => ['modulesettings'], 'roles' => ['Yupe.Backend.Modulesettings'],],
@@ -62,6 +64,30 @@ class BackendController extends yupe\components\controllers\BackController
                 'maxSize' => $this->module->maxSize,
                 'mimeTypes' => $this->module->mimeTypes,
                 'types' => $this->module->allowedExtensions,
+            ),
+            'AjaxUploadTinyMCE5' => array(
+                'class' => 'yupe\components\actions\YAjaxUploadTinyMCE5Action',
+            ),
+            'ElFinderConnection' => array(
+                'class' => 'yupe\components\actions\ElFinderConnectAction',
+                'settings' => array(
+                    'roots' => array(
+                        array(
+                            'driver' => 'LocalFileSystem',
+                            'path' => Yii::getPathOfAlias('webroot') . '/uploads/',
+                            'URL' => '/uploads/',
+                            'tmbURL' => '/uploads/.tmb/',
+                            'accessControl' => function ($attr, $path) {
+                                return strpos(basename($path), '.') === 0
+                                    ? !($attr === 'read' || $attr === 'write')
+                                    : null;
+                            },
+                            'uploadAllow' => array('image', 'application/pdf'),
+                            'uploadDeny' => array('all'),
+                            'uploadOrder' => array('deny', 'allow'),
+                        ),
+                    ),
+                ),
             ),
         ];
     }

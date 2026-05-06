@@ -90,7 +90,7 @@ class News extends yupe\models\YModel
     public function rules()
     {
         return [
-            ['title, slug, short_text,title_short,  full_text, meta_title, meta_keywords, meta_description', 'filter', 'filter' => 'trim'],
+            ['title, slug, short_text, title_short, link, full_text, meta_title, meta_keywords, meta_description', 'filter', 'filter' => 'trim'],
             ['title, slug, meta_title, meta_keywords, meta_description', 'filter', 'filter' => [new YPurifier(), 'purify']],
             ['date, title, slug, full_text', 'required', 'on' => ['update', 'insert']],
             ['status, is_protected, category_id', 'numerical', 'integerOnly' => true],
@@ -102,13 +102,13 @@ class News extends yupe\models\YModel
             ['slug', 'yupe\components\validators\YUniqueSlugValidator'],
             ['meta_title, meta_keywords, meta_description, meta_robots, layout, view', 'length', 'max' => 250],
             ['link', 'length', 'max' => 250],
-            ['link', 'yupe\components\validators\YUrlValidator'],
             [
                 'slug',
                 'yupe\components\validators\YSLugValidator',
                 'message' => Yii::t('NewsModule.news', 'Bad characters in {attribute} field')
             ],
             ['category_id', 'default', 'setOnEmpty' => true, 'value' => null],
+            ['data', 'safe'],
             [
                 'id, meta_title, meta_keywords, meta_description, create_time, update_time, date, title, slug, short_text, full_text, user_id, status, is_protected, lang, title_short, layout, view',
                 'safe',
@@ -132,6 +132,10 @@ class News extends yupe\models\YModel
                 'maxSize' => $module->maxSize,
                 'types' => $module->allowedExtensions,
                 'uploadPath' => $module->uploadPath,
+            ],
+            'customField' => [
+                'class' => 'yupe\components\behaviors\CustomFieldBehavior',
+                'attributeName' => 'data',
             ],
         ];
     }
@@ -234,7 +238,7 @@ class News extends yupe\models\YModel
             'title' => Yii::t('NewsModule.news', 'Title'),
             'slug' => Yii::t('NewsModule.news', 'Alias'),
             'image' => Yii::t('NewsModule.news', 'Image'),
-            'link' => Yii::t('NewsModule.news', 'Link'),
+            'link' => 'Имя партиала (longread / gallery / cards)',
             'lang' => Yii::t('NewsModule.news', 'Language'),
             'short_text' => Yii::t('NewsModule.news', 'Short text'),
             'full_text' => Yii::t('NewsModule.news', 'Full text'),

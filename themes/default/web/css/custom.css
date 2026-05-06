@@ -6255,3 +6255,93 @@ body.reviews-modal-open { overflow: hidden; }
   line-height: 1;
   margin-top: -2px;
 }
+
+
+/* ============================================================
+   VICTORY RIBBON — праздничная плашка над шапкой (9 мая)
+   Включается через настройки Yupe → «Георгиевская лента».
+   Лента position:fixed, поверх и десктоп-шапки, и фикс. мобайл-шапки.
+   Body получает класс .has-victory-band, по нему сдвигаем шапку и контент.
+   ============================================================ */
+.victory-band {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 20px;
+  background: #0f1c2f;
+  color: #d9dde8;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.victory-band__text {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  color: #ffffff;
+}
+.victory-band__star {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  color: #b88a3a;
+  flex-shrink: 0;
+}
+.victory-band__star svg { width: 100%; height: 100%; }
+.victory-band__ribbon {
+  flex: 1 1 auto;
+  max-width: 200px;
+  height: 10px;
+  border-radius: 1px;
+  background: linear-gradient(
+    to bottom,
+    #cc8a3a 0%, #cc8a3a 14%,
+    #1a1a1a 14%, #1a1a1a 24%,
+    #cc8a3a 24%, #cc8a3a 38%,
+    #1a1a1a 38%, #1a1a1a 48%,
+    #cc8a3a 48%, #cc8a3a 62%,
+    #1a1a1a 62%, #1a1a1a 72%,
+    #cc8a3a 72%, #cc8a3a 86%,
+    #1a1a1a 86%, #1a1a1a 96%,
+    #cc8a3a 96%, #cc8a3a 100%
+  );
+}
+
+/* Сдвигаем содержимое страницы вниз на высоту ленты */
+body.has-victory-band .wrapper { padding-top: 36px; }
+
+/* На ≤1360px фикс. .header-mobile (top:0, z:998) — поднимаем над ним ленту,
+   а саму шапку сдвигаем под ленту. Контент уже имеет margin-top:80px от .header-mobile,
+   bumpим до 80+36=116, padding-top на .wrapper отменяем (он уже учтён). */
+@media (max-width: 1360px) {
+  body.has-victory-band .wrapper { padding-top: 0; }
+  body.has-victory-band .header-mobile { top: 36px; }
+  body.has-victory-band .wrapper .content { margin-top: 116px; }
+}
+
+@media (max-width: 768px) {
+  .victory-band {
+    gap: 10px;
+    padding: 0 12px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+  .victory-band__ribbon { max-width: 70px; height: 8px; }
+  .victory-band__text { gap: 8px; }
+  .victory-band__star { width: 12px; height: 12px; }
+}
+
+@media (max-width: 480px) {
+  .victory-band__ribbon { max-width: 40px; height: 7px; }
+  .victory-band__text { font-size: 10px; }
+}

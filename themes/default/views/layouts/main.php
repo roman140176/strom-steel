@@ -132,7 +132,7 @@
   <?php \yupe\components\TemplateEvent::fire(DefautThemeEvents::HEAD_END); ?>
 </head>
 
-<body>
+<body class="<?= Yii::app()->getModule('yupe')->isVictoryRibbonVisible() ? 'has-victory-band' : '' ?>">
 
   <?php \yupe\components\TemplateEvent::fire(DefautThemeEvents::BODY_START); ?>
 

@@ -170,7 +170,7 @@ return [
                 '/install/default/<action:\w+>' => '/install/default/<action>',
                 '/backend' => '/yupe/backend/index',
                 '/backend/login' => '/user/account/backendlogin',
-                '/backend/<action:(AjaxFileUpload|AjaxImageUpload|AjaxImageUploadCKE|index|settings|flushDumpSettings|modulesettings|saveModulesettings|themesettings|modupdate|help|ajaxflush|transliterate)>' => '/yupe/backend/<action>',
+                '/backend/<action:(AjaxFileUpload|AjaxImageUpload|AjaxImageUploadCKE|AjaxUploadTinyMCE5|ElFinderConnection|index|settings|flushDumpSettings|modulesettings|saveModulesettings|themesettings|modupdate|help|ajaxflush|transliterate)>' => '/yupe/backend/<action>',
                 '/backend/<module:\w+>/<controller:\w+>' => '/<module>/<controller>Backend/index',
                 '/backend/<module:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>' => '/<module>/<controller>Backend/<action>',
                 '/backend/<module:\w+>/<controller:\w+>/<action:\w+>' => '/<module>/<controller>Backend/<action>',

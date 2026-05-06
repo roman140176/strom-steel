@@ -90,6 +90,9 @@ abstract class WebModule extends CWebModule
         'redactor' => [
             'class' => 'yupe\widgets\editors\Redactor',
         ],
+        'tinymce5' => [
+            'class' => 'yupe\widgets\editors\TinyMCE5',
+        ],
     ];
     /**
      * @var bool | string

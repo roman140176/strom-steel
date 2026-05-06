@@ -2,6 +2,20 @@
 $assetsUrl = Yii::app()->getTheme()->getAssetsUrl();
 $assetsPath = '.' . $assetsUrl;
 ?>
+<?php if (Yii::app()->getModule('yupe')->isVictoryRibbonVisible()): ?>
+    <div class="victory-band" role="note" aria-label="С Днём Победы">
+        <span class="victory-band__ribbon" aria-hidden="true"></span>
+        <span class="victory-band__text">
+            <span class="victory-band__star" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">
+                    <polygon points="12,2.6 14.6,9.2 21.6,9.6 16.2,14.1 18,21 12,17.2 6,21 7.8,14.1 2.4,9.6 9.4,9.2"></polygon>
+                </svg>
+            </span>
+            9 мая · С Днём Победы · 1941–1945
+        </span>
+        <span class="victory-band__ribbon" aria-hidden="true"></span>
+    </div>
+<?php endif; ?>
 <div class="header-wrap">
     <header class="container header-top__inner">
         <a href="/" class="logo-header">

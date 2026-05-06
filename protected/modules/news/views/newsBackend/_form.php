@@ -8,6 +8,7 @@
 <ul class="nav nav-tabs">
   <li class="active"><a href="#common" data-toggle="tab"><?= Yii::t("NewsModule.news", "General"); ?></a></li>
   <li><a href="#options" data-toggle="tab"><?= Yii::t("NewsModule.news", "Options"); ?></a></li>
+  <li><a href="#custom-fields" data-toggle="tab">Произвольные поля</a></li>
   <li><a href="#seo" data-toggle="tab"><?= Yii::t("NewsModule.news", "SEO"); ?></a></li>
 </ul>
 
@@ -280,6 +281,10 @@ $form = $this->beginWidget(
         ); ?>
       </div>
     </div>
+  </div>
+
+  <div class="tab-pane" id="custom-fields">
+    <?php $this->renderPartial('application.modules.yupe.views.customFieldBehavior._my-custom-field', ['model' => $model]); ?>
   </div>
 
   <div class="tab-pane" id="seo">

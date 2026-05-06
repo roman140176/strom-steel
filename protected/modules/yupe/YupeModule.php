@@ -129,6 +129,11 @@ class YupeModule extends WebModule
     public $hidePanelUrls = 0;
 
     /**
+     * @var string Режим показа праздничной (георгиевской) ленты в футере: 'auto' | 'on' | 'off'
+     */
+    public $victoryRibbon = 'auto';
+
+    /**
      * @var string
      */
     public $logo = 'images/logo.webp';
@@ -365,8 +370,39 @@ class YupeModule extends WebModule
             'ok' => 'Ссылка одноклассники',
             'copy' => 'Копирайт',
             'twitter' => 'ссылка twitter',
+            'victoryRibbon' => 'Георгиевская лента в футере (праздничный период)',
 
         ];
+    }
+
+    /**
+     * Варианты выбора для параметра victoryRibbon.
+     *
+     * @return array
+     */
+    public function getVictoryRibbonChoice()
+    {
+        return [
+            'auto' => 'Автоматически (1–11 мая)',
+            'on'   => 'Показывать всегда',
+            'off'  => 'Скрыть',
+        ];
+    }
+
+    /**
+     * Видна ли праздничная лента сейчас.
+     *
+     * @return bool
+     */
+    public function isVictoryRibbonVisible()
+    {
+        $mode = $this->victoryRibbon ?: 'auto';
+        if ($mode === 'on')  return true;
+        if ($mode === 'off') return false;
+
+        $month = (int)date('n');
+        $day   = (int)date('j');
+        return $month === 5 && $day >= 1 && $day <= 11;
     }
 
     /**
@@ -403,6 +439,7 @@ class YupeModule extends WebModule
             'defaultBackendLanguage' => $this->getLanguagesList(),
             'allowedIp',
             'hidePanelUrls' => $this->getChoice(),
+            'victoryRibbon' => $this->getVictoryRibbonChoice(),
             'logo',
             'allowedExtensions',
             'mimeTypes',
@@ -428,6 +465,7 @@ class YupeModule extends WebModule
                     'copy',
                     'siteDescription',
                     'siteKeyWords',
+                    'victoryRibbon',
                 ],
             ],
             'reqwisits' => [
