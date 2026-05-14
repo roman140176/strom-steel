@@ -6495,7 +6495,7 @@ body.has-victory-band .wrapper { padding-top: 36px; }
 .hhv-title {
   margin: 0 0 14px;
   font-weight: 800;
-  font-size: clamp(40px, 6vw, 88px);
+  font-size: clamp(40px, 6vw, 80px);
   line-height: 1.02;
   letter-spacing: -0.01em;
   text-transform: uppercase;
@@ -6631,6 +6631,8 @@ body.has-victory-band .wrapper { padding-top: 36px; }
   }
 }
 
+
+
 /* ============================================================
    Модалка «Прислать чертёж» (#sendDrawingModal) и форма
    ============================================================ */
@@ -6657,7 +6659,7 @@ body.has-victory-band .wrapper { padding-top: 36px; }
   line-height: 1.2;
 }
 .drawing-modal__lead {
-  margin: 0;
+  margin: 0;.container-objects
   font-size: 14px;
   line-height: 1.55;
   color: #5e6a7d;

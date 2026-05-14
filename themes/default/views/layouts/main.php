@@ -117,6 +117,15 @@
   Yii::app()->getClientScript()->registerCssFile($this->mainAssets . '/css/custom.css');
   Yii::app()->getClientScript()->registerScriptFile($this->mainAssets . '/js/custom.js', CClientScript::POS_END);
 
+  if (!empty($this->main_page)) {
+    Yii::app()->getClientScript()->registerLinkTag('preload', 'image', $this->mainAssets . '/images/page/curbs/curbs.avif', null, [
+      'imagesrcset' => $this->mainAssets . '/images/page/curbs/curbs-mob.avif 768w, ' . $this->mainAssets . '/images/page/curbs/curbs.avif 1916w',
+      'imagesizes'  => '100vw',
+      'type'        => 'image/avif',
+      'fetchpriority' => 'high',
+    ]);
+  }
+
   Yii::app()->getClientScript()->registerCoreScript('maskedinput');
 
   ?>

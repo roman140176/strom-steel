@@ -70,6 +70,14 @@ $(document).ready(function () {
       ],
     });
 
+  // a11y: slick ставит role="listbox" на .slick-track, но не даёт aria-label —
+  // axe ругается «ARIA input fields do not have accessible names»
+  $('.slick-track[role="listbox"]').each(function () {
+    if (!this.getAttribute('aria-label')) {
+      this.setAttribute('aria-label', 'Карусель');
+    }
+  });
+
   // При клике на кнопку "dropdown-button"
   $('.dropdown-button').click(function () {
     // Переключаем видимость выпадающего контейнера

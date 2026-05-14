@@ -13,7 +13,7 @@
         <div class="magnifer">
             <img src="<?= $this->mainAssets.'/images/icon/magnifer.svg'?>" alt="">
         </div>
-        <a class="but-favorite" href="<?= Yii::app()->createUrl('/favorite/default/index'); ?>" class="toolbar-button">
+        <a class="but-favorite toolbar-button" href="<?= Yii::app()->createUrl('/favorite/default/index'); ?>" aria-label="Избранные товары">
             <?= file_get_contents('.'. Yii::app()->getTheme()->getAssetsUrl() . '/images/svg/favorite.svg'); ?>
             <span class="badge-box but-favorite__count but-header__count <?= (Yii::app()->favorite->count() != null) ? ' active' : ''; ?>" id="yupe-store-favorite-total"><?= Yii::app()->favorite->count();?></span>
         </a>

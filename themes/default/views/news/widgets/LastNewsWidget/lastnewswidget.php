@@ -27,7 +27,7 @@
                         <?= CHtml::image(
                             $model->getImageUrl(840, 500, true),
                             CHtml::encode($model->title),
-                            ['loading' => 'lazy', 'class' => 'nws-card__img']
+                            ['loading' => 'lazy', 'decoding' => 'async', 'class' => 'nws-card__img', 'width' => 840, 'height' => 500]
                         ) ?>
                     </a>
                     <div class="nws-card__body">

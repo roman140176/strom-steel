@@ -30,7 +30,7 @@
                 $initial = $name !== '' ? mb_strtoupper(mb_substr($name, 0, 1, 'UTF-8'), 'UTF-8') : '';
                 ?>
                 <article class="swiper-slide reviews-card<?= $hasPreview ? ' reviews-card--has-more' : '' ?>">
-                    <div class="reviews-card__rating" aria-label="Оценка: <?= $rating ?> из 5">
+                    <div class="reviews-card__rating" role="img" aria-label="Оценка: <?= $rating ?> из 5">
                         <?php for ($i = 1; $i <= 5; $i++): ?>
                             <svg class="reviews-card__star<?= $i <= $rating ? ' is-on' : '' ?>" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                 <path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.78L10 14.77l-5.2 2.73.99-5.78L1.58 7.62l5.82-.85L10 1.5z" fill="currentColor"/>
@@ -46,7 +46,7 @@
                             </svg>
                         </button>
                         <template data-reviews-content="<?= $cardId ?>">
-                            <div class="reviews-modal__rating" aria-label="Оценка: <?= $rating ?> из 5">
+                            <div class="reviews-modal__rating" role="img" aria-label="Оценка: <?= $rating ?> из 5">
                                 <?php for ($i = 1; $i <= 5; $i++): ?>
                                     <svg class="reviews-card__star<?= $i <= $rating ? ' is-on' : '' ?>" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                         <path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.78L10 14.77l-5.2 2.73.99-5.78L1.58 7.62l5.82-.85L10 1.5z" fill="currentColor"/>

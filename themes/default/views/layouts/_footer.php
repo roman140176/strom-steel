@@ -33,7 +33,9 @@
     </div>
     <div class="footer__item">
       <div class="footer__item-title">Навигация</div>
-      <li class="footer-li"><a href="/store">Каталог товаров</a></li>
+      <ul class="menu_footer">
+        <li class="footer-li"><a href="/store">Каталог товаров</a></li>
+      </ul>
       <?php $this->widget('application.modules.menu.widgets.MenuWidget', [
         'name' => 'top-menu',
         'view' => 'footer'
