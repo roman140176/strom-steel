@@ -90,68 +90,124 @@ jQuery(function ($) {
   })();
 
   /* ========================================================================
-     Home banner Swiper — «наезд» поверх: активный стоит, новый наезжает
+     Hero на главной: видеофон (desktop ≥992px) / свайпер баннеров (mobile).
+     Единый контроллер: на init и при resize вокруг 992px переставляем активный
+     блок в DOM, инициализируем/уничтожаем Swiper, ставим/паузим видео.
+     Неактивный блок в DOM не висит — это и экономит трафик, и убирает фоновую
+     работу (autoplay/Swiper autoplay) в неиспользуемом режиме.
      ======================================================================== */
-  (function initHomeBannerSwiper() {
-    if (typeof Swiper === 'undefined') return;
-    var el = document.querySelector('.home-banner-swiper');
-    if (!el) return;
+  (function initHomeHero() {
+    var videoEl = document.querySelector('.home-hero-video');
+    var bannersEl = document.querySelector('.home-hero-banners');
+    if (!videoEl && !bannersEl) return;
 
-    var DURATION = 700;
+    // Якорь для возврата элемента на исходное место в <main>
+    var parent = (videoEl || bannersEl).parentNode;
+    var anchor = document.createComment(' home-hero anchor ');
+    parent.insertBefore(anchor, videoEl || bannersEl);
 
-    new Swiper(el, {
-      loop: true,
-      // fade со speed:0 — Swiper мгновенно переключает active без своей анимации
-      // дальше мы сами анимируем incoming слайд через CSS transform по swipeDirection
-      effect: 'fade',
-      fadeEffect: { crossFade: true },
-      speed: 0,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      },
-      pagination: {
-        el: '.home-banner-swiper__pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.home-banner-swiper__next',
-        prevEl: '.home-banner-swiper__prev',
-      },
-      a11y: {
-        prevSlideMessage: 'Предыдущий слайд',
-        nextSlideMessage: 'Следующий слайд',
-      },
-      on: {
-        slideChangeTransitionStart: function () {
-          var active = this.slides[this.activeIndex];
-          var prev = this.slides[this.previousIndex];
-          if (!active || !prev || active === prev) return;
+    // Сразу деттачим оба — вставлять будем только активный
+    if (videoEl && videoEl.parentNode) videoEl.parentNode.removeChild(videoEl);
+    if (bannersEl && bannersEl.parentNode) bannersEl.parentNode.removeChild(bannersEl);
 
-          // Направление по realIndex с учётом loop wrap-around
-          var cur = this.realIndex;
-          var was = this.previousRealIndex;
-          var n = this.slides.length;
-          var forward;
-          if (was === n - 1 && cur === 0) forward = true;
-          else if (was === 0 && cur === n - 1) forward = false;
-          else forward = cur > was;
+    var swiper = null;
+    var current = null; // 'video' | 'banners'
 
-          // Сбрасываем возможные предыдущие классы и форсим reflow, чтобы анимация перезапустилась
-          active.classList.remove('is-coming-right', 'is-coming-left');
-          void active.offsetHeight;
-          active.classList.add(forward ? 'is-coming-right' : 'is-coming-left');
+    function showVideo() {
+      if (current === 'video') return;
+      destroyBanners();
+      if (videoEl) {
+        parent.insertBefore(videoEl, anchor);
+        var v = videoEl.querySelector('video');
+        if (v) {
+          try {
+            v.muted = true;
+            var p = v.play();
+            if (p && typeof p.catch === 'function') p.catch(function () {});
+          } catch (e) {}
+        }
+      }
+      current = 'video';
+    }
 
-          // Предыдущий держим видимым под активным на время анимации
-          prev.classList.add('is-staying');
+    function showBanners() {
+      if (current === 'banners') return;
+      pauseVideo();
+      if (videoEl && videoEl.parentNode) videoEl.parentNode.removeChild(videoEl);
+      if (bannersEl) {
+        parent.insertBefore(bannersEl, anchor);
+        initSwiper();
+      }
+      current = 'banners';
+    }
 
-          setTimeout(function () {
+    function pauseVideo() {
+      if (!videoEl) return;
+      var v = videoEl.querySelector('video');
+      if (v) { try { v.pause(); } catch (e) {} }
+    }
+
+    function destroyBanners() {
+      if (swiper) {
+        try { swiper.destroy(true, true); } catch (e) {}
+        swiper = null;
+      }
+      if (bannersEl && bannersEl.parentNode) bannersEl.parentNode.removeChild(bannersEl);
+    }
+
+    function initSwiper() {
+      if (typeof Swiper === 'undefined' || swiper || !bannersEl) return;
+      var el = bannersEl.querySelector('.home-banner-swiper');
+      if (!el) return;
+      var DURATION = 700;
+      swiper = new Swiper(el, {
+        loop: true,
+        effect: 'fade',
+        fadeEffect: { crossFade: true },
+        speed: 0,
+        autoplay: { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true },
+        pagination: { el: '.home-banner-swiper__pagination', clickable: true },
+        navigation: { nextEl: '.home-banner-swiper__next', prevEl: '.home-banner-swiper__prev' },
+        a11y: { prevSlideMessage: 'Предыдущий слайд', nextSlideMessage: 'Следующий слайд' },
+        on: {
+          slideChangeTransitionStart: function () {
+            var active = this.slides[this.activeIndex];
+            var prev = this.slides[this.previousIndex];
+            if (!active || !prev || active === prev) return;
+            var cur = this.realIndex, was = this.previousRealIndex, n = this.slides.length;
+            var forward;
+            if (was === n - 1 && cur === 0) forward = true;
+            else if (was === 0 && cur === n - 1) forward = false;
+            else forward = cur > was;
             active.classList.remove('is-coming-right', 'is-coming-left');
-            prev.classList.remove('is-staying');
-          }, DURATION + 50);
+            void active.offsetHeight;
+            active.classList.add(forward ? 'is-coming-right' : 'is-coming-left');
+            prev.classList.add('is-staying');
+            setTimeout(function () {
+              active.classList.remove('is-coming-right', 'is-coming-left');
+              prev.classList.remove('is-staying');
+            }, DURATION + 50);
+          },
         },
-      },
+      });
+    }
+
+    var mq = window.matchMedia('(min-width: 992px)');
+    function apply(matches) { matches ? showVideo() : showBanners(); }
+    if (mq.addEventListener) mq.addEventListener('change', function (e) { apply(e.matches); });
+    else if (mq.addListener) mq.addListener(function (e) { apply(e.matches); });
+    apply(mq.matches);
+
+    // Scroll-down индикатор: плавно скроллим к блоку «Каталог продукции».
+    // Делегируем на document — .hhv-scroll живёт внутри видеоблока, который
+    // монтируется/демонтируется контроллером выше.
+    document.addEventListener('click', function (e) {
+      var btn = e.target && e.target.closest ? e.target.closest('.hhv-scroll') : null;
+      if (!btn) return;
+      e.preventDefault();
+      var target = document.querySelector('.page_title--main');
+      if (!target) return;
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   })();
 
@@ -227,6 +283,7 @@ jQuery(function ($) {
         a11y: {
           prevSlideMessage: 'Предыдущий отзыв',
           nextSlideMessage: 'Следующий отзыв',
+          slideRole: '',
         },
         breakpoints: {
           576: { slidesPerView: 1.6, spaceBetween: 18 },
@@ -440,6 +497,93 @@ jQuery(function ($) {
         window.stromInitMap('strom-map-modal');
       });
     }
+  })();
+
+  /* ========================================================================
+     Модалка «Прислать чертёж» (#sendDrawingModal) — AJAX-сабмит + UX файла.
+     Бэкенд — POST-обработчик в начале themes/default/views/homepage/hp/page.php.
+     ======================================================================== */
+  (function initDrawingForm() {
+    var form = document.getElementById('drawing-form');
+    if (!form) return;
+
+    var fileInput  = form.querySelector('input[type="file"]');
+    var fileLabel  = form.querySelector('.drawing-form__file-label');
+    var fileBox    = form.querySelector('.drawing-form__file');
+    var fileDefault = fileLabel ? (fileLabel.getAttribute('data-default') || fileLabel.textContent) : '';
+
+    if (fileInput) {
+      fileInput.addEventListener('change', function () {
+        var f = fileInput.files && fileInput.files[0];
+        if (f) {
+          if (fileLabel) fileLabel.textContent = f.name;
+          if (fileBox) fileBox.classList.add('is-filled');
+        } else {
+          if (fileLabel) fileLabel.textContent = fileDefault;
+          if (fileBox) fileBox.classList.remove('is-filled');
+        }
+      });
+    }
+
+    var alertBox  = form.querySelector('[data-role="drawing-alert"]');
+    var submitBtn = form.querySelector('.drawing-form__submit');
+    var submitLbl = form.querySelector('.drawing-form__submit-label');
+
+    function showAlert(type, lines) {
+      if (!alertBox) return;
+      alertBox.className = 'drawing-form__alert drawing-form__alert--' + type;
+      alertBox.innerHTML = lines.map(function (l) {
+        return '<div>' + l + '</div>';
+      }).join('');
+      alertBox.hidden = false;
+    }
+    function clearAlert() {
+      if (!alertBox) return;
+      alertBox.hidden = true;
+      alertBox.innerHTML = '';
+      alertBox.className = 'drawing-form__alert';
+    }
+    function setLoading(loading) {
+      if (!submitBtn) return;
+      submitBtn.disabled = loading;
+      if (submitLbl) submitLbl.textContent = loading ? 'Отправка…' : 'Отправить';
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      clearAlert();
+      setLoading(true);
+
+      var fd = new FormData(form);
+
+      fetch(window.location.pathname, {
+        method: 'POST',
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        body: fd,
+        credentials: 'same-origin',
+      }).then(function (r) {
+        return r.json();
+      }).then(function (json) {
+        setLoading(false);
+        if (json && json.success) {
+          showAlert('success', [json.message || 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.']);
+          form.reset();
+          if (fileLabel) fileLabel.textContent = fileDefault;
+          if (fileBox) fileBox.classList.remove('is-filled');
+          // Закрыть модалку через 2.5 секунды.
+          setTimeout(function () {
+            try { $('#sendDrawingModal').modal('hide'); } catch (e) {}
+            clearAlert();
+          }, 2500);
+        } else {
+          var errs = (json && json.errors && json.errors.length) ? json.errors : ['Не удалось отправить заявку.'];
+          showAlert('error', errs);
+        }
+      }).catch(function () {
+        setLoading(false);
+        showAlert('error', ['Сетевая ошибка. Попробуйте ещё раз.']);
+      });
+    });
   })();
 
 });

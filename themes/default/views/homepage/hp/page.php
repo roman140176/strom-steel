@@ -9,10 +9,144 @@ $this->description = !empty($page->meta_description) ? $page->meta_description :
 $this->keywords = !empty($page->meta_keywords) ? $page->meta_keywords : Yii::app()->getModule('yupe')->siteKeyWords;
 $this->main_page = true;
 $mainAssets = Yii::app()->getTheme()->getAssetsUrl();
+
+// ── AJAX-обработчик модалки «Прислать чертёж» (#sendDrawingModal) ──
+// По образцу laser-calc на странице lazernaya-rezka.php. Файл идёт attachment'ом,
+// на сервере не сохраняется. Отвечает строго JSON-ом (AJAX-only).
+if (
+    Yii::app()->request->isPostRequest
+    && Yii::app()->request->isAjaxRequest
+    && ($_POST['send_drawing'] ?? '') === '1'
+) {
+    $errors = [];
+
+    $userName    = trim((string)($_POST['user_name'] ?? ''));
+    $userPhone   = trim((string)($_POST['user_phone'] ?? ''));
+    $userEmail   = trim((string)($_POST['user_email'] ?? ''));
+    $userComment = trim((string)($_POST['user_comment'] ?? ''));
+
+    if ($userName === '')  { $errors[] = 'Укажите имя.'; }
+    if ($userPhone === '') { $errors[] = 'Укажите телефон.'; }
+    if ($userEmail !== '' && !filter_var($userEmail, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Некорректный E-mail.';
+    }
+
+    // Файл — обязательный
+    $allowedExt = ['pdf', 'dwg', 'dxf', 'step', 'stp', 'iges', 'igs', 'jpg', 'jpeg', 'png', 'zip', 'rar'];
+    $maxBytes   = 20 * 1024 * 1024; // 20 МБ
+    $hasFile    = isset($_FILES['drawing_file']) && is_uploaded_file($_FILES['drawing_file']['tmp_name']);
+    $fileName   = null;
+
+    if (!$hasFile) {
+        $errors[] = 'Прикрепите файл с чертежом.';
+    } else {
+        if ((int)$_FILES['drawing_file']['error'] !== UPLOAD_ERR_OK) {
+            $errors[] = 'Не удалось загрузить файл. Попробуйте ещё раз.';
+        } elseif ((int)$_FILES['drawing_file']['size'] > $maxBytes) {
+            $errors[] = 'Файл больше 20 МБ. Уменьшите размер или пришлите ссылку в комментарии.';
+        } else {
+            $origName = (string)$_FILES['drawing_file']['name'];
+            $ext      = strtolower((string)pathinfo($origName, PATHINFO_EXTENSION));
+            if (!in_array($ext, $allowedExt, true)) {
+                $errors[] = 'Формат файла не поддерживается. Принимаем: ' . strtoupper(implode(', ', $allowedExt)) . '.';
+            } else {
+                $fileName = $origName;
+            }
+        }
+    }
+
+    // reCAPTCHA — только при включённом флаге
+    if (empty($errors) && !empty(Yii::app()->params['recaptchaEnabled'])) {
+        $captcha = (string)($_POST['g-recaptcha-response'] ?? '');
+        if ($captcha === '') {
+            $errors[] = 'Пройдите проверку reCAPTCHA.';
+        } else {
+            $ch = curl_init('https://www.google.com/recaptcha/api/siteverify');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, [
+                'secret'   => Yii::app()->params['secretkey'],
+                'response' => $captcha,
+            ]);
+            $rResp = curl_exec($ch);
+            curl_close($ch);
+            $rResp = CJSON::decode($rResp);
+            if (empty($rResp['success'])) {
+                $errors[] = 'Не удалось пройти проверку reCAPTCHA.';
+            }
+        }
+    }
+
+    if (empty($errors)) {
+        $body = $this->renderPartial('//mail/mail/_send-drawing', [
+            'userName'    => $userName,
+            'userPhone'   => $userPhone,
+            'userEmail'   => $userEmail,
+            'userComment' => $userComment,
+            'fileName'    => $fileName,
+        ], true);
+
+        try {
+            $mail  = Yii::app()->mail;
+            $to    = Yii::app()->getModule('yupe')->email;
+            $from  = 'info@stromsteel.ru';
+            $theme = 'Заявка с чертежом с сайта';
+
+            if ($fileName !== null) {
+                $mail->AddAttachment($_FILES['drawing_file']['tmp_name'], $fileName);
+            }
+            $mail->send($from, $to, $theme, $body);
+
+            header('Content-Type: application/json; charset=UTF-8');
+            echo CJSON::encode([
+                'success' => true,
+                'message' => 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.',
+            ]);
+            Yii::app()->end();
+        } catch (Exception $e) {
+            $errors[] = 'Не удалось отправить заявку. Попробуйте позже.';
+        }
+    }
+
+    header('Content-Type: application/json; charset=UTF-8');
+    echo CJSON::encode(['success' => false, 'errors' => $errors]);
+    Yii::app()->end();
+}
 ?>
-<main>
+<main class="homepage-main">
     <h1 class="sr-only">Металлоконструкции: бордюры, решётчатые настилы, водоотводы</h1>
-    <div class="container sliders-container">
+    <!-- Hero. Desktop (≥992px): видеофон. Mobile (<992px): свайпер баннеров.
+         JS-переключение в custom.js до Swiper init: удаляется неактивный блок,
+         чтобы на мобиле не качался видео-файл, а на десктопе не висел свайпер. -->
+    <div class="home-hero-video">
+        <video autoplay muted loop playsinline preload="metadata" poster="<?= $mainAssets ?>/video/laser-poster.webp">
+            <source src="<?= $mainAssets ?>/video/laser.webm" type="video/webm">
+            <source src="<?= $mainAssets ?>/video/laser.mp4" type="video/mp4">
+        </video>
+        <div class="home-hero-video__overlay">
+            <div class="home-hero-video__content container">
+                <span class="hhv-eyebrow">
+                    <span class="hhv-eyebrow__dot" aria-hidden="true"></span>
+                    Собственное производство · Москва
+                </span>
+                <h2 class="hhv-title">Металл под<br>ваш проект</h2>
+                <p class="hhv-sub">Производим бордюры, решётчатые настилы, водоотводы и нестандартные металлоконструкции под чертёж.</p>
+                <div class="hhv-cta">
+                    <a href="/store" class="hhv-btn hhv-btn--primary">
+                        Выбрать в каталоге
+                        <span class="hhv-btn__arrow" aria-hidden="true">→</span>
+                    </a>
+                    <a href="#" class="hhv-btn hhv-btn--ghost js-button" data-target="#sendDrawingModal" data-toggle="modal">
+                        Прислать чертёж
+                    </a>
+                </div>
+            </div>
+            <button type="button" class="hhv-scroll" aria-label="Прокрутить к каталогу">
+                <span class="hhv-scroll__label">К каталогу</span>
+                <span class="hhv-scroll__chevron" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+    <div class="home-hero-banners container sliders-container">
         <div class="swiper home-banner-swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide home-banner-slide">
@@ -21,7 +155,7 @@ $mainAssets = Yii::app()->getTheme()->getAssetsUrl();
                         <source type="image/avif" media="(max-width: 767px)" srcset="<?= $mainAssets ?>/images/page/curbs/curbs-mob.avif">
                         <source media="(min-width: 768px)" srcset="<?= $mainAssets ?>/images/page/curbs/curbs.png">
                         <source media="(max-width: 767px)" srcset="<?= $mainAssets ?>/images/page/curbs/curbs-mob.png">
-                        <img src="<?= $mainAssets ?>/images/page/curbs/curbs.png" alt="Бордюры металлические — производство и монтаж" loading="eager" decoding="async">
+                        <img src="<?= $mainAssets ?>/images/page/curbs/curbs.png" alt="Бордюры металлические — производство и монтаж" width="1916" height="821" loading="eager" decoding="async" fetchpriority="high">
                     </picture>
                 </div>
                 <div class="swiper-slide home-banner-slide">
@@ -30,7 +164,7 @@ $mainAssets = Yii::app()->getTheme()->getAssetsUrl();
                         <source type="image/avif" media="(max-width: 767px)" srcset="<?= $mainAssets ?>/images/page/gangways/gangways-mob.avif">
                         <source media="(min-width: 768px)" srcset="<?= $mainAssets ?>/images/page/gangways/gangways.png">
                         <source media="(max-width: 767px)" srcset="<?= $mainAssets ?>/images/page/gangways/gangways-mob.png">
-                        <img src="<?= $mainAssets ?>/images/page/gangways/gangways.png" alt="Трапы и лотки из нержавеющей стали" loading="eager" decoding="async">
+                        <img src="<?= $mainAssets ?>/images/page/gangways/gangways.png" alt="Трапы и лотки из нержавеющей стали" width="1916" height="821" loading="lazy" decoding="async">
                     </picture>
                 </div>
                 <div class="swiper-slide home-banner-slide">
@@ -39,7 +173,7 @@ $mainAssets = Yii::app()->getTheme()->getAssetsUrl();
                         <source type="image/avif" media="(max-width: 767px)" srcset="<?= $mainAssets ?>/images/page/lattice-decking/lattice-decking-mob.avif">
                         <source media="(min-width: 768px)" srcset="<?= $mainAssets ?>/images/page/lattice-decking/lattice-decking.png">
                         <source media="(max-width: 767px)" srcset="<?= $mainAssets ?>/images/page/lattice-decking/lattice-decking-mob.png">
-                        <img src="<?= $mainAssets ?>/images/page/lattice-decking/lattice-decking.png" alt="Решётчатые настилы — производство металлоконструкций" loading="eager" decoding="async">
+                        <img src="<?= $mainAssets ?>/images/page/lattice-decking/lattice-decking.png" alt="Решётчатые настилы — производство металлоконструкций" width="1916" height="821" loading="lazy" decoding="async">
                     </picture>
                 </div>
                 <div class="swiper-slide home-banner-slide">
@@ -48,7 +182,7 @@ $mainAssets = Yii::app()->getTheme()->getAssetsUrl();
                         <source type="image/avif" media="(max-width: 767px)" srcset="<?= $mainAssets ?>/images/page/protection/protection-mob.avif">
                         <source media="(min-width: 768px)" srcset="<?= $mainAssets ?>/images/page/protection/protection.png">
                         <source media="(max-width: 767px)" srcset="<?= $mainAssets ?>/images/page/protection/protection-mob.png">
-                        <img src="<?= $mainAssets ?>/images/page/protection/protection.png" alt="Системы грязезащиты" loading="eager" decoding="async">
+                        <img src="<?= $mainAssets ?>/images/page/protection/protection.png" alt="Системы грязезащиты" width="1916" height="821" loading="lazy" decoding="async">
                     </picture>
                 </div>
             </div>
@@ -72,7 +206,7 @@ $mainAssets = Yii::app()->getTheme()->getAssetsUrl();
         <div class="hv-grid">
             <?php for ($i = 1; $i <= 5; $i++) : ?>
                 <button type="button" class="hv-card home-video-card<?= $i === 1 ? ' hv-card--big' : '' ?>" data-video="/uploads/video/<?= $i ?>.mp4" aria-label="Смотреть видео <?= $i ?>">
-                    <img class="hv-card__poster" src="/uploads/video/posters/<?= $i ?>.webp" alt="" loading="lazy" decoding="async">
+                    <img class="hv-card__poster" src="/uploads/video/posters/<?= $i ?>.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
                     <span class="hv-card__play" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM15.75 13.299C16.75 12.7217 16.75 11.2783 15.75 10.7009L11.25 8.10286C10.25 7.52551 9 8.24719 9 9.4019V14.598C9 15.7527 10.25 16.4744 11.25 15.8971L15.75 13.299Z" fill="currentColor"/>
@@ -368,3 +502,84 @@ foreach ($faqHomeItems as $item) {
         </div>
     </div>
 </section>
+
+<!-- Модалка «Прислать чертёж». AJAX-сабмит обрабатывается в начале этого же файла. -->
+<div id="sendDrawingModal" class="modal fade drawing-modal" role="dialog" aria-hidden="true" aria-labelledby="sendDrawingModalTitle">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content drawing-modal__content">
+            <button type="button" class="close drawing-modal__close" data-dismiss="modal" aria-label="Закрыть">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="drawing-modal__header">
+                <h2 class="drawing-modal__title" id="sendDrawingModalTitle">Прислать чертёж</h2>
+                <p class="drawing-modal__lead">Загрузите PDF, DWG, DXF, STEP, IGES, изображение или архив. Мы изучим документ и пришлём расчёт в течение рабочего дня.</p>
+            </div>
+
+            <form class="drawing-form" id="drawing-form" method="post" enctype="multipart/form-data" autocomplete="off" novalidate>
+                <input type="hidden" name="send_drawing" value="1">
+                <input type="hidden" name="<?= Yii::app()->request->csrfTokenName ?>" value="<?= Yii::app()->request->csrfToken ?>">
+
+                <div class="drawing-form__grid">
+                    <div class="drawing-form__field">
+                        <label class="drawing-form__label">Имя <span class="drawing-form__req">*</span></label>
+                        <input class="drawing-form__input" type="text" name="user_name" placeholder="Иван Петров" required>
+                    </div>
+                    <div class="drawing-form__field">
+                        <label class="drawing-form__label">Телефон <span class="drawing-form__req">*</span></label>
+                        <?php $this->widget('CMaskedTextFieldPhone', [
+                            'name' => 'user_phone',
+                            'mask' => '+7(999)999-99-99',
+                            'htmlOptions' => [
+                                'class' => 'drawing-form__input data-mask',
+                                'data-mask' => 'phone',
+                                'placeholder' => '+7 (___) ___-__-__',
+                                'autocomplete' => 'off',
+                                'required' => true,
+                            ],
+                        ]); ?>
+                    </div>
+                    <div class="drawing-form__field drawing-form__field--wide">
+                        <label class="drawing-form__label">E-mail</label>
+                        <input class="drawing-form__input" type="email" name="user_email" placeholder="name@company.ru">
+                    </div>
+                </div>
+
+                <div class="drawing-form__file-block">
+                    <label class="drawing-form__label">Чертёж <span class="drawing-form__req">*</span></label>
+                    <label class="drawing-form__file">
+                        <svg class="drawing-form__file-ico" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13"/>
+                        </svg>
+                        <span class="drawing-form__file-label" data-default="Выбрать файл">Выбрать файл</span>
+                        <input type="file" name="drawing_file" accept=".pdf,.dwg,.dxf,.step,.stp,.iges,.igs,.jpg,.jpeg,.png,.zip,.rar" required>
+                    </label>
+                    <p class="drawing-form__hint">PDF, DWG, DXF, STEP, IGES, JPG, PNG, ZIP, RAR · максимум 20 МБ</p>
+                </div>
+
+                <div class="drawing-form__field">
+                    <label class="drawing-form__label">Комментарий</label>
+                    <textarea class="drawing-form__textarea" name="user_comment" rows="3" placeholder="Объём, сроки, особенности..."></textarea>
+                </div>
+
+                <?php if (!empty(Yii::app()->params['recaptchaEnabled'])) :
+                    Yii::app()->getClientScript()->registerScriptFile('https://www.google.com/recaptcha/api.js'); ?>
+                    <div class="drawing-form__captcha">
+                        <div class="g-recaptcha" data-sitekey="<?= Yii::app()->params['key'] ?>"></div>
+                    </div>
+                <?php endif ?>
+
+                <div class="drawing-form__alert" data-role="drawing-alert" hidden></div>
+
+                <div class="drawing-form__footer">
+                    <button type="submit" class="drawing-form__submit">
+                        <span class="drawing-form__submit-label">Отправить</span>
+                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                            <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                        </svg>
+                    </button>
+                    <p class="drawing-form__agree">Нажимая «Отправить», вы соглашаетесь с <a href="/politika-konfidencialnosti" target="_blank" rel="noopener">обработкой персональных данных</a>.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
