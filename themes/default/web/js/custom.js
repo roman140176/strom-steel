@@ -586,4 +586,22 @@ jQuery(function ($) {
     });
   })();
 
+  // Ленивая загрузка Google reCAPTCHA: скрипт уходит в сеть только когда
+  // открывается модалка, содержащая .g-recaptcha. Экономит ~340 KB на пейджвью
+  // для пользователей, которые форму не вызывают.
+  (function () {
+    if (!window.jQuery) return;
+    var loaded = false;
+    jQuery(document).on('show.bs.modal', function (e) {
+      if (loaded || window.grecaptcha) return;
+      if (!jQuery(e.target).find('.g-recaptcha').length) return;
+      var s = document.createElement('script');
+      s.src = 'https://www.google.com/recaptcha/api.js';
+      s.async = true;
+      s.defer = true;
+      document.head.appendChild(s);
+      loaded = true;
+    });
+  })();
+
 });
