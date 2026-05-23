@@ -1,7 +1,7 @@
 ---
 title: Project-level expert role skills (frontend / backend / architect)
 date: 2026-05-22
-status: draft → awaiting implementation plan
+status: implemented (2026-05-23)
 ---
 
 # Project-level expert role skills
