@@ -593,8 +593,19 @@ jQuery(function ($) {
     if (!window.jQuery) return;
     var loaded = false;
     jQuery(document).on('show.bs.modal', function (e) {
+      var $captchas = jQuery(e.target).find('.g-recaptcha');
+      if (!$captchas.length) return;
+      // api.js уже загружен (например, формой чертежа в explicit-режиме,
+      // где авторендера нет) — отрисовываем неотрисованные виджеты вручную.
+      if (window.grecaptcha && typeof window.grecaptcha.render === 'function') {
+        $captchas.each(function () {
+          var sitekey = this.getAttribute('data-sitekey');
+          if (!sitekey || this.children.length) return; // нет ключа или уже отрисован
+          try { window.grecaptcha.render(this, { sitekey: sitekey }); } catch (err) {}
+        });
+        return;
+      }
       if (loaded || window.grecaptcha) return;
-      if (!jQuery(e.target).find('.g-recaptcha').length) return;
       var s = document.createElement('script');
       s.src = 'https://www.google.com/recaptcha/api.js';
       s.async = true;

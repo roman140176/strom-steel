@@ -563,9 +563,44 @@ foreach ($faqHomeItems as $item) {
                 </div>
 
                 <?php if (!empty(Yii::app()->params['recaptchaEnabled'])) :
-                    Yii::app()->getClientScript()->registerScriptFile('https://www.google.com/recaptcha/api.js'); ?>
+                    // Explicit render — иначе reCAPTCHA при автозагрузке не
+                    // инициализирует виджеты внутри скрытых модалок Bootstrap.
+                    Yii::app()->getClientScript()->registerScriptFile(
+                        'https://www.google.com/recaptcha/api.js?onload=sswDrawingCaptchaLoad&render=explicit',
+                        CClientScript::POS_END,
+                        ['async' => true, 'defer' => true]
+                    );
+                    Yii::app()->getClientScript()->registerScript('ssw-drawing-captcha', "
+                        window.__sswDrawingCaptcha = window.__sswDrawingCaptcha || { ready:false, widgetId:null, sitekey: '" . CHtml::encode(Yii::app()->params['key']) . "' };
+                        window.sswDrawingCaptchaLoad = function(){
+                            window.__sswDrawingCaptcha.ready = true;
+                            // Если модалка уже открыта на момент загрузки api.js — рендерим сразу.
+                            if (document.getElementById('ssw-drawing-captcha-host') && document.body.classList.contains('modal-open')) {
+                                sswDrawingCaptchaEnsure();
+                            }
+                        };
+                        window.sswDrawingCaptchaEnsure = function(){
+                            var st = window.__sswDrawingCaptcha;
+                            if (!st.ready || !window.grecaptcha || !window.grecaptcha.render) return;
+                            var host = document.getElementById('ssw-drawing-captcha-host');
+                            if (!host) return;
+                            if (st.widgetId === null) {
+                                try { st.widgetId = grecaptcha.render(host, { sitekey: st.sitekey }); } catch(e) {}
+                            } else {
+                                try { grecaptcha.reset(st.widgetId); } catch(e) {}
+                            }
+                        };
+                        jQuery(function($){
+                            $('#sendDrawingModal').on('shown.bs.modal', function(){
+                                sswDrawingCaptchaEnsure();
+                            });
+                        });
+                    ", CClientScript::POS_END); ?>
                     <div class="drawing-form__captcha">
-                        <div class="g-recaptcha" data-sitekey="<?= Yii::app()->params['key'] ?>"></div>
+                        <?php /* без класса g-recaptcha: иначе авторендер api.js
+                               падает на div без data-sitekey и ломает остальные
+                               капчи страницы; этот виджет рендерится явно по id */ ?>
+                        <div id="ssw-drawing-captcha-host"></div>
                     </div>
                 <?php endif ?>
 
