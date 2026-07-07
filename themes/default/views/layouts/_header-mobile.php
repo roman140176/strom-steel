@@ -40,14 +40,19 @@
 </div>
 <div class="menu-mobile-box">
     <div class="mmc_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <div class="catalog-mobile-card">
+        <div class="catalog-main-link">
+            <span class="catalog-main-link__label">Каталог</span>
+            <span class="catalog-main-link__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </div>
+        <div class="catalog-menu-wrapper">
+           <?php $this->widget('application.modules.store.widgets.CategoryWidget'
+                ); ?>
+        </div>
+    </div>
    <?php $this->widget('application.modules.menu.widgets.MenuWidget',
     ['name' => 'top-menu','view' => 'mobile'
         ]); ?>
-    <div class="catalog-main-link">Каталог</div>
-    <div class="catalog-menu-wrapper">
-       <?php $this->widget('application.modules.store.widgets.CategoryWidget'
-            ); ?>
-    </div>
     <a href="tel:+74956643517" class="tel-header-mobile">+7 (495) 664-35-17</a>
     <a href="tel:+74955320720" class="tel-header-mobile">+7 (495) 532-07-20</a>
     <a href="#" class="call-mob js-button" data-target="#callbackModal" data-toggle="modal"><span>Заказать звонок</span></a>

@@ -266,7 +266,7 @@
     !!!!!
   </div>
 
-  <!-- Begin roistat -->
+  <!-- roistat — отключён. Для возврата раскомментировать <script> ниже.
   <script>
     (function(w, d, s, h, id) {
       w.roistatProjectId = id;
@@ -281,7 +281,7 @@
       js2.parentNode.insertBefore(js, js2);
     })(window, document, 'script', 'cloud.roistat.com', '3e620cb8b092a76836dff1cdf2060933');
   </script>
-  <!-- End roistat -->
+  -->
   <!-- amoCRM social button widget — отключён (выдавал ошибку social_services).
        Если потребуется снова, раскомментировать блок ниже и обновить hash/id в кабинете amoCRM.
   <script>

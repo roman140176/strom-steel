@@ -68,7 +68,7 @@ class CallbackFormModal extends CFormModel
     public function afterValidate()
     {
         if (empty($this->getErrors()) and get_class($this) != 'CallbackServicesFormModal') {
-            $this->sentDataToRoistat(); //Begin roistat
+            // $this->sentDataToRoistat(); // roistat отключён
             // if (Yii::app()->hasModule('amocrm')) {
             //     $amocrm = new Amocrm;
             //     $amocrm->addLead($this->getAttributes());

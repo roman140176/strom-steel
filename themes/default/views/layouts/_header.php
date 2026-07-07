@@ -55,13 +55,12 @@ $assetsPath = '.' . $assetsUrl;
 </div>
 
 <div class="header-bottom container posrel">
-    <div class="catalog-link-main posrel">
-        <?= file_get_contents($assetsPath . '/images/icon/burger.svg'); ?>
-        <span>Каталог товаров</span>
-        <?= file_get_contents($assetsPath . '/images/icon/gal.svg'); ?>
-
-        <?php $this->widget('application.modules.store.widgets.CategoryWidget', ['depth' => 1, 'view' => 'tree']); ?>
-    </div>
+    <button type="button" class="catalog-link-main" id="catalog-trigger"
+            aria-haspopup="true" aria-expanded="false" aria-controls="catalog-drawer">
+        <span class="catalog-link-main__dot" aria-hidden="true"></span>
+        <span class="catalog-link-main__label">Каталог товаров</span>
+        <span class="catalog-link-main__arrow" aria-hidden="true"><?= file_get_contents($assetsPath . '/images/icon/gal.svg'); ?></span>
+    </button>
 
     <nav class="header-nav">
         <?php $this->widget('application.modules.menu.widgets.MenuWidget', ['name' => 'top-menu']); ?>
@@ -88,14 +87,5 @@ $assetsPath = '.' . $assetsUrl;
 
 <?php $this->renderPartial('//layouts/_header-mobile'); ?>
 
-<?php Yii::app()->clientScript->registerScript("submenu", "
-    $('.menu-catalog-submenu').each(function(){
-        var h = $('#menu-catalog').innerHeight();
-        var el = $(this);
-        var u = el.find('ul');
-        el.css('height', h);
-        u.css('height', h);
-        u.attr('data-simplebar',true);
-        u.attr('data-simplebar-auto-hide',false);
-        })
-"); ?>
+<?php // Выезжающее двухпанельное меню каталога (off-canvas), триггер — #catalog-trigger
+$this->widget('application.modules.store.widgets.CategoryWidget', ['depth' => 1, 'view' => 'drawer']); ?>

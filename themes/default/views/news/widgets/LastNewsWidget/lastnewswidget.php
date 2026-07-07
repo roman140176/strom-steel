@@ -41,7 +41,7 @@
                             <span><?= $dateRus ?></span>
                         </div>
                         <h3 class="nws-card__title">
-                            <a href="<?= $url ?>"><?= $model->title_short ?: $model->title ?></a>
+                            <a href="<?= $url ?>"><?= $model->title ?></a>
                         </h3>
                         <?php if ($excerpt !== ''): ?>
                             <p class="nws-card__text"><?= CHtml::encode($excerpt) ?></p>

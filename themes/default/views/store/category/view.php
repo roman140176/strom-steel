@@ -95,6 +95,11 @@ $this->breadcrumbs = array_merge(
             <div class="fix-sidebar-close"></div>
           </div> -->
           <div class="sidebar-box">
+            <div class="filters-loading" data-filters-loading>
+              <div class="filters-loading__inner">
+                <span class="filters-loading__text">Готовим фильтры…</span>
+              </div>
+            </div>
             <div class="sidebar-box__close">
               <div></div>
             </div>
@@ -153,8 +158,10 @@ $this->breadcrumbs = array_merge(
                   <label for="hit_id" class="fbc-label"><span class="before"></span>Хит продаж</label>
                   <input type="checkbox" name="new[]" value="1" id="new_id" <?= (isset($_GET['new']) and $_GET['new']['0'] == 1) ? 'checked' : '' ?>>
                   <label for="new_id" class="fbc-label"><span class="before"></span>Новое поступление</label>
-                  <input type="checkbox" name="spec[]" value="1" id="spec_id" <?= (isset($_GET['spec']) and $_GET['spec']['0'] == 1) ? 'checked' : '' ?>>
-                  <label for="spec_id" class="fbc-label"><span class="before"></span>Акции и скидки</label>
+                  <?php if ($category->getCountSpecial() > 0) : ?>
+                    <input type="checkbox" name="spec[]" value="1" id="spec_id" <?= (isset($_GET['spec']) and $_GET['spec']['0'] == 1) ? 'checked' : '' ?>>
+                    <label for="spec_id" class="fbc-label"><span class="before"></span>Акции и скидки</label>
+                  <?php endif ?>
 
                   <div class="selected-filters"></div>
                 </div>

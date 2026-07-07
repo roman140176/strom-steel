@@ -586,6 +586,122 @@ jQuery(function ($) {
     });
   })();
 
+  /* ========================================================================
+     Stromsteel Works (.ssw-*) — карусель «Реализованные объекты» на главной
+     View: themes/default/views/page/widgets/PagesNewWidget/works.php
+     Поведение: автопрокрутка 6 с, пауза при hover/focus, после ручного
+     клика по стрелкам автоплей останавливается навсегда. Прогресс-бар
+     считаем сами на rAF, чтобы корректно паузить/возобновлять.
+     ======================================================================== */
+  (function initStromsteelWorks() {
+    var section = document.querySelector('.ssw-section');
+    if (!section) return;
+    var swiperEl = section.querySelector('.ssw-swiper');
+    if (!swiperEl || typeof Swiper === 'undefined') return;
+
+    var slidesCount = swiperEl.querySelectorAll('.swiper-slide').length;
+    if (slidesCount === 0) return;
+
+    var currentEl = section.querySelector('[data-ssw-current]');
+    var progressFill = section.querySelector('[data-ssw-progress]');
+    var prevBtn = section.querySelector('.ssw-nav--prev');
+    var nextBtn = section.querySelector('.ssw-nav--next');
+
+    var AUTOPLAY_MS = 6000;
+    var stopped = false;
+    var paused = false;
+    var startTs = 0;
+    var elapsed = 0;
+    var rafId = null;
+
+    function setProgress(pct) {
+      if (progressFill) progressFill.style.width = pct + '%';
+    }
+    function tick(now) {
+      if (paused || stopped) return;
+      var t = elapsed + (now - startTs);
+      setProgress(Math.min(100, (t / AUTOPLAY_MS) * 100));
+      if (t < AUTOPLAY_MS) rafId = requestAnimationFrame(tick);
+    }
+    function startTimer() {
+      if (stopped) return;
+      elapsed = 0;
+      setProgress(0);
+      paused = false;
+      cancelAnimationFrame(rafId);
+      startTs = performance.now();
+      rafId = requestAnimationFrame(tick);
+    }
+    function pauseTimer() {
+      if (stopped || paused) return;
+      paused = true;
+      elapsed += performance.now() - startTs;
+      cancelAnimationFrame(rafId);
+    }
+    function resumeTimer() {
+      if (stopped || !paused) return;
+      paused = false;
+      startTs = performance.now();
+      rafId = requestAnimationFrame(tick);
+    }
+    function stopTimer() {
+      stopped = true;
+      paused = false;
+      cancelAnimationFrame(rafId);
+      setProgress(100);
+    }
+    function updateCounter(sw) {
+      if (!currentEl) return;
+      var idx = ((sw && typeof sw.realIndex === 'number') ? sw.realIndex : 0) + 1;
+      currentEl.textContent = (idx < 10 ? '0' : '') + idx;
+    }
+
+    var useLoop = slidesCount > 1;
+    var swiper = new Swiper(swiperEl, {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      speed: 650,
+      loop: useLoop,
+      grabCursor: useLoop,
+      watchOverflow: true,
+      autoplay: useLoop ? {
+        delay: AUTOPLAY_MS,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      } : false,
+      navigation: {
+        nextEl: '.ssw-nav--next',
+        prevEl: '.ssw-nav--prev',
+      },
+      a11y: {
+        prevSlideMessage: 'Предыдущий объект',
+        nextSlideMessage: 'Следующий объект',
+      },
+      on: {
+        init: function () {
+          updateCounter(this);
+          if (useLoop) startTimer();
+        },
+        slideChange: function () {
+          updateCounter(this);
+          if (!stopped && useLoop) startTimer();
+        },
+        autoplayPause: function () { pauseTimer(); },
+        autoplayResume: function () { resumeTimer(); },
+        autoplayStop: function () { stopTimer(); },
+      },
+    });
+
+    function stopAll() {
+      if (swiper && swiper.autoplay && typeof swiper.autoplay.stop === 'function') {
+        try { swiper.autoplay.stop(); } catch (e) {}
+      }
+      stopTimer();
+    }
+    if (prevBtn) prevBtn.addEventListener('click', stopAll);
+    if (nextBtn) nextBtn.addEventListener('click', stopAll);
+  })();
+
   // Ленивая загрузка Google reCAPTCHA: скрипт уходит в сеть только когда
   // открывается модалка, содержащая .g-recaptcha. Экономит ~340 KB на пейджвью
   // для пользователей, которые форму не вызывают.
@@ -615,4 +731,234 @@ jQuery(function ($) {
     });
   })();
 
+  /* ========================================================================
+     Новостные кейсы — интерактивная схема (.nce-schematic-wrap)
+     Легенда .nce-leg ссылается якорями на аннотации SVG (#anno-..). Штатный
+     переход по якорю подсвечивает аннотацию через :target, но заодно прыгает
+     страницей к ней. Перехватываем клик: подсветку-«замок» даём классом
+     .is-active (тот же вид, что :target), а страницей не прыгаем — лишь на
+     узких экранах, где схема может оказаться выше зоны видимости, мягко её
+     подводим. Хеш/история не трогаются (ср. replaceState в FAQ-табах выше).
+     ======================================================================== */
+  (function initSchematicLegend() {
+    var wraps = document.querySelectorAll('.nce-schematic-wrap');
+    if (!wraps.length) return;
+
+    // зеркало правил .nce-anno:target из стилей новости (через те же CSS-переменные)
+    var style = document.createElement('style');
+    style.textContent =
+      '.nce-anno.is-active .nce-anno__shape{stroke:var(--g-bright);stroke-width:2.6}' +
+      '.nce-anno.is-active .nce-anno__fill{fill:rgba(67,201,140,.28)}' +
+      '.nce-anno.is-active .nce-anno__line{stroke:var(--g-bright);stroke-dasharray:none}' +
+      '.nce-anno.is-active .nce-anno__badge{fill:var(--g);stroke:var(--g-soft)}';
+    document.head.appendChild(style);
+
+    document.addEventListener('click', function (e) {
+      var leg = e.target && e.target.closest ? e.target.closest('.nce-leg') : null;
+      if (!leg) return;
+      var href = leg.getAttribute('href') || '';
+      if (href.charAt(0) !== '#' || href.length < 2) return;
+      var anno = document.getElementById(href.slice(1));
+      if (!anno || !anno.classList.contains('nce-anno')) return;
+
+      e.preventDefault(); // гасим штатный прыжок к якорю
+
+      // снимаем подсветку с соседних аннотаций той же схемы, ставим на текущую
+      var svg = anno.ownerSVGElement || (anno.closest ? anno.closest('svg') : null);
+      if (svg) {
+        var active = svg.querySelectorAll('.nce-anno.is-active');
+        for (var i = 0; i < active.length; i++) active[i].classList.remove('is-active');
+      }
+      anno.classList.add('is-active');
+
+      // на узком экране схема может быть выше зоны видимости — мягко подводим;
+      // на десктопе схема и легенда видны вместе, страницу не двигаем
+      var anatomy = leg.closest ? leg.closest('.nce-anatomy') : null;
+      var wrap = (anatomy && anatomy.querySelector('.nce-schematic-wrap')) || wraps[0];
+      var r = wrap.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      if (r.top < 0 || r.bottom > vh) {
+        wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  })();
+
+  /* ========================================================================
+     Каталог — выезжающее двухпанельное меню (off-canvas)
+     ======================================================================== */
+  (function initCatalogDrawer() {
+    var trigger = document.getElementById('catalog-trigger');
+    var drawer = document.getElementById('catalog-drawer');
+    if (!trigger || !drawer) return;
+
+    function toArr(nl) { return Array.prototype.slice.call(nl); }
+
+    var cats = toArr(drawer.querySelectorAll('.cat-drawer__cat'));
+    var subs = toArr(drawer.querySelectorAll('.cat-drawer__sub'));
+    var mq = window.matchMedia('(max-width: 900px)');
+    var closeTimer = null;
+
+    function isMobile() { return mq.matches; }
+
+    function setActive(catId) {
+      cats.forEach(function (c) {
+        var on = c.getAttribute('data-cat') === catId;
+        c.classList.toggle('is-active', on);
+        var link = c.querySelector('.cat-drawer__cat-link');
+        if (link) { link.setAttribute('aria-selected', on ? 'true' : 'false'); }
+      });
+      subs.forEach(function (s) {
+        s.classList.toggle('is-active', s.getAttribute('data-cat') === catId);
+      });
+    }
+
+    function openDrawer() {
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+      drawer.hidden = false;
+      void drawer.offsetWidth; // reflow, чтобы проиграть transition
+      drawer.classList.add('is-open');
+      document.body.classList.add('cat-drawer-open');
+      trigger.setAttribute('aria-expanded', 'true');
+      var closeBtn = drawer.querySelector('.cat-drawer__close');
+      if (closeBtn) { closeBtn.focus(); }
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('is-open', 'is-sub-open');
+      document.body.classList.remove('cat-drawer-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      closeTimer = setTimeout(function () {
+        if (!drawer.classList.contains('is-open')) { drawer.hidden = true; }
+      }, 420);
+      trigger.focus();
+    }
+
+    trigger.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (drawer.classList.contains('is-open')) { closeDrawer(); } else { openDrawer(); }
+    });
+
+    toArr(drawer.querySelectorAll('[data-cat-close]')).forEach(function (el) {
+      el.addEventListener('click', function (e) { e.preventDefault(); closeDrawer(); });
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if ((e.key === 'Escape' || e.keyCode === 27) && drawer.classList.contains('is-open')) { closeDrawer(); }
+    });
+
+    cats.forEach(function (c) {
+      var id = c.getAttribute('data-cat');
+      var link = c.querySelector('.cat-drawer__cat-link');
+      c.addEventListener('mouseenter', function () { if (!isMobile()) { setActive(id); } });
+      if (link) {
+        link.addEventListener('focus', function () { if (!isMobile()) { setActive(id); } });
+        link.addEventListener('click', function (e) {
+          if (isMobile()) {
+            e.preventDefault();
+            setActive(id);
+            drawer.classList.add('is-sub-open');
+          }
+          // десктоп: обычный переход по ссылке категории
+        });
+      }
+    });
+
+    var back = drawer.querySelector('[data-cat-back]');
+    if (back) { back.addEventListener('click', function () { drawer.classList.remove('is-sub-open'); }); }
+  })();
+
+
+  /* ========================================================================
+     Мобильное меню (<=1360px): галочка-индикатор у «Каталог».
+     Раскрытие дерева делает базовый scripts.min.js (slideToggle
+     .catalog-menu-wrapper) — здесь лишь синхронизируем поворот стрелки.
+     ======================================================================== */
+  (function initMobileCatalogArrow() {
+    var links = document.querySelectorAll('.catalog-main-link');
+    if (!links.length) return;
+    Array.prototype.forEach.call(links, function (link) {
+      link.addEventListener('click', function () {
+        link.classList.toggle('is-open');
+      });
+    });
+  })();
+
+  /* ========================================================================
+     Подложка блока фильтров. Пока ionRangeSlider/аккордеон достраивают фильтры,
+     держим поверх блока «Готовим фильтры…». Снимаем не по фиксированному таймеру,
+     а когда DOM блока перестал меняться: MutationObserver с дебаунсом — reveal
+     через SETTLE мс после последней мутации (т.е. когда перестройка реально
+     закончилась). START — если мутаций нет вовсе; CAP — предохранитель от залипания.
+     ======================================================================== */
+  (function initFiltersLoader() {
+    var boxes = document.querySelectorAll('.sidebar-box');
+    if (!boxes.length) return;
+    if (typeof MutationObserver === 'undefined') {
+      // деградация: без наблюдателя снимаем на window.load
+      window.addEventListener('load', function () {
+        Array.prototype.forEach.call(boxes, function (box) { box.classList.add('filters-ready'); });
+      });
+      return;
+    }
+    var SETTLE = 450;  // тишина после последней мутации -> фильтры собраны
+    var START = 900;   // если перестройки не было вовсе
+    var CAP = 6000;    // жёсткий предел
+    Array.prototype.forEach.call(boxes, function (box) {
+      var loader = box.querySelector('[data-filters-loading]');
+      if (!loader) return;
+      var timer = null, revealed = false;
+      function reveal() {
+        if (revealed) return;
+        revealed = true;
+        obs.disconnect();
+        clearTimeout(timer);
+        box.classList.add('filters-ready');
+        setTimeout(function () { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 450);
+      }
+      function bump(ms) { clearTimeout(timer); timer = setTimeout(reveal, ms); }
+      var obs = new MutationObserver(function () { bump(SETTLE); });
+      obs.observe(box, { childList: true, subtree: true, attributes: true });
+      bump(START);
+      setTimeout(reveal, CAP);
+    });
+  })();
+
+  /* ========================================================================
+     Страница контактов: живой бейдж «Открыто/Закрыто» (Пн-Пт 9:00–19:00 по
+     Москве) + копирование телефона/почты/ИНН по клику (.ct-copy).
+     ======================================================================== */
+  (function initContactsPage() {
+    var badge = document.querySelector('[data-ct-status]');
+    if (badge) {
+      var d;
+      try { d = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Moscow' })); }
+      catch (e) { d = new Date(); }
+      var day = d.getDay();
+      var mins = d.getHours() * 60 + d.getMinutes();
+      var open = day >= 1 && day <= 5 && mins >= 540 && mins < 1140;
+      badge.hidden = false;
+      badge.className = open ? 'ct-status is-open' : 'ct-status is-closed';
+      badge.textContent = open ? 'Открыто сейчас' : 'Закрыто';
+    }
+
+    var copies = document.querySelectorAll('.ct-copy');
+    Array.prototype.forEach.call(copies, function (b) {
+      var orig = b.textContent;
+      b.addEventListener('click', function () {
+        var val = b.getAttribute('data-copy') || '';
+        var done = function () {
+          b.textContent = 'Скопировано'; b.classList.add('is-copied');
+          setTimeout(function () { b.textContent = orig; b.classList.remove('is-copied'); }, 1600);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(val).then(done, done);
+        } else {
+          var ta = document.createElement('textarea'); ta.value = val;
+          document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); } catch (e) {}
+          document.body.removeChild(ta); done();
+        }
+      });
+    });
+  })();
 });

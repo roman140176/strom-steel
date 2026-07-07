@@ -226,14 +226,11 @@ if (
     </div>
    
 </main>
-<section class="widget-pages">
-
-    <?php $this->widget('application.modules.page.widgets.PagesNewWidget', [
-        'parent_id' => 3,
-        'view' => 'works',
-        'limit' => 4
-    ]); ?>
-</section>
+<?php $this->widget('application.modules.page.widgets.PagesNewWidget', [
+    'parent_id' => 3,
+    'view' => 'works',
+    'limit' => 4
+]); ?>
 <div class="container container-tabs">
     <div class="tabs-head">
         <h2 class="page_title">Хиты продаж</h2>

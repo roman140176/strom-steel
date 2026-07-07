@@ -26,7 +26,7 @@ $url = '/news/' . $data->slug;
             <span><?= $dateRus ?></span>
         </div>
         <h3 class="nws-card__title">
-            <a href="<?= $url ?>"><?= $data->title_short ?: $data->title ?></a>
+            <a href="<?= $url ?>"><?= $data->title ?></a>
         </h3>
         <?php if ($excerpt !== ''): ?>
             <p class="nws-card__text"><?= CHtml::encode($excerpt) ?></p>

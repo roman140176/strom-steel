@@ -722,7 +722,7 @@ class Order extends yupe\models\YModel
      */
     public function afterSave()
     {
-        $this->sentDataToRoistat(); //Begin roistat
+        // $this->sentDataToRoistat(); // roistat отключён
         
         $this->updateOrderProducts($this->_orderProducts);
         parent::afterSave();

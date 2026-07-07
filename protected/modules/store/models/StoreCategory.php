@@ -481,6 +481,22 @@ class StoreCategory extends \yupe\models\YModel
       ->queryScalar();
   }
 
+  /**
+   * Кол-во товаров с признаком «Акции и скидки» (is_special) в категории и её детях.
+   * Нужно, чтобы не показывать фильтр «Акции и скидки», когда акций нет.
+   *
+   * @return string|false
+   */
+  public function getCountSpecial()
+  {
+    $ids = array_merge($this->getChildsArray(), [$this->id]);
+    return Yii::app()->getDb()->createCommand()
+      ->select('count(*)')
+      ->from('{{store_product}}')
+      ->where(['and', ['in', 'category_id', $ids], 'is_special = 1'])
+      ->queryScalar();
+  }
+
   public function getProducts()
   {
     $poducts = array_merge($this->getChildsArray(), [$this->id]);

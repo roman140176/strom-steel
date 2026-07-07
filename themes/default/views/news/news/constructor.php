@@ -30,8 +30,10 @@ if (!in_array($tpl, $allowed, true)) {
 ?>
 
 <article class="news-longread">
+    <?php if ($model->title_short !== 'breadcrumb') : ?>
     <div class="container">
         <?php $this->widget('bootstrap.widgets.TbBreadcrumbs', ['links' => $this->breadcrumbs]); ?>
     </div>
+    <?php endif; ?>
     <?php $this->renderPartial('parts/_' . $tpl, ['model' => $model]); ?>
 </article>

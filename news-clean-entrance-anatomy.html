@@ -1,223 +1,1079 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Анатомия чистого входа: как устроена грязезащита офиса</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* PREVIEW ONLY — на сайте .container уже определён, при интеграции удалить */
-*{box-sizing:border-box;}
-body{margin:0;background:#fff;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1c2522;-webkit-font-smoothing:antialiased;}
-figure{margin:0;}
-.container{width:1320px;margin:0 auto;padding:0;}
-@media (max-width:1366px){.container{width:100%;padding:0 15px;}}
-/* /PREVIEW ONLY */
+  /* PREVIEW ONLY — на сайте .container уже определён, при интеграции удалить */
+  * {
+    box-sizing: border-box;
+  }
 
-/* ===== News Clean Entrance — namespace .nce-* ===== */
-.nce-root{--g:#0e7e50;--g-deep:#0a5e3b;--g-bright:#43c98c;--g-soft:#5fd6a0;--ink:#16201c;--mut:#3f4a46;--line:#e3e7e5;--steel:#0f1b17;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:var(--ink);line-height:1.5;}
-.nce-root *{box-sizing:border-box;}
-.nce-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+  body {
+    margin: 0;
+    background: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1c2522;
+    -webkit-font-smoothing: antialiased;
+  }
 
-.nce-sec{width:100%;}
-.nce-sec--pad{padding:80px 0;}
-.nce-sec--padsm{padding:60px 0;}
-.nce-sec--tint{background:#f6f8f7;}
+  figure {
+    margin: 0;
+  }
 
-/* eyebrow */
-.nce-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--g);margin:0 0 18px;}
-.nce-eyebrow svg{width:15px;height:15px;flex:none;}
-.nce-eyebrow--bar{padding-left:13px;border-left:2px solid var(--g);}
+  .container {
+    width: 1320px;
+    margin: 0 auto;
+    padding: 0;
+  }
 
-.nce-h2{font-size:33px;line-height:1.16;font-weight:700;letter-spacing:-.01em;margin:0 0 16px;color:var(--ink);text-wrap:balance;}
-.nce-p{font-size:16px;line-height:1.65;color:var(--mut);margin:0 0 14px;}
-.nce-p:last-child{margin:0;}
+  @media (max-width:1366px) {
+    .container {
+      width: 100%;
+      padding: 0 15px;
+    }
+  }
 
-/* ===== 1. HERO (blueprint) ===== */
-.nce-hero{position:relative;min-height:480px;display:flex;align-items:flex-end;background:#0c1714;overflow:hidden;}
-.nce-hero__photo{position:absolute;inset:0;background:#0c1714 center/cover no-repeat;background-image:url('{{themeAssets}}/images/news/anatomi/1.jpg');opacity:.20;filter:grayscale(.4);}
-.nce-hero__grid{position:absolute;inset:0;background-image:linear-gradient(rgba(95,214,160,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(95,214,160,.07) 1px,transparent 1px);background-size:30px 30px;}
-.nce-hero__veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,20,16,.92) 0%,rgba(10,20,16,.72) 55%,rgba(10,20,16,.35) 100%);}
-.nce-hero__inner{position:relative;width:100%;padding-top:70px;}
-.nce-hero__content{max-width:760px;color:#fff;padding-bottom:36px;}
-.nce-eyebrow--chip{background:var(--g);color:#fff;padding:7px 13px;border-radius:5px;letter-spacing:.1em;}
-.nce-eyebrow--chip svg{stroke:#fff;}
-.nce-hero h1{font-size:56px;line-height:1.04;font-weight:800;letter-spacing:-.025em;margin:0 0 18px;text-wrap:balance;}
-.nce-hero h1 em{font-style:normal;color:var(--g-bright);}
-.nce-hero__sub{font-size:18px;line-height:1.55;color:rgba(255,255,255,.82);max-width:600px;margin:0;}
-.nce-hero__meta{position:relative;border-top:1px solid rgba(255,255,255,.13);}
-.nce-hero__meta .container{display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding-top:15px;padding-bottom:15px;}
-.nce-meta{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.72);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.04em;}
-.nce-meta svg{width:14px;height:14px;stroke:var(--g-soft);}
-.nce-meta--cat{color:#fff;}
+  /* /PREVIEW ONLY */
 
-/* ===== 2. LEAD ===== */
-.nce-lead__box{max-width:880px;padding-left:26px;border-left:2px solid var(--g);}
-.nce-lead__box .nce-eyebrow{margin-bottom:18px;margin-left:-26px;padding-left:26px;}
-.nce-lead__t{font-size:23px;line-height:1.45;font-weight:500;color:var(--ink);margin:0;text-wrap:pretty;}
+  /* ===== News Clean Entrance — namespace .nce-* ===== */
+  .nce-root {
+    --g: #0e7e50;
+    --g-deep: #0a5e3b;
+    --g-bright: #43c98c;
+    --g-soft: #5fd6a0;
+    --ink: #16201c;
+    --mut: #3f4a46;
+    --line: #e3e7e5;
+    --steel: #0f1b17;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--ink);
+    line-height: 1.5;
+  }
 
-/* ===== 3. TASK ===== */
-.nce-task .nce-p{max-width:760px;font-size:17px;}
-.nce-task strong{color:var(--ink);font-weight:600;}
-.nce-callout{margin-top:26px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--g);border-radius:0 12px 12px 0;padding:20px 24px;font-size:16px;line-height:1.6;color:#26332e;max-width:820px;}
-.nce-callout em{font-style:normal;color:var(--g);font-weight:600;}
+  .nce-root * {
+    box-sizing: border-box;
+  }
 
-/* ===== 4. ANATOMY (core) ===== */
-.nce-anatomy{background:var(--steel);position:relative;overflow:hidden;}
-.nce-anatomy__grid{position:absolute;inset:0;background-image:linear-gradient(rgba(95,214,160,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(95,214,160,.05) 1px,transparent 1px);background-size:32px 32px;}
-.nce-anatomy .container{position:relative;}
-.nce-anatomy .nce-eyebrow{color:var(--g-soft);}
-.nce-anatomy .nce-eyebrow--bar{border-color:var(--g-soft);}
-.nce-anatomy .nce-h2{color:#fff;}
-.nce-anatomy__intro{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:30px;}
-.nce-anatomy__legendline{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;letter-spacing:.04em;color:rgba(255,255,255,.6);max-width:300px;text-align:right;}
-.nce-anatomy__legendline b{color:var(--g-bright);font-weight:600;}
-.nce-schematic-wrap{border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.015);padding:18px;}
-.nce-schematic{display:block;width:100%;height:auto;}
+  .nce-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
 
-/* schematic styling */
-.nce-arch{stroke:rgba(255,255,255,.42);stroke-width:1.4;fill:none;}
-.nce-arch--fill{fill:rgba(255,255,255,.045);}
-.nce-zlabel{fill:rgba(255,255,255,.45);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;letter-spacing:.18em;}
-.nce-zdiv{stroke:rgba(255,255,255,.16);stroke-width:1;stroke-dasharray:2 5;}
+  .nce-sec {
+    width: 100%;
+  }
 
-.nce-anno__shape{stroke:rgba(255,255,255,.55);stroke-width:1.6;fill:none;transition:stroke .3s ease,stroke-width .3s ease;}
-.nce-anno__fill{fill:rgba(95,214,160,.07);stroke:none;transition:fill .3s ease;}
-.nce-anno__line{stroke:rgba(255,255,255,.3);stroke-width:1;stroke-dasharray:3 4;transition:stroke .3s ease;}
-.nce-anno__dot{fill:var(--g-bright);}
-.nce-anno__badge{fill:rgba(255,255,255,.05);stroke:rgba(95,214,160,.55);stroke-width:1.3;transition:fill .3s ease,stroke .3s ease;}
-.nce-anno__num{fill:#dff3e8;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;font-weight:600;text-anchor:middle;}
-.nce-anno{cursor:pointer;}
-.nce-anno:hover .nce-anno__shape,.nce-anno:target .nce-anno__shape{stroke:var(--g-bright);stroke-width:2.6;}
-.nce-anno:hover .nce-anno__fill,.nce-anno:target .nce-anno__fill{fill:rgba(67,201,140,.28);}
-.nce-anno:hover .nce-anno__line,.nce-anno:target .nce-anno__line{stroke:var(--g-bright);stroke-dasharray:none;}
-.nce-anno:hover .nce-anno__badge,.nce-anno:target .nce-anno__badge{fill:var(--g);stroke:var(--g-soft);}
+  .nce-sec--pad {
+    padding: 80px 0;
+  }
 
-/* legend list under schematic */
-.nce-legend{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:24px;}
-.nce-leg{display:block;text-decoration:none;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:11px;padding:18px;transition:border-color .3s ease,background .3s ease,transform .3s ease;}
-.nce-leg:hover{border-color:var(--g-soft);background:rgba(67,201,140,.08);transform:translateY(-3px);}
-.nce-leg__n{display:inline-block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;font-weight:600;color:var(--g-bright);border:1px solid rgba(95,214,160,.45);border-radius:6px;padding:2px 8px;margin-bottom:12px;}
-.nce-leg__t{font-size:16px;font-weight:700;color:#fff;margin:0 0 6px;}
-.nce-leg__d{font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.62);margin:0;}
+  .nce-sec--padsm {
+    padding: 60px 0;
+  }
 
-/* ===== 5. FUNNEL ===== */
-.nce-funnel{display:flex;align-items:flex-end;gap:0;margin-top:10px;}
-.nce-stage{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;}
-.nce-stage__bar{width:100%;border-radius:12px 12px 0 0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:22px 18px;color:#fff;}
-.nce-stage:nth-child(1) .nce-stage__bar{height:230px;background:linear-gradient(180deg,#5e756b,#43564e);}
-.nce-stage:nth-child(3) .nce-stage__bar{height:185px;background:linear-gradient(180deg,#1f9d68,#16804f);}
-.nce-stage:nth-child(5) .nce-stage__bar{height:140px;background:linear-gradient(180deg,#0a5e3b,#084c30);}
-.nce-stage__n{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:30px;font-weight:700;opacity:.9;}
-.nce-stage__k{font-size:18px;font-weight:700;margin-top:4px;letter-spacing:.02em;}
-.nce-stage__base{padding:18px 16px 0;}
-.nce-stage__el{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin:0 0 6px;}
-.nce-stage__d{font-size:14.5px;line-height:1.5;color:var(--mut);margin:0;}
-.nce-arrow{align-self:center;margin:0 -2px 96px;color:#9fb1a8;flex:none;}
-.nce-arrow svg{width:30px;height:30px;display:block;}
+  .nce-sec--tint {
+    background: #f6f8f7;
+  }
 
-/* ===== 6. PROCESS ribbon ===== */
-.nce-process{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:8px;}
-.nce-process::before{content:"";position:absolute;top:21px;left:22px;right:calc(33.333% - 39px);height:2px;background:repeating-linear-gradient(90deg,var(--g) 0 8px,transparent 8px 15px);opacity:.4;}
-.nce-pstep{position:relative;}
-.nce-pstep__n{position:relative;z-index:1;width:44px;height:44px;border-radius:50%;background:#fff;border:2px solid var(--g);color:var(--g);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
-.nce-pstep h3{font-size:18px;font-weight:700;margin:0 0 7px;color:var(--ink);}
-.nce-pstep .nce-p{font-size:15px;}
+  /* eyebrow */
+  .nce-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--g);
+    margin: 0 0 18px;
+  }
 
-/* ===== 7. MOSAIC ===== */
-.nce-mosaic{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:16px;margin-top:8px;height:520px;}
-.nce-shot{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#dfe8e3;box-shadow:0 12px 30px -22px rgba(14,32,28,.4);}
-.nce-shot__img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s ease;}
-.nce-shot:hover{transform:translateY(-4px);box-shadow:0 22px 44px -22px rgba(14,32,28,.5);transition:transform .4s ease,box-shadow .4s ease;}
-.nce-shot:hover .nce-shot__img{transform:scale(1.03);}
-.nce-shot__cap{position:absolute;left:0;right:0;bottom:0;padding:34px 16px 14px;font-size:13.5px;font-weight:600;color:#fff;background:linear-gradient(to top,rgba(8,22,17,.85),transparent);z-index:1;}
-.nce-shot1{grid-area:1/1/3/2;}
-.nce-shot2{grid-area:1/2/2/3;}
-.nce-shot3{grid-area:1/3/2/4;}
-.nce-shot4{grid-area:2/2/3/4;}
-.nce-shot1 .nce-shot__img{background-image:url('{{themeAssets}}/images/news/anatomi/2.jpg');}
-.nce-shot2 .nce-shot__img{background-image:url('{{themeAssets}}/images/news/anatomi/3.jpg');}
-.nce-shot3 .nce-shot__img{background-image:url('{{themeAssets}}/images/news/anatomi/4.jpg');}
-.nce-shot4 .nce-shot__img{background-image:url('{{themeAssets}}/images/news/anatomi/5.jpg');}
+  .nce-eyebrow svg {
+    width: 15px;
+    height: 15px;
+    flex: none;
+  }
 
-/* ===== 8. RESULT + CTA ===== */
-.nce-final{background:linear-gradient(160deg,#0a5e3b 0%,#084027 100%);position:relative;overflow:hidden;}
-.nce-final__grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:34px 34px;}
-.nce-final .container{position:relative;}
-.nce-result{text-align:center;color:#fff;padding-bottom:46px;margin-bottom:46px;border-bottom:1px solid rgba(255,255,255,.16);}
-.nce-result .nce-eyebrow{color:var(--g-soft);justify-content:center;display:flex;}
-.nce-result__t{font-size:24px;line-height:1.4;font-weight:600;max-width:700px;margin:0 auto 30px;text-wrap:balance;}
-.nce-marks{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;}
-.nce-mark{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;color:#fff;}
-.nce-mark svg{width:19px;height:19px;stroke:var(--g-soft);flex:none;}
-.nce-cta{text-align:center;color:#fff;}
-.nce-cta .nce-eyebrow{color:var(--g-soft);justify-content:center;display:flex;}
-.nce-cta h2{font-size:38px;line-height:1.1;font-weight:800;letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance;}
-.nce-cta__desc{font-size:17px;line-height:1.55;color:rgba(255,255,255,.85);max-width:580px;margin:0 auto 30px;}
-.nce-cta__btns{display:flex;justify-content:center;flex-wrap:wrap;gap:13px;}
-.nce-btn{display:inline-flex;align-items:center;gap:10px;font-size:16px;font-weight:600;padding:15px 28px;border-radius:9px;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease;}
-.nce-btn svg{width:18px;height:18px;}
-.nce-btn--primary{background:#fff;color:var(--g-deep);}
-.nce-btn--primary:hover{transform:translateY(-3px);box-shadow:0 16px 30px -14px rgba(0,0,0,.45);}
-.nce-btn--ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45);}
-.nce-btn--ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);}
-.nce-cta__mail{margin-top:20px;font-size:14px;color:rgba(255,255,255,.7);}
-.nce-cta__mail a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4);}
+  .nce-eyebrow--bar {
+    padding-left: 13px;
+    border-left: 2px solid var(--g);
+  }
 
-/* back link */
-.nce-back{padding:34px 0 64px;}
-.nce-back a{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;color:var(--g);text-decoration:none;}
-.nce-back a svg{width:18px;height:18px;}
-.nce-back a:hover{color:var(--g-deep);}
+  .nce-h2 {
+    font-size: 33px;
+    line-height: 1.16;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    margin: 0 0 16px;
+    color: var(--ink);
+    text-wrap: balance;
+  }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width:900px){
-  .nce-sec--pad{padding:58px 0;}
-  .nce-sec--padsm{padding:46px 0;}
-  .nce-hero{min-height:420px;}
-  .nce-hero h1{font-size:42px;}
-  .nce-hero__sub{font-size:16px;}
-  .nce-h2{font-size:27px;}
-  .nce-lead__t{font-size:20px;}
-  .nce-anatomy__intro{flex-direction:column;align-items:flex-start;}
-  .nce-anatomy__legendline{text-align:left;max-width:none;}
-  .nce-legend{grid-template-columns:1fr 1fr;}
-  .nce-funnel{flex-direction:column;align-items:stretch;gap:0;}
-  .nce-stage{align-items:stretch;}
-  .nce-stage__bar{height:auto !important;flex-direction:row;justify-content:flex-start;gap:16px;align-items:center;border-radius:12px;padding:18px 22px;}
-  .nce-stage__n{font-size:24px;}
-  .nce-stage__base{text-align:left;padding:12px 6px 0;}
-  .nce-arrow{transform:rotate(90deg);margin:8px auto;}
-  .nce-process{grid-template-columns:1fr;gap:22px;}
-  .nce-process::before{display:none;}
-  .nce-mosaic{grid-template-columns:1fr 1fr;grid-template-rows:none;height:auto;}
-  .nce-shot{aspect-ratio:4/3;}
-  .nce-shot1,.nce-shot2,.nce-shot3,.nce-shot4{grid-area:auto;}
-  .nce-cta h2{font-size:30px;}
-}
-@media (max-width:600px){
-  .nce-sec--pad{padding:44px 0;}
-  .nce-hero{min-height:auto;}
-  .nce-hero__inner{padding-top:46px;}
-  .nce-hero h1{font-size:33px;}
-  .nce-h2{font-size:23px;}
-  .nce-lead__t{font-size:18px;}
-  .nce-legend{grid-template-columns:1fr;}
-  .nce-mosaic{grid-template-columns:1fr;}
-  .nce-cta h2{font-size:25px;}
-  .nce-cta__btns{flex-direction:column;}
-  .nce-btn{justify-content:center;}
-  .nce-hero__meta .container{gap:12px 18px;}
-}
+  .nce-p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--mut);
+    margin: 0 0 14px;
+  }
+
+  .nce-p:last-child {
+    margin: 0;
+  }
+
+  /* ===== 1. HERO (blueprint) ===== */
+  .nce-hero {
+    position: relative;
+    min-height: 480px;
+    display: flex;
+    align-items: flex-end;
+    background: rgba(12, 23, 20, .9);
+    overflow: hidden;
+    flex-flow: column;
+    justify-content: space-between;
+  }
+
+  .nce-hero .container.nce-breadcrumb{
+    position: relative;
+    z-index: 3;
+  }
+
+  .nce-hero .container.nce-breadcrumb .breadcrumb li a{
+    color: #fefefe;
+  }
+
+  .nce-hero .container.nce-breadcrumb .breadcrumb>.active{
+    color: rgba(254, 254, 254, .8);
+  }
+
+  .nce-hero__photo {
+    position: absolute;
+    inset: 0;
+    background: #0c1714 center/cover no-repeat;
+    background-image:url('{{themeAssets}}/images/news/anatomi/1.jpg');
+    opacity: .20;
+    filter: grayscale(.4);
+  }
+
+  .nce-hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(95, 214, 160, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(95, 214, 160, .07) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  .nce-hero__veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(10, 20, 16, .92) 0%, rgba(10, 20, 16, .72) 55%, rgba(10, 20, 16, .35) 100%);
+  }
+
+  .nce-hero__inner {
+    position: relative;
+    width: 100%;
+    padding-top: 70px;
+  }
+
+  .nce-hero__content {
+    max-width: 760px;
+    color: #fff;
+    padding-bottom: 36px;
+  }
+
+  .nce-eyebrow--chip {
+    background: var(--g);
+    color: #fff;
+    padding: 7px 13px;
+    border-radius: 5px;
+    letter-spacing: .1em;
+  }
+
+  .nce-eyebrow--chip svg {
+    stroke: #fff;
+  }
+
+  .nce-hero h1 {
+    font-size: 56px;
+    line-height: 1.04;
+    font-weight: 800;
+    letter-spacing: -.025em;
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+
+  .nce-hero h1 em {
+    font-style: normal;
+    color: var(--g-bright);
+  }
+
+  .nce-hero__sub {
+    font-size: 18px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, .82);
+    max-width: 600px;
+    margin: 0;
+  }
+
+  .nce-hero__meta {
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, .13);
+  }
+
+  .nce-hero__meta .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .nce-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, .72);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: .04em;
+  }
+
+  .nce-meta svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--g-soft);
+  }
+
+  .nce-meta--cat {
+    color: #fff;
+  }
+
+  /* ===== 2. LEAD ===== */
+  .nce-lead__box {
+    max-width: 880px;
+    padding-left: 26px;
+    border-left: 2px solid var(--g);
+  }
+
+  .nce-lead__box .nce-eyebrow {
+    margin-bottom: 18px;
+    margin-left: -26px;
+    padding-left: 26px;
+  }
+
+  .nce-lead__t {
+    font-size: 23px;
+    line-height: 1.45;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  /* ===== 3. TASK ===== */
+  .nce-task .nce-p {
+    max-width: 760px;
+    font-size: 17px;
+  }
+
+  .nce-task strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .nce-callout {
+    margin-top: 26px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--g);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #26332e;
+    max-width: 820px;
+  }
+
+  .nce-callout em {
+    font-style: normal;
+    color: var(--g);
+    font-weight: 600;
+  }
+
+  /* ===== 4. ANATOMY (core) ===== */
+  .nce-anatomy {
+    background: var(--steel);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nce-anatomy__grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(95, 214, 160, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(95, 214, 160, .05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .nce-anatomy .container {
+    position: relative;
+  }
+
+  .nce-anatomy .nce-eyebrow {
+    color: var(--g-soft);
+  }
+
+  .nce-anatomy .nce-eyebrow--bar {
+    border-color: var(--g-soft);
+  }
+
+  .nce-anatomy .nce-h2 {
+    color: #fff;
+  }
+
+  .nce-anatomy__intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+
+  .nce-anatomy__legendline {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px;
+    letter-spacing: .04em;
+    color: rgba(255, 255, 255, .6);
+    max-width: 300px;
+    text-align: right;
+  }
+
+  .nce-anatomy__legendline b {
+    color: var(--g-bright);
+    font-weight: 600;
+  }
+
+  .nce-schematic-wrap {
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .015);
+    padding: 18px;
+  }
+
+  .nce-schematic {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* schematic styling */
+  .nce-arch {
+    stroke: rgba(255, 255, 255, .42);
+    stroke-width: 1.4;
+    fill: none;
+  }
+
+  .nce-arch--fill {
+    fill: rgba(255, 255, 255, .045);
+  }
+
+  .nce-zlabel {
+    fill: rgba(255, 255, 255, .45);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    letter-spacing: .18em;
+  }
+
+  .nce-zdiv {
+    stroke: rgba(255, 255, 255, .16);
+    stroke-width: 1;
+    stroke-dasharray: 2 5;
+  }
+
+  .nce-anno__shape {
+    stroke: rgba(255, 255, 255, .55);
+    stroke-width: 1.6;
+    fill: none;
+    transition: stroke .3s ease, stroke-width .3s ease;
+  }
+
+  .nce-anno__fill {
+    fill: rgba(95, 214, 160, .07);
+    stroke: none;
+    transition: fill .3s ease;
+  }
+
+  .nce-anno__line {
+    stroke: rgba(255, 255, 255, .3);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+    transition: stroke .3s ease;
+  }
+
+  .nce-anno__dot {
+    fill: var(--g-bright);
+  }
+
+  .nce-anno__badge {
+    fill: rgba(255, 255, 255, .05);
+    stroke: rgba(95, 214, 160, .55);
+    stroke-width: 1.3;
+    transition: fill .3s ease, stroke .3s ease;
+  }
+
+  .nce-anno__num {
+    fill: #dff3e8;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 15px;
+    font-weight: 600;
+    text-anchor: middle;
+  }
+
+  .nce-anno {
+    cursor: pointer;
+  }
+
+  .nce-anno:hover .nce-anno__shape,
+  .nce-anno:target .nce-anno__shape {
+    stroke: var(--g-bright);
+    stroke-width: 2.6;
+  }
+
+  .nce-anno:hover .nce-anno__fill,
+  .nce-anno:target .nce-anno__fill {
+    fill: rgba(67, 201, 140, .28);
+  }
+
+  .nce-anno:hover .nce-anno__line,
+  .nce-anno:target .nce-anno__line {
+    stroke: var(--g-bright);
+    stroke-dasharray: none;
+  }
+
+  .nce-anno:hover .nce-anno__badge,
+  .nce-anno:target .nce-anno__badge {
+    fill: var(--g);
+    stroke: var(--g-soft);
+  }
+
+  /* legend list under schematic */
+  .nce-legend {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .nce-leg {
+    display: block;
+    text-decoration: none;
+    background: rgba(255, 255, 255, .03);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 11px;
+    padding: 18px;
+    transition: border-color .3s ease, background .3s ease, transform .3s ease;
+  }
+
+  .nce-leg:hover {
+    border-color: var(--g-soft);
+    background: rgba(67, 201, 140, .08);
+    transform: translateY(-3px);
+  }
+
+  .nce-leg__n {
+    display: inline-block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--g-bright);
+    border: 1px solid rgba(95, 214, 160, .45);
+    border-radius: 6px;
+    padding: 2px 8px;
+    margin-bottom: 12px;
+  }
+
+  .nce-leg__t {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 6px;
+  }
+
+  .nce-leg__d {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, .62);
+    margin: 0;
+  }
+
+  /* ===== 5. FUNNEL ===== */
+  .nce-funnel {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    margin-top: 10px;
+  }
+
+  .nce-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+
+  .nce-stage__bar {
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 22px 18px;
+    color: #fff;
+  }
+
+  .nce-stage:nth-child(1) .nce-stage__bar {
+    height: 230px;
+    background: linear-gradient(180deg, #5e756b, #43564e);
+  }
+
+  .nce-stage:nth-child(3) .nce-stage__bar {
+    height: 185px;
+    background: linear-gradient(180deg, #1f9d68, #16804f);
+  }
+
+  .nce-stage:nth-child(5) .nce-stage__bar {
+    height: 140px;
+    background: linear-gradient(180deg, #0a5e3b, #084c30);
+  }
+
+  .nce-stage__n {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 30px;
+    font-weight: 700;
+    opacity: .9;
+  }
+
+  .nce-stage__k {
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 4px;
+    letter-spacing: .02em;
+  }
+
+  .nce-stage__base {
+    padding: 18px 16px 0;
+  }
+
+  .nce-stage__el {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--g);
+    margin: 0 0 6px;
+  }
+
+  .nce-stage__d {
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--mut);
+    margin: 0;
+  }
+
+  .nce-arrow {
+    align-self: center;
+    margin: 0 -2px 96px;
+    color: #9fb1a8;
+    flex: none;
+  }
+
+  .nce-arrow svg {
+    width: 30px;
+    height: 30px;
+    display: block;
+  }
+
+  /* ===== 6. PROCESS ribbon ===== */
+  .nce-process {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+    margin-top: 8px;
+  }
+
+  .nce-process::before {
+    content: "";
+    position: absolute;
+    top: 21px;
+    left: 22px;
+    right: calc(33.333% - 39px);
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--g) 0 8px, transparent 8px 15px);
+    opacity: .4;
+  }
+
+  .nce-pstep {
+    position: relative;
+  }
+
+  .nce-pstep__n {
+    position: relative;
+    z-index: 1;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--g);
+    color: var(--g);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .nce-pstep h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 7px;
+    color: var(--ink);
+  }
+
+  .nce-pstep .nce-p {
+    font-size: 15px;
+  }
+
+  /* ===== 7. MOSAIC ===== */
+  .nce-mosaic {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+    height: 520px;
+  }
+
+  .nce-shot {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #dfe8e3;
+    box-shadow: 0 12px 30px -22px rgba(14, 32, 28, .4);
+  }
+
+  .nce-shot__img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform .6s ease;
+  }
+
+  .nce-shot:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 44px -22px rgba(14, 32, 28, .5);
+    transition: transform .4s ease, box-shadow .4s ease;
+  }
+
+  .nce-shot:hover .nce-shot__img {
+    transform: scale(1.03);
+  }
+
+  .nce-shot__cap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 34px 16px 14px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(to top, rgba(8, 22, 17, .85), transparent);
+    z-index: 1;
+  }
+
+  .nce-shot1 {
+    grid-area: 1/1/3/2;
+  }
+
+  .nce-shot2 {
+    grid-area: 1/2/2/3;
+  }
+
+  .nce-shot3 {
+    grid-area: 1/3/2/4;
+  }
+
+  .nce-shot4 {
+    grid-area: 2/2/3/4;
+  }
+
+  .nce-shot1 .nce-shot__img {
+    background-image:url('{{themeAssets}}/images/news/anatomi/2.jpg');
+  }
+
+  .nce-shot2 .nce-shot__img {
+    background-image:url('{{themeAssets}}/images/news/anatomi/3.jpg');
+  }
+
+  .nce-shot3 .nce-shot__img {
+    background-image:url('{{themeAssets}}/images/news/anatomi/4.jpg');
+  }
+
+  .nce-shot4 .nce-shot__img {
+    background-image:url('{{themeAssets}}/images/news/anatomi/5.jpg');
+  }
+
+  /* ===== 8. RESULT + CTA ===== */
+  .nce-final {
+    background: linear-gradient(160deg, #0a5e3b 0%, #084027 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nce-final__grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .04) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+
+  .nce-final .container {
+    position: relative;
+  }
+
+  .nce-result {
+    text-align: center;
+    color: #fff;
+    padding-bottom: 46px;
+    margin-bottom: 46px;
+    border-bottom: 1px solid rgba(255, 255, 255, .16);
+  }
+
+  .nce-result .nce-eyebrow {
+    color: var(--g-soft);
+    justify-content: center;
+    display: flex;
+  }
+
+  .nce-result__t {
+    font-size: 24px;
+    line-height: 1.4;
+    font-weight: 600;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    text-wrap: balance;
+  }
+
+  .nce-marks {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .nce-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 999px;
+    padding: 11px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .nce-mark svg {
+    width: 19px;
+    height: 19px;
+    stroke: var(--g-soft);
+    flex: none;
+  }
+
+  .nce-cta {
+    text-align: center;
+    color: #fff;
+  }
+
+  .nce-cta .nce-eyebrow {
+    color: var(--g-soft);
+    justify-content: center;
+    display: flex;
+  }
+
+  .nce-cta h2 {
+    font-size: 38px;
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+
+  .nce-cta__desc {
+    font-size: 17px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, .85);
+    max-width: 580px;
+    margin: 0 auto 30px;
+  }
+
+  .nce-cta__btns {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 13px;
+  }
+
+  .nce-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 15px 28px;
+    border-radius: 9px;
+    text-decoration: none;
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+  }
+
+  .nce-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .nce-btn--primary {
+    background: #fff;
+    color: var(--g-deep);
+  }
+
+  .nce-btn--primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 30px -14px rgba(0, 0, 0, .45);
+  }
+
+  .nce-btn--ghost {
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid rgba(255, 255, 255, .45);
+  }
+
+  .nce-btn--ghost:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, .08);
+  }
+
+  .nce-cta__mail {
+    margin-top: 20px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, .7);
+  }
+
+  .nce-cta__mail a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, .4);
+  }
+
+  /* back link */
+  .nce-back {
+    padding: 34px 0 64px;
+  }
+
+  .nce-back a {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--g);
+    text-decoration: none;
+  }
+
+  .nce-back a svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .nce-back a:hover {
+    color: var(--g-deep);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:900px) {
+    .nce-sec--pad {
+      padding: 58px 0;
+    }
+
+    .nce-sec--padsm {
+      padding: 46px 0;
+    }
+
+    .nce-hero {
+      min-height: 420px;
+    }
+
+    .nce-hero h1 {
+      font-size: 42px;
+    }
+
+    .nce-hero__sub {
+      font-size: 16px;
+    }
+
+    .nce-h2 {
+      font-size: 27px;
+    }
+
+    .nce-lead__t {
+      font-size: 20px;
+    }
+
+    .nce-anatomy__intro {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .nce-anatomy__legendline {
+      text-align: left;
+      max-width: none;
+    }
+
+    .nce-legend {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .nce-funnel {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .nce-stage {
+      align-items: stretch;
+    }
+
+    .nce-stage__bar {
+      height: auto !important;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 16px;
+      align-items: center;
+      border-radius: 12px;
+      padding: 18px 22px;
+    }
+
+    .nce-stage__n {
+      font-size: 24px;
+    }
+
+    .nce-stage__base {
+      text-align: left;
+      padding: 12px 6px 0;
+    }
+
+    .nce-arrow {
+      transform: rotate(90deg);
+      margin: 8px auto;
+    }
+
+    .nce-process {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .nce-process::before {
+      display: none;
+    }
+
+    .nce-mosaic {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: none;
+      height: auto;
+    }
+
+    .nce-shot {
+      aspect-ratio: 4/3;
+    }
+
+    .nce-shot1,
+    .nce-shot2,
+    .nce-shot3,
+    .nce-shot4 {
+      grid-area: auto;
+    }
+
+    .nce-cta h2 {
+      font-size: 30px;
+    }
+  }
+
+  @media (max-width:600px) {
+    .nce-sec--pad {
+      padding: 44px 0;
+    }
+
+    .nce-hero {
+      min-height: auto;
+    }
+
+    .nce-hero__inner {
+      padding-top: 46px;
+    }
+
+    .nce-hero h1 {
+      font-size: 33px;
+    }
+
+    .nce-h2 {
+      font-size: 23px;
+    }
+
+    .nce-lead__t {
+      font-size: 18px;
+    }
+
+    .nce-legend {
+      grid-template-columns: 1fr;
+    }
+
+    .nce-mosaic {
+      grid-template-columns: 1fr;
+    }
+
+    .nce-cta h2 {
+      font-size: 25px;
+    }
+
+    .nce-cta__btns {
+      flex-direction: column;
+    }
+
+    .nce-btn {
+      justify-content: center;
+    }
+
+    .nce-hero__meta .container {
+      gap: 12px 18px;
+    }
+  }
 </style>
-</head>
-<body>
 <article class="nce-root" data-screen-label="Новость: Анатомия чистого входа">
 
   <!-- ============ 1. HERO ============ -->
   <section class="nce-sec nce-hero" data-screen-label="Hero">
+    <div class="container nce-breadcrumb">
+      <ul class="breadcrumb">
+        <li><a href="/">Главная</a></li>
+        <li><a href="/news">Новости</a></li>
+        <li class="active">Чистота на входе</li>
+      </ul>
+    </div>
     <div class="nce-hero__photo"></div>
     <div class="nce-hero__grid"></div>
     <div class="nce-hero__veil"></div>
@@ -225,18 +1081,34 @@ figure{margin:0;}
       <div class="container">
         <div class="nce-hero__content">
           <span class="nce-eyebrow nce-eyebrow--chip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.7-6-10a6 6 0 0 1 12 0c0 4.3-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M12 21s-6-5.7-6-10a6 6 0 0 1 12 0c0 4.3-6 10-6 10z" />
+              <circle cx="12" cy="11" r="2" />
+            </svg>
             Реализованный проект · Москва · Июнь 2026
           </span>
           <h1>Анатомия <em>чистого входа</em></h1>
-          <p class="nce-hero__sub">Разбираем по элементам систему защиты от грязи, которую «СТРОМ ТРЕЙД» смонтировала в офисном центре.</p>
+          <p class="nce-hero__sub">Разбираем по элементам систему защиты от грязи, которую «СТРОМ ТРЕЙД» смонтировала в
+            офисном центре.</p>
         </div>
       </div>
       <div class="nce-hero__meta">
         <div class="container">
-          <span class="nce-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>11.06.2026</span>
-          <span class="nce-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>~2 мин</span>
-          <span class="nce-meta nce-meta--cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h7l2 2h9v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Реализованные проекты</span>
+          <span class="nce-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>11.06.2026</span>
+          <span class="nce-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" />
+            </svg>~2 мин</span>
+          <span class="nce-meta nce-meta--cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7h7l2 2h9v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            </svg>Реализованные проекты</span>
         </div>
       </div>
     </div>
@@ -247,7 +1119,9 @@ figure{margin:0;}
     <div class="container">
       <div class="nce-lead__box">
         <span class="nce-eyebrow">Главное</span>
-        <p class="nce-lead__t">Хотите забыть о грязных следах в офисе после дождя или снегопада? «СТРОМ ТРЕЙД» предлагает продуманные решения для защиты помещений от уличной грязи. Недавно специалисты реализовали очередной успешный проект в Москве — и готовы поделиться деталями.</p>
+        <p class="nce-lead__t">Хотите забыть о грязных следах в офисе после дождя или снегопада? «СТРОМ ТРЕЙД»
+          предлагает продуманные решения для защиты помещений от уличной грязи. Недавно специалисты реализовали
+          очередной успешный проект в Москве — и готовы поделиться деталями.</p>
       </div>
     </div>
   </section>
@@ -257,8 +1131,11 @@ figure{margin:0;}
     <div class="container">
       <span class="nce-eyebrow nce-eyebrow--bar">Задача</span>
       <h2 class="nce-h2">Две зоны на пути в офис</h2>
-      <p class="nce-p">Проблема грязных полов в офисах особенно актуальна в межсезонье. Решает её система очистки обуви на входе. В этом проекте «СТРОМ ТРЕЙД» сосредоточилась на двух зонах входной группы — <strong>уличной</strong> и <strong>зоне тамбура</strong> между наружной и внутренней дверями.</p>
-      <div class="nce-callout">Именно зона тамбура отвечает за <em>финальную очистку</em>: здесь обувь избавляется от средних частиц — песка и мелких камешков — и теряет остатки влаги.</div>
+      <p class="nce-p">Проблема грязных полов в офисах особенно актуальна в межсезонье. Решает её система очистки обуви
+        на входе. В этом проекте «СТРОМ ТРЕЙД» сосредоточилась на двух зонах входной группы — <strong>уличной</strong> и
+        <strong>зоне тамбура</strong> между наружной и внутренней дверями.</p>
+      <div class="nce-callout">Именно зона тамбура отвечает за <em>финальную очистку</em>: здесь обувь избавляется от
+        средних частиц — песка и мелких камешков — и теряет остатки влаги.</div>
     </div>
   </section>
 
@@ -271,26 +1148,28 @@ figure{margin:0;}
           <span class="nce-eyebrow nce-eyebrow--bar">Анатомия системы</span>
           <h2 class="nce-h2">Входная группа в разрезе</h2>
         </div>
-        <p class="nce-anatomy__legendline">Две зоны · пять элементов · одна задача — <b>остановить грязь на входе</b>.</p>
+        <p class="nce-anatomy__legendline">Две зоны · пять элементов · одна задача — <b>остановить грязь на входе</b>.
+        </p>
       </div>
 
       <div class="nce-schematic-wrap">
-        <svg class="nce-schematic" viewBox="0 0 1040 520" role="img" aria-label="Схема-разрез входной группы: уличная зона со стальной решёткой на профиле-фундаменте и тамбур с алюминиевым ковром, скребками и текстильными вставками">
+        <svg class="nce-schematic" viewBox="0 0 1040 520" role="img"
+          aria-label="Схема-разрез входной группы: уличная зона со стальной решёткой на профиле-фундаменте и тамбур с алюминиевым ковром, скребками и текстильными вставками">
           <!-- ground -->
-          <line class="nce-arch" x1="36" y1="350" x2="1006" y2="350"/>
+          <line class="nce-arch" x1="36" y1="350" x2="1006" y2="350" />
           <!-- building envelope -->
-          <rect class="nce-arch nce-arch--fill" x="430" y="140" width="576" height="14"/>
-          <rect class="nce-arch nce-arch--fill" x="430" y="154" width="14" height="196"/>
-          <rect class="nce-arch nce-arch--fill" x="992" y="154" width="14" height="196"/>
-          <rect class="nce-arch nce-arch--fill" x="772" y="154" width="12" height="120"/>
+          <rect class="nce-arch nce-arch--fill" x="430" y="140" width="576" height="14" />
+          <rect class="nce-arch nce-arch--fill" x="430" y="154" width="14" height="196" />
+          <rect class="nce-arch nce-arch--fill" x="992" y="154" width="14" height="196" />
+          <rect class="nce-arch nce-arch--fill" x="772" y="154" width="12" height="120" />
           <!-- outer door leaf (open) -->
-          <line class="nce-arch" x1="444" y1="350" x2="486" y2="288"/>
-          <circle class="nce-anno__dot" cx="444" cy="350" r="3"/>
+          <line class="nce-arch" x1="444" y1="350" x2="486" y2="288" />
+          <circle class="nce-anno__dot" cx="444" cy="350" r="3" />
           <!-- inner door panel -->
-          <line class="nce-arch" x1="778" y1="274" x2="778" y2="350"/>
+          <line class="nce-arch" x1="778" y1="274" x2="778" y2="350" />
           <!-- zone dividers -->
-          <line class="nce-zdiv" x1="430" y1="362" x2="430" y2="470"/>
-          <line class="nce-zdiv" x1="778" y1="362" x2="778" y2="470"/>
+          <line class="nce-zdiv" x1="430" y1="362" x2="430" y2="470" />
+          <line class="nce-zdiv" x1="778" y1="362" x2="778" y2="470" />
           <!-- zone labels -->
           <text class="nce-zlabel" x="150" y="500">УЛИЧНАЯ ЗОНА</text>
           <text class="nce-zlabel" x="540" y="500">ТАМБУР</text>
@@ -298,56 +1177,61 @@ figure{margin:0;}
 
           <!-- 01 STEEL GRATING -->
           <g class="nce-anno" id="anno-01">
-            <path class="nce-anno__shape" d="M150 350 V410 H410 V350"/>
-            <rect class="nce-anno__fill" x="150" y="336" width="260" height="14"/>
-            <rect class="nce-anno__shape" x="150" y="336" width="260" height="14"/>
-            <path class="nce-anno__shape" d="M168 336V350 M186 336V350 M204 336V350 M222 336V350 M240 336V350 M258 336V350 M276 336V350 M294 336V350 M312 336V350 M330 336V350 M348 336V350 M366 336V350 M384 336V350"/>
-            <line class="nce-anno__line" x1="285" y1="336" x2="285" y2="104"/>
-            <circle class="nce-anno__dot" cx="285" cy="336" r="3.5"/>
-            <circle class="nce-anno__badge" cx="285" cy="90" r="17"/>
+            <path class="nce-anno__shape" d="M150 350 V410 H410 V350" />
+            <rect class="nce-anno__fill" x="150" y="336" width="260" height="14" />
+            <rect class="nce-anno__shape" x="150" y="336" width="260" height="14" />
+            <path class="nce-anno__shape"
+              d="M168 336V350 M186 336V350 M204 336V350 M222 336V350 M240 336V350 M258 336V350 M276 336V350 M294 336V350 M312 336V350 M330 336V350 M348 336V350 M366 336V350 M384 336V350" />
+            <line class="nce-anno__line" x1="285" y1="336" x2="285" y2="104" />
+            <circle class="nce-anno__dot" cx="285" cy="336" r="3.5" />
+            <circle class="nce-anno__badge" cx="285" cy="90" r="17" />
             <text class="nce-anno__num" x="285" y="95">01</text>
           </g>
 
           <!-- 02 PROFILE-FOUNDATION -->
           <g class="nce-anno" id="anno-02">
-            <rect class="nce-anno__fill" x="160" y="372" width="240" height="30"/>
-            <rect class="nce-anno__shape" x="160" y="372" width="240" height="30"/>
-            <path class="nce-anno__shape" d="M178 372 L160 402 M210 372 L192 402 M242 372 L224 402 M274 372 L256 402 M306 372 L288 402 M338 372 L320 402 M370 372 L352 402"/>
-            <line class="nce-anno__line" x1="200" y1="400" x2="150" y2="448"/>
-            <circle class="nce-anno__dot" cx="200" cy="400" r="3.5"/>
-            <circle class="nce-anno__badge" cx="138" cy="462" r="17"/>
+            <rect class="nce-anno__fill" x="160" y="372" width="240" height="30" />
+            <rect class="nce-anno__shape" x="160" y="372" width="240" height="30" />
+            <path class="nce-anno__shape"
+              d="M178 372 L160 402 M210 372 L192 402 M242 372 L224 402 M274 372 L256 402 M306 372 L288 402 M338 372 L320 402 M370 372 L352 402" />
+            <line class="nce-anno__line" x1="200" y1="400" x2="150" y2="448" />
+            <circle class="nce-anno__dot" cx="200" cy="400" r="3.5" />
+            <circle class="nce-anno__badge" cx="138" cy="462" r="17" />
             <text class="nce-anno__num" x="138" y="467">02</text>
           </g>
 
           <!-- 03 ALUMINIUM MAT -->
           <g class="nce-anno" id="anno-03">
-            <rect class="nce-anno__fill" x="468" y="336" width="278" height="14"/>
-            <rect class="nce-anno__shape" x="468" y="336" width="278" height="14"/>
-            <line class="nce-anno__line" x1="560" y1="336" x2="560" y2="104"/>
-            <circle class="nce-anno__dot" cx="560" cy="336" r="3.5"/>
-            <circle class="nce-anno__badge" cx="560" cy="90" r="17"/>
+            <rect class="nce-anno__fill" x="468" y="336" width="278" height="14" />
+            <rect class="nce-anno__shape" x="468" y="336" width="278" height="14" />
+            <line class="nce-anno__line" x1="560" y1="336" x2="560" y2="104" />
+            <circle class="nce-anno__dot" cx="560" cy="336" r="3.5" />
+            <circle class="nce-anno__badge" cx="560" cy="90" r="17" />
             <text class="nce-anno__num" x="560" y="95">03</text>
           </g>
 
           <!-- 04 SCRAPERS -->
           <g class="nce-anno" id="anno-04">
-            <path class="nce-anno__shape" d="M492 322V350 M528 322V350 M564 322V350 M600 322V350 M636 322V350 M672 322V350 M708 322V350"/>
-            <path class="nce-anno__shape" d="M488 322 H496 M524 322 H532 M560 322 H568 M596 322 H604 M632 322 H640 M668 322 H676 M704 322 H712"/>
-            <line class="nce-anno__line" x1="672" y1="322" x2="716" y2="104"/>
-            <circle class="nce-anno__dot" cx="672" cy="322" r="3.5"/>
-            <circle class="nce-anno__badge" cx="722" cy="90" r="17"/>
+            <path class="nce-anno__shape"
+              d="M492 322V350 M528 322V350 M564 322V350 M600 322V350 M636 322V350 M672 322V350 M708 322V350" />
+            <path class="nce-anno__shape"
+              d="M488 322 H496 M524 322 H532 M560 322 H568 M596 322 H604 M632 322 H640 M668 322 H676 M704 322 H712" />
+            <line class="nce-anno__line" x1="672" y1="322" x2="716" y2="104" />
+            <circle class="nce-anno__dot" cx="672" cy="322" r="3.5" />
+            <circle class="nce-anno__badge" cx="722" cy="90" r="17" />
             <text class="nce-anno__num" x="722" y="95">04</text>
           </g>
 
           <!-- 05 TEXTILE INSERTS -->
           <g class="nce-anno" id="anno-05">
-            <rect class="nce-anno__fill" x="510" y="338" width="20" height="11"/>
-            <rect class="nce-anno__fill" x="582" y="338" width="20" height="11"/>
-            <rect class="nce-anno__fill" x="654" y="338" width="20" height="11"/>
-            <path class="nce-anno__shape" d="M510 340 l20 7 M510 345 l12 4 M582 340 l20 7 M582 345 l12 4 M654 340 l20 7 M654 345 l12 4"/>
-            <line class="nce-anno__line" x1="602" y1="346" x2="648" y2="448"/>
-            <circle class="nce-anno__dot" cx="602" cy="346" r="3.5"/>
-            <circle class="nce-anno__badge" cx="662" cy="462" r="17"/>
+            <rect class="nce-anno__fill" x="510" y="338" width="20" height="11" />
+            <rect class="nce-anno__fill" x="582" y="338" width="20" height="11" />
+            <rect class="nce-anno__fill" x="654" y="338" width="20" height="11" />
+            <path class="nce-anno__shape"
+              d="M510 340 l20 7 M510 345 l12 4 M582 340 l20 7 M582 345 l12 4 M654 340 l20 7 M654 345 l12 4" />
+            <line class="nce-anno__line" x1="602" y1="346" x2="648" y2="448" />
+            <circle class="nce-anno__dot" cx="602" cy="346" r="3.5" />
+            <circle class="nce-anno__badge" cx="662" cy="462" r="17" />
             <text class="nce-anno__num" x="662" y="467">05</text>
           </g>
         </svg>
@@ -363,7 +1247,8 @@ figure{margin:0;}
         <a class="nce-leg" href="#anno-02">
           <span class="nce-leg__n">02</span>
           <p class="nce-leg__t">Профиль-фундамент</p>
-          <p class="nce-leg__d">Надёжная опорная конструкция — «фундамент» из прочного металлического профиля под решётку.</p>
+          <p class="nce-leg__d">Надёжная опорная конструкция — «фундамент» из прочного металлического профиля под
+            решётку.</p>
         </a>
         <a class="nce-leg" href="#anno-03">
           <span class="nce-leg__n">03</span>
@@ -400,7 +1285,10 @@ figure{margin:0;}
             <p class="nce-stage__d">Крупные фракции грязи, снег и наледь — снимаются ещё до входа.</p>
           </div>
         </div>
-        <div class="nce-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="nce-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg></div>
         <div class="nce-stage">
           <div class="nce-stage__bar">
             <span class="nce-stage__n">02</span>
@@ -411,7 +1299,10 @@ figure{margin:0;}
             <p class="nce-stage__d">Песок и мелкие камешки счищаются с подошвы.</p>
           </div>
         </div>
-        <div class="nce-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="nce-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg></div>
         <div class="nce-stage">
           <div class="nce-stage__bar">
             <span class="nce-stage__n">03</span>
@@ -457,10 +1348,22 @@ figure{margin:0;}
       <span class="nce-eyebrow nce-eyebrow--bar">Примеры работ</span>
       <h2 class="nce-h2">Как это выглядит на объекте</h2>
       <div class="nce-mosaic">
-        <figure class="nce-shot nce-shot1"><div class="nce-shot__img"></div><figcaption class="nce-shot__cap">Стальные решётки на входе</figcaption></figure>
-        <figure class="nce-shot nce-shot2"><div class="nce-shot__img"></div><figcaption class="nce-shot__cap">Профиль-фундамент под решётку</figcaption></figure>
-        <figure class="nce-shot nce-shot3"><div class="nce-shot__img"></div><figcaption class="nce-shot__cap">Ковёр в зоне тамбура</figcaption></figure>
-        <figure class="nce-shot nce-shot4"><div class="nce-shot__img"></div><figcaption class="nce-shot__cap">Готовая входная группа</figcaption></figure>
+        <figure class="nce-shot nce-shot1">
+          <div class="nce-shot__img"></div>
+          <figcaption class="nce-shot__cap">Стальные решётки на входе</figcaption>
+        </figure>
+        <figure class="nce-shot nce-shot2">
+          <div class="nce-shot__img"></div>
+          <figcaption class="nce-shot__cap">Профиль-фундамент под решётку</figcaption>
+        </figure>
+        <figure class="nce-shot nce-shot3">
+          <div class="nce-shot__img"></div>
+          <figcaption class="nce-shot__cap">Ковёр в зоне тамбура</figcaption>
+        </figure>
+        <figure class="nce-shot nce-shot4">
+          <div class="nce-shot__img"></div>
+          <figcaption class="nce-shot__cap">Входная группа</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -473,15 +1376,27 @@ figure{margin:0;}
         <span class="nce-eyebrow">Итог</span>
         <p class="nce-result__t">Полы в офисе остаются чистыми даже в самую ненастную погоду.</p>
         <div class="nce-marks">
-          <span class="nce-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Установлено в срок</span>
-          <span class="nce-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Заказчик доволен</span>
-          <span class="nce-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6 6 4.5 4.5M18 6l1.5-1.5M6 18l-1.5 1.5M18 18l1.5 1.5"/><circle cx="12" cy="12" r="4"/></svg>Чисто в любую погоду</span>
+          <span class="nce-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" />
+            </svg>Установлено в срок</span>
+          <span class="nce-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>Заказчик доволен</span>
+          <span class="nce-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6 6 4.5 4.5M18 6l1.5-1.5M6 18l-1.5 1.5M18 18l1.5 1.5" />
+              <circle cx="12" cy="12" r="4" />
+            </svg>Чисто в любую погоду</span>
         </div>
       </div>
       <div class="nce-cta">
         <span class="nce-eyebrow">Нужна такая же система?</span>
         <h2>Спроектируем и смонтируем под ключ</h2>
-        <p class="nce-cta__desc">Выедем на замеры, разработаем чертежи и установим систему. Оставьте заявку — поможем воплотить проект в жизнь.</p>
+        <p class="nce-cta__desc">Выедем на замеры, разработаем чертежи и установим систему. Оставьте заявку — поможем
+          воплотить проект в жизнь.</p>
         <div class="nce-cta__btns">
           <a href="#" class="nce-btn nce-btn--primary" data-target="#CallbackFormEmail" data-toggle="modal">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -507,10 +1422,11 @@ figure{margin:0;}
   <!-- ============ BACK LINK ============ -->
   <div class="nce-sec nce-back">
     <div class="container">
-      <a href="/news"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Все новости</a>
+      <a href="/news"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6" />
+        </svg>Все новости</a>
     </div>
   </div>
 
 </article>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
-</html>

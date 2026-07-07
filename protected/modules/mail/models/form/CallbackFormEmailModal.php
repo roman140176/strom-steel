@@ -70,7 +70,7 @@ class CallbackFormEmailModal extends CFormModel
     public function afterValidate()
     {
         if (empty($this->getErrors())) {
-            $this->sentDataToRoistat(); // Begin roistat
+            // $this->sentDataToRoistat(); // roistat отключён
             // if (Yii::app()->hasModule('amocrm')) {
             //     $amocrm = new Amocrm;
             //     $amocrm->addLead($this->getAttributes());

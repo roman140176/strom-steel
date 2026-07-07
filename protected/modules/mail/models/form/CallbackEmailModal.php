@@ -60,7 +60,7 @@ class CallbackEmailModal extends CFormModel
      public function afterValidate()
     {
         if (empty($this->getErrors())) {
-            $this->sentDataToRoistat();  //Begin roistat
+            // $this->sentDataToRoistat();  // roistat отключён
             
             Yii::app()->mailMessage->raiseMailEvent('forma', $this->getAttributes());
         }
